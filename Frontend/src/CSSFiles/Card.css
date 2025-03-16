@@ -1,0 +1,26 @@
+.card{
+    height: 60vh;
+    width: 30vw;
+    background-color: rgb(191, 210, 210);
+    margin: 5vh;
+    border-radius: 8px;
+    text-decoration: none;
+    /* border : 2px solid black; */
+    
+}
+.card .card_img{
+    height: 25vh;
+    width: 30vw;
+}
+
+.card .car_name{
+    font-size: xx-large;
+    font-weight: bolder;
+    margin-left: 2vw;
+}
+.card ul li{
+    margin-left: 3vw;
+    margin-top: 1vw;
+    text-decoration: none;
+    border-radius: 10px;
+}

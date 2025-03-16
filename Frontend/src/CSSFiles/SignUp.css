@@ -1,0 +1,75 @@
+.login{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.login video{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+.login h3{
+    margin-top: 2vh;
+    color: azure;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+.login .content{
+    position: absolute;
+    top: 20vh;
+    height: 70vh;
+    width: 40vw;
+    /* border: 3px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 4vh;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(2px); 
+}
+.login .content .username,.email,.password{
+    display: flex;
+    flex-direction: column;
+}
+.login .content .username .username-label,.email-label,.password-label{
+    margin-bottom: 1vh;
+    background: none;
+    font-weight: bold;
+    font-size: large;
+    color: azure;
+}
+.login .content .username #username,#email,#password{
+    height: 5vh;
+    width: 20vw;
+    padding-left: 1vw;
+    font-weight:500;
+    font-size: medium;
+    background: none;
+    color: azure;
+
+}
+.login .content p{
+    color: brown;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.login .content button{
+    height: 4vh;
+    width: 10vw;
+    font-weight: bolder;
+    font-size: medium;
+    background: none;
+    &:hover{
+        border: 3px solid black;
+        font-size: large;
+    }
+}

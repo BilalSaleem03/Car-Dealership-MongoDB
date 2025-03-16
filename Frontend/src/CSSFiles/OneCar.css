@@ -1,0 +1,54 @@
+.one_car_window{
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(24, 24, 24);
+    padding-top: 20vh;
+}
+
+.one_car{
+    width: 40vw;
+    height: 90vh;
+    background-color: rgb(181, 194, 194);
+    margin: auto;
+    /* margin-top: 10vh; */
+    border-radius: 4vw;
+}
+
+.one_car img{
+    height: 35vh;
+    width: 40vw;
+}
+.one_car h3{
+    margin-left: 1vw;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+.one_car ul li{
+    margin-left: 3vw;
+    margin-top: 1vh;
+    text-decoration: none;
+}
+
+.one_car button{
+    margin-top: 5vh;
+    width: 8vw;
+    height: 6vh;
+    margin-left: 2vw;
+    border: 3px solid black;
+    border-radius: 2vw;
+    /* font-size: 2vw; */
+    font-weight: bolder;
+    &:hover{
+        background-color: red;
+        color: white;
+    }
+
+}
+.one_car .buy_btn:hover{
+    background-color: green;
+    color: white;
+}
+
+.owner-message{
+    background-color: blue;
+}

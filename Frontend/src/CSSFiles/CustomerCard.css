@@ -1,0 +1,32 @@
+.customer_card{
+    height: 50vh;
+    width: 20vw;
+    background-color: rgb(191, 210, 210);
+    margin: 5vh;
+    border-radius: 8px;
+    text-decoration: none;
+    /* border : 2px solid black; */
+    
+}
+.customer_card img{
+    height: 30vh;
+    width: 20vw;
+}
+/* 
+NavLink{
+
+    text-decoration: none;
+} */
+
+.customer_card h3{
+    font-size: xx-large;
+    font-weight: bolder;
+    color: black;
+}
+.customer_card h4{
+    font-size: x-large;
+    font-weight: bolder;
+    text-decoration:double;
+    margin-top: 3vh;
+    color: rgb(15, 13, 13);
+}

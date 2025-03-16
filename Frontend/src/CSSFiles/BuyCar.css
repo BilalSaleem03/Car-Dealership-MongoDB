@@ -1,0 +1,81 @@
+.FormPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh;
+    /* background-color: #113f67; */
+    /* background-color: #181C14; */
+    height: 100%;
+}
+
+
+.FormPage h3{
+    font-size: xx-large;
+    font-weight: bolder;
+    margin: 20vh 0vh 10vh 0vh;
+    color: #e7eaf6;
+}
+
+.SalesForm{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #e7eaf6; */
+    background-color: #3C3D37;
+    width: 60vw;
+    padding: 5vh;
+    border-radius: 15px;
+}
+
+
+.SalesForm div label{
+    display:inline-block;
+    width: 10vw;
+    height: 4vh;
+    margin-left: 2.5vw;
+    margin-top: 2vh;
+    color: #e7eaf6;
+}
+
+.SalesForm div input{
+    width: 15vw;
+    height: 4vh;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+
+.SalesForm .address input{
+    width: 43vw;
+    height: 6vh;
+    margin: 10px 0px 10px 0px;
+}
+
+
+.SalesForm button{
+    height: 6vh;
+    width: 10vw;
+    margin-top: 3vh;
+    align-self: center;
+    font-weight: bolder;
+    border-radius: 10px;
+    color: white;
+    background-color: #113f67;
+    &:hover{
+        background-color: #a2a8d3;
+        color: #113f67;
+    }
+}
+
+@media (max-width:900px){  
+    .SalesForm div{
+        display: flex;
+        flex-direction: column;
+    }
+    .SalesForm div label{
+        width: 80%;
+    }
+    .SalesForm div input{
+        width: 80%;
+    }  
+}

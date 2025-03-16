@@ -1,0 +1,46 @@
+
+.one-car {
+    width: 25vw;
+    height: 70vh; 
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(2px); 
+    border-radius: 15px;
+    padding: 1vw;
+    position: relative;
+}
+
+.one-car .card_img{
+    width: 25vw;
+    height: 20vh;
+}
+
+.one-car .list{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.one-car .list li{
+    margin-bottom: 3px;
+    color: aliceblue;
+
+}
+
+
+.one-car .btns{
+
+    padding-top: 4vh;
+  
+}
+
+.one-car button{
+    /* right: 1vw; */
+    background: white;
+    color: black;
+    font-size: 1vw;
+    font-weight: bold;
+    border: none;
+    padding: 6px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    outline: none; 
+    
+}

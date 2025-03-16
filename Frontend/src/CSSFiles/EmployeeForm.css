@@ -1,0 +1,80 @@
+.FormPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh;
+    /* background-color: #113f67; */
+    background-color: #181C14;
+}
+
+
+.FormPage h3{
+    font-size: xx-large;
+    font-weight: bolder;
+    margin: 20vh 0vh 10vh 0vh;
+    color: #e7eaf6;
+}
+
+.EmployeeForm{
+    display: flex;
+    flex-direction: column;
+    /* background-color: #e7eaf6; */
+    background-color: #3C3D37;
+    width: 60vw;
+    padding: 5vh;
+    border-radius: 15px;
+}
+
+
+.EmployeeForm div label{
+    display:inline-block;
+    width: 10vw;
+    height: 4vh;
+    margin-left: 2.5vw;
+    margin-top: 2vh;
+    color: #e7eaf6;
+}
+
+.EmployeeForm div input{
+    width: 15vw;
+    height: 4vh;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+
+.EmployeeForm .address input{
+    width: 43vw;
+    height: 6vh;
+    margin: 10px 0px 10px 0px;
+}
+
+
+.EmployeeForm button{
+    height: 6vh;
+    width: 10vw;
+    margin-top: 3vh;
+    align-self: center;
+    font-weight: bolder;
+    border-radius: 10px;
+    color: #a2a8d3;
+    background-color: #113f67;
+    &:hover{
+        background-color: #a2a8d3;
+        color: #113f67;
+    }
+}
+
+@media (max-width:900px){
+    .EmployeeForm div{
+        display: flex;
+        flex-direction: column;
+    }
+    .EmployeeForm div label{
+        width: 80%;
+    }
+    .EmployeeForm div input{
+        width: 80%;
+    }
+}
