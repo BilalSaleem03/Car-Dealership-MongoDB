@@ -24,7 +24,7 @@ export default function OwnedCar({car}){
     }
     return(
         <div className="one-car">
-            <img className='card_img' src={carImage} alt="car Image" />
+            <img className='card_img' src={car.Image?.url || carImage} alt="car Image" />
             <ul className='list'>
                 <li>Car name: {car.Car_Name}</li>
                 <li>Manufacturer: {car.Manufacturer}</li>

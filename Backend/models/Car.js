@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 
 const carSchema = new mongoose.Schema({
+    Image: {
+        url: {
+            type: String,
+            required: true 
+        },
+        filename: {
+            type: String,
+            required: true
+        }
+    },
     Car_Owner: {
         type: String,
         lowercase : true,

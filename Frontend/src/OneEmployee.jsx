@@ -32,7 +32,7 @@ export default function OneEmployee(){
         <div className='one_employee_window'>
             <Navbar/>
             <div className='one_employee'>
-                <img src={personImage} alt="car Image" />
+                <img src={data.Image?.url || personImage} alt="car Image" />
                 <h3>{data.First_Name} {data.Last_Name}</h3>
                 <ul>
                     <li>Designation: {data.Designation}</li>

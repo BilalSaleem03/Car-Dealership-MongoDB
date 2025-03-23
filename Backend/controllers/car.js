@@ -3,6 +3,7 @@
 const mongoose = require("mongoose");
 const Car = require("../models/Car.js");
 
+
 module.exports.catagoryCar = async (req , res)=>{
     let {type} = req.params;
     try {
@@ -50,8 +51,14 @@ module.exports.deleteCar = async(req , res)=>{
 
 module.exports.addCar = async (req, res) => {
     let carData = req.body;
+    let imageURL = req.file.path;
+    let imageFileName = req.file.filename;
     try {
         let ack = await Car.create({
+            Image: {
+                url: imageURL, // Store image path in DB
+                filename: imageFileName
+            },
             Car_Owner: req.user.username.toString(),
             Car_Name: carData.carName,
             Manufacturer: carData.manufacturer,

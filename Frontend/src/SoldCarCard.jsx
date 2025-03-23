@@ -46,7 +46,7 @@ export default function Card({car}){
 
     return(
         <div className='card'>
-            <img className='card_img' src={carImage} alt="car Image" />
+            <img className='card_img' src={carData.Image?.url || carImage} alt="car Image" />
             <h3 className='car_name'>{carData.Car_Name}</h3>
             <ul>
                 <li>Car Type: {carData.Car_Type}</li>

@@ -62,7 +62,7 @@ export default function OneCar(){
         <div className='one_car_window'>
             <Navbar/>
             <div className='one_car'>
-                <img src={carImage} alt="car Image" />
+                <img src={data.Image?.url || carImage} alt="car Image" />
                 <h3>{data.Car_Name}</h3>
                 <ul>
                     <li>Manufacturer: {data.Manufacturer}</li>

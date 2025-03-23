@@ -7,6 +7,7 @@ import logo from "./assets/logo.png"
 import Navbar from "./Homepage/Navbar"
 export default function EmployeeForm(){
     let [employeeForm , setEmployeeForm] = useState({
+        employeeImage:null,
         firstName:"",
         lastName:"",
         cnic:3310200000000,
@@ -19,55 +20,77 @@ export default function EmployeeForm(){
         hireDate:"",
         designation:"",
         salary:1000,
-        commessionRate:0
+        commissionRate:0
     })
     const navigate = useNavigate();
 
     let handleEmployeeForm = (event)=>{
         let field = event.target.name;
         let newValue = event.target.value;
+        if (field === "employeeImage") {
+            setEmployeeForm((preValues) => ({
+                ...preValues,
+                [field]: event.target.files[0], // Store the file object
+            }));
+        } else {
+        
         employeeForm[field] = newValue;
         setEmployeeForm((currValues)=>{
             return({...currValues , [field]:newValue})
-        })
-
+        })}
     }
 
     let {id} = useParams();
 
-    let setPreviousData = ()=>{
-        let showPreviousData = async (id)=>{
-            let previousData = await axios.get(`http://localhost:3000/aboutus/${id}` , {withCredentials : true});
-            // console.log(previousData);  
-            setEmployeeForm({
-                firstName : previousData.data.First_Name,
-                lastName : previousData.data.Last_Name,
-                DOB : previousData.data.Date_of_Birth.split('T')[0],
-                gender : previousData.data.Gender,
-                cnic : previousData.data.CNIC,
-                phone : previousData.data.Phone_Number,
-                telephone : previousData.data.Telephone,
-                email : previousData.data.Email_Address,
-                address : previousData.data.Address,
-                hireDate : previousData.data.Hire_Date.split('T')[0],
-                designation : previousData.data.Designation,
-                salary : previousData.data.Salary,
-                commessionRate : previousData.data.Commission_Rate
-            })
+    // let setPreviousData = ()=>{
+    //     let showPreviousData = async (id)=>{
+    //         let previousData = await axios.get(`http://localhost:3000/aboutus/${id}` , {withCredentials : true});
+    //         // console.log(previousData);  
+    //         setEmployeeForm({
+    //             firstName : previousData.data.First_Name,
+    //             lastName : previousData.data.Last_Name,
+    //             DOB : previousData.data.Date_of_Birth.split('T')[0],
+    //             gender : previousData.data.Gender,
+    //             cnic : previousData.data.CNIC,
+    //             phone : previousData.data.Phone_Number,
+    //             telephone : previousData.data.Telephone,
+    //             email : previousData.data.Email_Address,
+    //             address : previousData.data.Address,
+    //             hireDate : previousData.data.Hire_Date.split('T')[0],
+    //             designation : previousData.data.Designation,
+    //             salary : previousData.data.Salary,
+    //             commessionRate : previousData.data.Commission_Rate
+    //         })
     
-        }
-        if(id){
-            showPreviousData(id);
-        }
-    }   
-    useEffect(()=>{
-        setPreviousData();
-    } , [])
+    //     }
+    //     if(id){
+    //         showPreviousData(id);
+    //     }
+    // }   
+    // useEffect(()=>{
+    //     setPreviousData();
+    // } , [])
 
     let handleSubmit =async (event)=>{
         event.preventDefault();
         console.log(employeeForm)
+        const formData = new FormData();
+        formData.append("employeeImage", employeeForm.employeeImage); // Append image file
+        formData.append("firstName", employeeForm.firstName);
+        formData.append("lastName", employeeForm.lastName);
+        formData.append("DOB", employeeForm.DOB);
+        formData.append("gender", employeeForm.gender);
+        formData.append("cnic", employeeForm.cnic);
+        formData.append("phone", employeeForm.phone);
+        formData.append("telephone", employeeForm.telephone);
+        formData.append("email", employeeForm.email);
+        formData.append("address", employeeForm.address);
+        formData.append("hireDate", employeeForm.hireDate);
+        formData.append("designation", employeeForm.designation);
+        formData.append("salary", employeeForm.salary);
+        formData.append("commissionRate", employeeForm.commissionRate);
         setEmployeeForm({
+            employeeImage:null,
             firstName:"",
             lastName:"",
             cnic:3310200000000,
@@ -80,23 +103,23 @@ export default function EmployeeForm(){
             hireDate:"",
             designation:"",
             salary:1000,
-            commessionRate:0
+            commissionRate:0
         })
 
-        if(id){
-            try {
-                let respose = await axios.post(`http://localhost:3000/aboutus/update/${id}`, employeeForm , {withCredentials : true})
-                navigate('/aboutus')
-            } catch (error) {
-                console.log(error)
-            }
-            return;
-        }
+        // if(id){
+        //     try {
+        //         let respose = await axios.post(`http://localhost:3000/aboutus/update/${id}`, employeeForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }})
+        //         navigate('/aboutus')
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        //     return;
+        // }
 
         try {
             // Send form data to the backend
             console.log("Sending data................")
-            const response = await axios.post('http://localhost:3000/aboutus/addemployee', employeeForm , {withCredentials : true});
+            const response = await axios.post('http://localhost:3000/aboutus/addemployee', employeeForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }});
             console.log('Data submitted successfully:', response.data);
             navigate('/aboutus')
         }
@@ -111,11 +134,11 @@ export default function EmployeeForm(){
           
             <h3>Employee Registration Form</h3>
 
-            <form action="" className="EmployeeForm" onSubmit={handleSubmit}>
+            <form action="" className="EmployeeForm" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="primaryInfo">
                     {/* <div></div> */}
-                    {/* <label htmlFor="emplyeeID">Enter Employee Id</label> 
-                    <input type="text" id="emplyeeID" placeholder="Employee ID" name="employeeID" onChange={handleEmployeeForm} value={employeeForm.employeeID} required/> */}
+                    <label htmlFor="emplyeeImage">Enter Employee Image</label> 
+                    <input type="file" id="emplyeeImage" placeholder="Employee Image" name="employeeImage" onChange={handleEmployeeForm} required/>
                     <label htmlFor="designation">Enter Designation</label>
                     <input type="text" id="designation" placeholder="Designation" name="designation" onChange={handleEmployeeForm} value={employeeForm.designation} required/>
                 </div>
@@ -146,8 +169,8 @@ export default function EmployeeForm(){
                 <div className="salaryInfo">
                     <label htmlFor="salary">Enter Salary</label>
                     <input type="number" id="salary" placeholder="Salary" name="salary" onChange={handleEmployeeForm} value={employeeForm.salary} required/>
-                    <label htmlFor="commessionRate">Commesssion Rate</label>
-                    <input type="number" id="commessionRate" placeholder="Commession Rate" name="commessionRate" onChange={handleEmployeeForm} value={employeeForm.commessionRate} required/>
+                    <label htmlFor="commissionRate">Commesssion Rate</label>
+                    <input type="number" id="commissionRate" placeholder="Commission Rate" name="commissionRate" onChange={handleEmployeeForm} value={employeeForm.commissionRate} required/>
                 </div>
                 <div className="telephone">
                     <label htmlFor="telephone">Enter Telephone</label>

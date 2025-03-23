@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 
 const customerSchema = new mongoose.Schema({
+    Image: {
+        url: {
+            type: String,
+            required: true 
+        },
+        filename: {
+            type: String,
+            required: true
+        }
+    },
     First_Name: {
         type: String,
         required: true

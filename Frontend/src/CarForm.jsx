@@ -9,6 +9,7 @@ import Navbar from "./Homepage/Navbar"
 
 export default function CarForm(){
     let [carForm , setCarForm] = useState({
+        carImage:null,
         manufacturer:"",
         carName:"",
         model:2024,
@@ -25,87 +26,108 @@ export default function CarForm(){
 
     let {id} = useParams();
 
-    let setPreviousData = ()=>{
-        let showPreviousData = async (id)=>{
-            let previousData = await axios.get(`http://localhost:3000/car/${id}` , {withCredentials : true});  
-            setCarForm({
-                manufacturer : previousData.data.Manufacturer,
-                carName : previousData.data.Car_Name,
-                model : previousData.data.Model_Number,
-                color : previousData.data.Color,
-                engineType : previousData.data.Engine_Type,    
-                engineNumber : previousData.data.Engine_Number,    
-                milage : previousData.data.Mileage,
-                carType : previousData.data.Car_Type,          
-                accidental : previousData.data.Accidental,     
-                price : previousData.data.Price,
-                availability : true
-            })
+    // let setPreviousData = ()=>{
+    //     let showPreviousData = async (id)=>{
+    //         let previousData = await axios.get(`http://localhost:3000/car/${id}` , {withCredentials : true});  
+    //         setCarForm({
+    //             manufacturer : previousData.data.Manufacturer,
+    //             carName : previousData.data.Car_Name,
+    //             model : previousData.data.Model_Number,
+    //             color : previousData.data.Color,
+    //             engineType : previousData.data.Engine_Type,    
+    //             engineNumber : previousData.data.Engine_Number,    
+    //             milage : previousData.data.Mileage,
+    //             carType : previousData.data.Car_Type,          
+    //             accidental : previousData.data.Accidental,     
+    //             price : previousData.data.Price,
+    //             availability : true
+    //         })
     
-        }
-        if(id){
-            showPreviousData(id);
-        }
-    }   
-    useEffect(()=>{
-        setPreviousData();
-    } , [])
+    //     }
+    //     if(id){
+    //         showPreviousData(id);
+    //     }
+    // }   
+    // useEffect(()=>{
+    //     setPreviousData();
+    // } , [])
 
 
     let handleCarForm = (event)=>{
         let field = event.target.name;
         let newValue;
-        if(field === "accidental"){
-           newValue = event.target.value === "true" ? true : event.target.value === "false" ? false : event.target.value;
-        }else{
+        if (field === "carImage") {
+            setCarForm((preValues) => ({
+                ...preValues,
+                [field]: event.target.files[0], // Store the file object
+            }));
+        } else {
+            if(field === "accidental"){
+            newValue = event.target.value === "true" ? true : event.target.value === "false" ? false : event.target.value;
+            }else{
 
-            newValue = event.target.value;
+                newValue = event.target.value;
+            }
+            carForm[field] = newValue;
+            setCarForm((currValues)=>{
+                return({...currValues , [field]:newValue})
+            })
         }
-        carForm[field] = newValue;
-        setCarForm((currValues)=>{
-            return({...currValues , [field]:newValue})
-        })
-
     }
     let handleSubmit =async (event)=>{
         event.preventDefault();
         console.log(carForm);
+        const formData = new FormData();
+        formData.append("carImage", carForm.carImage); // Append image file
+        formData.append("manufacturer", carForm.manufacturer);
+        formData.append("carName", carForm.carName);
+        formData.append("model", carForm.model);
+        formData.append("color", carForm.color);
+        formData.append("engineType", carForm.engineType);
+        formData.append("engineNumber", carForm.engineNumber);
+        formData.append("mileage", carForm.mileage);
+        formData.append("carType", carForm.carType);
+        formData.append("accidental", carForm.accidental);
+        formData.append("price", carForm.price);
+        formData.append("availability", carForm.availability);
+
         setCarForm({
-            manufacturer:"",
-            carName:"",
-            model:2024,
-            color:"",
-            engineType:"",   
-            engineNumber:"",   
-            milage:1000,
-            carType:"",            
+            carImage: null,
+            manufacturer: "",
+            carName: "",
+            model: 2024,
+            color: "",
+            engineType: "",   
+            engineNumber: "",   
+            mileage: 1000,
+            carType: "",            
             accidental: false,     
-            price:10000,
+            price: 10000,
             availability: true
-        })
+        });
         console.log(carForm);
         //updating
-        if(id){
-            try {
-                let respose = await axios.post(`http://localhost:3000/car/update/${id}`, carForm , {withCredentials : true})
-                navigate('/explore')
-            } catch (error) {
-                console.log(error)
-                if(error.response.status == 401){
-                    navigate('/login')
-                }else if(error.response.status == 403){
-                    navigate(`/category/car/${id}`)
-                } else{
-                    console.log("some other error3")
-                }
+        // if(id){
+        //     try {
+        //         let respose = await axios.post(`http://localhost:3000/car/update/${id}`, carForm , {withCredentials : true})
+        //         navigate('/explore')
+        //     } catch (error) {
+        //         console.log(error)
+        //         if(error.response.status == 401){
+        //             navigate('/login')
+        //         }else if(error.response.status == 403){
+        //             navigate(`/category/car/${id}`)
+        //         } else{
+        //             console.log("some other error3")
+        //         }
 
-            }
-            return;
-        }
+        //     }
+        //     return;
+        // }
         //new Addition
         try {
             // Send form data to the backend
-            const response = await axios.post('http://localhost:3000/car/addcar', carForm , {withCredentials : true});
+            const response = await axios.post('http://localhost:3000/car/addcar', carForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }});
             navigate('/explore')
         }
         catch (error) {
@@ -126,7 +148,7 @@ export default function CarForm(){
             
             <h3>Car Registration Form</h3>
 
-            <form action="" className="CarForm" onSubmit={handleSubmit}>
+            <form action="" className="CarForm" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="primaryInfo">
                     <label htmlFor="EngineNumber">Enter Engine Number</label> 
                     <input type="text" id="EngineNumber" placeholder="Engine # " name="engineNumber" onChange={handleCarForm} value={carForm.engineNumber} required/>
@@ -140,8 +162,8 @@ export default function CarForm(){
                     <input type="number" id="model" placeholder="Car Model" name="model" onChange={handleCarForm} value={carForm.model} required/>
                 </div>
                 <div className="engine">
-                    {/* <label htmlFor="engineType">Enter Engine Type</label>
-                    <input type="text" id="engineType" placeholder="Engine Type" name="engineType" onChange={handleCarForm} value={carForm.engineType} required/> */}
+                    <label htmlFor="carImage">Choose Image</label>
+                    <input type="file" id="carImage" placeholder="Image" name="carImage" onChange={handleCarForm} required/>
                     <label htmlFor="milage">Enter Milage</label>
                     <input type="number" id="milage" placeholder="Milage" name="milage" onChange={handleCarForm} value={carForm.milage} required/>
                 </div>

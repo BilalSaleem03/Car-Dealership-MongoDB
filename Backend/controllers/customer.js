@@ -35,10 +35,16 @@ module.exports.specificCustomer = async (req , res)=>{
 }
 
 module.exports.addCustomer = async (req, res) => {
+    let imageURL = req.file.path;
+    let imageFileName = req.file.filename;
     let customerData = req.body;
     let ack;
     try {
         ack = await Customer.create({
+            Image: {
+                url: imageURL, // Store image path in DB
+                filename: imageFileName
+            },
             First_Name: customerData.firstName,
             Last_Name: customerData.lastName,
             CNIC: customerData.cnic,
@@ -62,6 +68,10 @@ module.exports.updateCustomer = async (req, res) => {
     let ack;
     try {
         ack = await Customer.findByIdAndUpdate(id , {
+            Image: {
+                url: imageURL, // Store image path in DB
+                filename: imageFileName
+            },
             First_Name: customerData.firstName,
             Last_Name: customerData.lastName,
             CNIC: customerData.cnic,

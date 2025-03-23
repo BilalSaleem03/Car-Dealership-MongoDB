@@ -14,7 +14,7 @@ export default function OneEmployee(){
     const getData = async ()=>{
         try {
             let response = await axios.get(`http://localhost:3000/customer/${id}` , {withCredentials : true});
-            // console.log(response.request.status);     --->To get status code
+            console.log(response.data);    
             setdata(response.data);
         } catch (error) {
             console.log(error.response.data.error)
@@ -28,19 +28,11 @@ export default function OneEmployee(){
         return dateString ? dateString.split('T')[0] : 'N/A';
     };
 
-    // const updateCustomer =async ()=>{
-    //     try {
-    //         let response = await axios.put(`http://localhost:3000/customer/update/${id}` ,{} , {withCredentials : true});
-    //         navigate('/customer')
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
     return(
         <div className='one_customer_window'>
             <Navbar/>
             <div className='one_customer'>
-                <img src={personImage} alt="person Image" />
+                <img src={data.Image?.url || personImage} alt="person Image" />
                 <h3>{data.First_Name} {data.Last_Name}</h3>
                 <ul>
                     <li>CNIC# {data.CNIC}</li>

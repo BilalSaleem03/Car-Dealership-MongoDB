@@ -5,8 +5,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
-// const multer = require("multer")
-// const upload = multer({dest : "/CustomerImages"})
+
 
 const flash = require('connect-flash');
 
@@ -23,8 +22,8 @@ const personalPostsRoute = require("./routes/personalPosts.js")
  
 
 //middleware
-app.use(express.urlencoded({ extended: true }));         
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));         
 app.use(cookieParser()); 
 app.use((req, res, next) => {
     // console.log("req", req.cookies);
