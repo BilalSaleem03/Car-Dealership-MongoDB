@@ -42,34 +42,35 @@ export default function EmployeeForm(){
 
     let {id} = useParams();
 
-    // let setPreviousData = ()=>{
-    //     let showPreviousData = async (id)=>{
-    //         let previousData = await axios.get(`http://localhost:3000/aboutus/${id}` , {withCredentials : true});
-    //         // console.log(previousData);  
-    //         setEmployeeForm({
-    //             firstName : previousData.data.First_Name,
-    //             lastName : previousData.data.Last_Name,
-    //             DOB : previousData.data.Date_of_Birth.split('T')[0],
-    //             gender : previousData.data.Gender,
-    //             cnic : previousData.data.CNIC,
-    //             phone : previousData.data.Phone_Number,
-    //             telephone : previousData.data.Telephone,
-    //             email : previousData.data.Email_Address,
-    //             address : previousData.data.Address,
-    //             hireDate : previousData.data.Hire_Date.split('T')[0],
-    //             designation : previousData.data.Designation,
-    //             salary : previousData.data.Salary,
-    //             commessionRate : previousData.data.Commission_Rate
-    //         })
+    let setPreviousData = ()=>{
+        let showPreviousData = async (id)=>{
+            let previousData = await axios.get(`http://localhost:3000/aboutus/${id}` , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" } });
+            // console.log(previousData);  
+            setEmployeeForm({
+                carImage:null,
+                firstName : previousData.data.First_Name,
+                lastName : previousData.data.Last_Name,
+                DOB : previousData.data.Date_of_Birth.split('T')[0],
+                gender : previousData.data.Gender,
+                cnic : previousData.data.CNIC,
+                phone : previousData.data.Phone_Number,
+                telephone : previousData.data.Telephone,
+                email : previousData.data.Email_Address,
+                address : previousData.data.Address,
+                hireDate : previousData.data.Hire_Date.split('T')[0],
+                designation : previousData.data.Designation,
+                salary : previousData.data.Salary,
+                commessionRate : previousData.data.Commission_Rate
+            })
     
-    //     }
-    //     if(id){
-    //         showPreviousData(id);
-    //     }
-    // }   
-    // useEffect(()=>{
-    //     setPreviousData();
-    // } , [])
+        }
+        if(id){
+            showPreviousData(id);
+        }
+    }   
+    useEffect(()=>{
+        setPreviousData();
+    } , [])
 
     let handleSubmit =async (event)=>{
         event.preventDefault();
@@ -106,15 +107,15 @@ export default function EmployeeForm(){
             commissionRate:0
         })
 
-        // if(id){
-        //     try {
-        //         let respose = await axios.post(`http://localhost:3000/aboutus/update/${id}`, employeeForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }})
-        //         navigate('/aboutus')
-        //     } catch (error) {
-        //         console.log(error)
-        //     }
-        //     return;
-        // }
+        if(id){
+            try {
+                let respose = await axios.post(`http://localhost:3000/aboutus/update/${id}`, employeeForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }})
+                navigate('/aboutus')
+            } catch (error) {
+                console.log(error)
+            }
+            return;
+        }
 
         try {
             // Send form data to the backend
@@ -138,7 +139,7 @@ export default function EmployeeForm(){
                 <div className="primaryInfo">
                     {/* <div></div> */}
                     <label htmlFor="emplyeeImage">Enter Employee Image</label> 
-                    <input type="file" id="emplyeeImage" placeholder="Employee Image" name="employeeImage" onChange={handleEmployeeForm} required/>
+                    <input type="file" id="emplyeeImage" placeholder="Employee Image" name="employeeImage" onChange={handleEmployeeForm}/>
                     <label htmlFor="designation">Enter Designation</label>
                     <input type="text" id="designation" placeholder="Designation" name="designation" onChange={handleEmployeeForm} value={employeeForm.designation} required/>
                 </div>

@@ -65,9 +65,12 @@ module.exports.addCustomer = async (req, res) => {
 module.exports.updateCustomer = async (req, res) => {
     let {id} = req.params;
     let customerData = req.body;
+    let imageURL = req.file?.path;
+    let imageFileName = req.file?.filename;
     let ack;
-    try {
-        ack = await Customer.findByIdAndUpdate(id , {
+    let updatedcustomerInfo;
+    if(req.file){
+        updatedcustomerInfo = {
             Image: {
                 url: imageURL, // Store image path in DB
                 filename: imageFileName
@@ -81,7 +84,22 @@ module.exports.updateCustomer = async (req, res) => {
             Phone_Number: customerData.phone,
             Telephone: customerData.telephone,
             Address: customerData.address
-        });
+        }
+    } else {
+        updatedcustomerInfo = {
+            First_Name: customerData.firstName,
+            Last_Name: customerData.lastName,
+            CNIC: customerData.cnic,
+            Gender: customerData.gender,
+            Date_of_Birth: new Date(customerData.DOB),
+            Email_Address: customerData.email,
+            Phone_Number: customerData.phone,
+            Telephone: customerData.telephone,
+            Address: customerData.address
+        }
+    }
+    try {
+        ack = await Customer.findByIdAndUpdate(id , updatedcustomerInfo );
     } catch (error) {
         res.status(500).json({ error: "An error occurred during insertion." });
         return;

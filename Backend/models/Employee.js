@@ -3,12 +3,10 @@ const mongoose = require('mongoose');
 const employeeSchema = new mongoose.Schema({
     Image: {
         url: {
-            type: String,
-            required: true 
+            type: String, 
         },
         filename: {
             type: String,
-            required: true
         }
     },
     First_Name: {

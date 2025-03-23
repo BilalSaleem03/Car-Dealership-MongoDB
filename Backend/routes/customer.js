@@ -15,7 +15,7 @@ route.get("/:id" ,customerController.specificCustomer)
 route.post("/addcustomer", isLoggedIn, upload.single("customerImage") , customerController.addCustomer );
 
 
-route.post("/update/:id", isLoggedIn , customerController.updateCustomer);
+route.post("/update/:id", isLoggedIn , upload.single("customerImage") , customerController.updateCustomer);
 
 
 module.exports = route;

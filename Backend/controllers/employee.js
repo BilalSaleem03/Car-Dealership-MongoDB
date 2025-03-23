@@ -66,9 +66,19 @@ module.exports.addEmployee =  async (req, res) => {
 module.exports.updateEmployee = async (req, res) => {
     let {id} = req.params;
     let employeeData = req.body;
+    console.log(req.body)
     let ack;
-    try {
-        ack = await Employee.findByIdAndUpdate(id , {
+    let imageURL = req.file?.path;
+    let imageFileName = req.file?.filename;
+
+    let  updatedEmployee;
+    if(req.file){
+        console.log("has file")
+        updatedEmployee = {
+            Image: {
+                url: imageURL,
+                filename: imageFileName
+            },
             First_Name: employeeData.firstName,
             Last_Name: employeeData.lastName,
             CNIC: employeeData.cnic,
@@ -82,7 +92,30 @@ module.exports.updateEmployee = async (req, res) => {
             Designation: employeeData.designation,
             Salary: employeeData.salary,
             Commission_Rate: employeeData.commessionRate 
-        });
+        }
+    }
+    else{
+        
+        console.log("No file")
+        updatedEmployee = {
+            First_Name: employeeData.firstName,
+            Last_Name: employeeData.lastName,
+            CNIC: employeeData.cnic,
+            Gender: employeeData.gender,
+            Date_of_Birth: new Date(employeeData.DOB),
+            Email_Address: employeeData.email,
+            Phone_Number: employeeData.phone,
+            Telephone: employeeData.telephone,
+            Address: employeeData.address,
+            Hire_Date: new Date(employeeData.hireDate),
+            Designation: employeeData.designation,
+            Salary: employeeData.salary,
+            Commission_Rate: employeeData.commessionRate 
+        }
+    }
+    try {
+
+        ack = await Employee.findByIdAndUpdate(id , updatedEmployee);
     } catch (error) {
         res.status(500).json({ error: "An error occurred during insertion." });
         return;

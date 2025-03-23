@@ -14,7 +14,7 @@ export default function PersonalPage(){
         try{
             let response =await axios.get("http://localhost:3000/personalPosts" , {withCredentials : true})
             setData(response.data);
-            console.log(response)
+            // console.log(response)
         } catch(error){
             if(error.response.status === 401){
                 navigate("/login")

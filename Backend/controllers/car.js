@@ -82,9 +82,16 @@ module.exports.addCar = async (req, res) => {
 module.exports.updateCar = async (req, res) => {
     let {id} = req.params;
     let carData = req.body;
+    let imageURL = req.file?.path;
+    let imageFileName = req.file?.filename;
     let ack;
-    try {
-        ack = await Car.findByIdAndUpdate(id , {
+    let updatedCarInfo;
+    if(req.file){
+        updatedCarInfo = {
+            Image: {
+                url: imageURL, // Store image path in DB
+                filename: imageFileName
+            },
             Car_Name: carData.carName,
             Manufacturer: carData.manufacturer,
             Color: carData.color,
@@ -96,7 +103,24 @@ module.exports.updateCar = async (req, res) => {
             Accidental: carData.accidental,
             Price: carData.price,
             Availability: carData.availability
-        });
+        }
+    } else {
+        updatedCarInfo = {
+            Car_Name: carData.carName,
+            Manufacturer: carData.manufacturer,
+            Color: carData.color,
+            Model_Number: carData.model,
+            Engine_Type: carData.engineType,
+            Engine_Number: carData.engineNumber,
+            Car_Type:carData.carType,
+            Mileage: carData.milage,
+            Accidental: carData.accidental,
+            Price: carData.price,
+            Availability: carData.availability
+        }
+    }
+    try {
+        ack = await Car.findByIdAndUpdate(id , updatedCarInfo);
     } catch (error) {
         res.status(500).json({ error: "An error occurred during insertion." });
         return;

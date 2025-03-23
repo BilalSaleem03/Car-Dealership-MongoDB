@@ -19,8 +19,8 @@
     margin-left: 2vw;
 }
 .card ul li{
-    margin-left: 3vw;
+    margin-left: 1vw;
     margin-top: 1vw;
-    text-decoration: none;
+    list-style-type: none;
     border-radius: 10px;
 }

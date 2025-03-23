@@ -16,7 +16,7 @@ route.delete("/delete/:id" , isLoggedIn ,isOwner, carControllers.deleteCar)
 
 route.post("/addCar", verifyJWT , upload.single("carImage") , carControllers.addCar);
 
-route.post("/update/:id", isLoggedIn , isOwner , carControllers.updateCar);
+route.post("/update/:id", isLoggedIn , isOwner , upload.single("carImage"), carControllers.updateCar);
 
 
 module.exports = route;

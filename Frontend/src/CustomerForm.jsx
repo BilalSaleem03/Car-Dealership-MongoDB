@@ -27,6 +27,7 @@ export default function CustomerForm(){
         let showPreviousData = async (id)=>{
             let previousData = await axios.get(`http://localhost:3000/customer/${id}` ,  {withCredentials : true});  
             setCustomerForm({
+                customerImage:null,
                 firstName : previousData.data.First_Name,
                 lastName : previousData.data.Last_Name,
                 DOB : previousData.data.Date_of_Birth.split("T")[0],
@@ -91,7 +92,7 @@ export default function CustomerForm(){
         if(id){
             try {
                 let response = await axios.post(`http://localhost:3000/customer/update/${id}`, customerForm , {withCredentials : true , headers: { "Content-Type": "multipart/form-data" }})
-                console.log("response" , response)
+                // console.log("response" , response)
                 navigate('/customer')
             } catch (error) {
                 console.log("error   ",error)
@@ -101,8 +102,8 @@ export default function CustomerForm(){
         
         try {
             let response = await axios.post('http://localhost:3000/customer/addcustomer', customerForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" } })
-            console.log("response" , response)
-            console.log("Successfully submited")
+            // console.log("response" , response)
+            // console.log("Successfully submited")
             navigate('/customer')
         } catch (error) {
             
@@ -117,8 +118,8 @@ export default function CustomerForm(){
 
             <form action="" className="CustomerForm" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="primaryInfo">
-                    <label htmlFor="customerImage">Upload Image</label> 
-                    <input type="file" id="customerImage" placeholder="Customer Image" name="customerImage" onChange={handleCustomerForm} required />
+                    <label htmlFor="customerImage">{id ?"Upload New Image" :"Upload Image"}</label> 
+                    <input type="file" id="customerImage" placeholder="Customer Image" name="customerImage" onChange={handleCustomerForm} />
                     <label htmlFor="cnic">Enter CNIC #</label>
                     <input type="number" id="cnic" placeholder="CNIC#" name="cnic" onChange={handleCustomerForm} value={customerForm.cnic} required/>
                 </div>

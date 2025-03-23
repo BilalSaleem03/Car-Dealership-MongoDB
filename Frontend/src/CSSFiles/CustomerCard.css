@@ -2,21 +2,19 @@
     height: 50vh;
     width: 20vw;
     background-color: rgb(191, 210, 210);
-    margin: 5vh;
-    border-radius: 8px;
-    text-decoration: none;
-    /* border : 2px solid black; */
-    
+    margin: 5vh;    
 }
 .customer_card img{
     height: 30vh;
     width: 20vw;
 }
-/* 
-NavLink{
-
+.navlink{
     text-decoration: none;
-} */
+    border-radius: 8px;
+    :hover{
+        text-decoration: underline;
+    }
+}
 
 .customer_card h3{
     font-size: xx-large;
@@ -26,7 +24,16 @@ NavLink{
 .customer_card h4{
     font-size: x-large;
     font-weight: bolder;
-    text-decoration:double;
     margin-top: 3vh;
     color: rgb(15, 13, 13);
+}
+@media (max-width: 1080px) {
+    .customer_card h3 {
+        font-size: large;
+        font-weight:300;
+    }
+    .customer_card h4 {
+        font-size: large;
+        font-weight:300;
+    }
 }

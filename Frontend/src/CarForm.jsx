@@ -26,31 +26,32 @@ export default function CarForm(){
 
     let {id} = useParams();
 
-    // let setPreviousData = ()=>{
-    //     let showPreviousData = async (id)=>{
-    //         let previousData = await axios.get(`http://localhost:3000/car/${id}` , {withCredentials : true});  
-    //         setCarForm({
-    //             manufacturer : previousData.data.Manufacturer,
-    //             carName : previousData.data.Car_Name,
-    //             model : previousData.data.Model_Number,
-    //             color : previousData.data.Color,
-    //             engineType : previousData.data.Engine_Type,    
-    //             engineNumber : previousData.data.Engine_Number,    
-    //             milage : previousData.data.Mileage,
-    //             carType : previousData.data.Car_Type,          
-    //             accidental : previousData.data.Accidental,     
-    //             price : previousData.data.Price,
-    //             availability : true
-    //         })
+    let setPreviousData = ()=>{
+        let showPreviousData = async (id)=>{
+            let previousData = await axios.get(`http://localhost:3000/car/${id}` , {withCredentials : true});  
+            setCarForm({
+                carImage:null,
+                manufacturer : previousData.data.Manufacturer,
+                carName : previousData.data.Car_Name,
+                model : previousData.data.Model_Number,
+                color : previousData.data.Color,
+                engineType : previousData.data.Engine_Type,    
+                engineNumber : previousData.data.Engine_Number,    
+                milage : previousData.data.Mileage,
+                carType : previousData.data.Car_Type,          
+                accidental : previousData.data.Accidental,     
+                price : previousData.data.Price,
+                availability : true
+            })
     
-    //     }
-    //     if(id){
-    //         showPreviousData(id);
-    //     }
-    // }   
-    // useEffect(()=>{
-    //     setPreviousData();
-    // } , [])
+        }
+        if(id){
+            showPreviousData(id);
+        }
+    }   
+    useEffect(()=>{
+        setPreviousData();
+    } , [])
 
 
     let handleCarForm = (event)=>{
@@ -107,23 +108,23 @@ export default function CarForm(){
         });
         console.log(carForm);
         //updating
-        // if(id){
-        //     try {
-        //         let respose = await axios.post(`http://localhost:3000/car/update/${id}`, carForm , {withCredentials : true})
-        //         navigate('/explore')
-        //     } catch (error) {
-        //         console.log(error)
-        //         if(error.response.status == 401){
-        //             navigate('/login')
-        //         }else if(error.response.status == 403){
-        //             navigate(`/category/car/${id}`)
-        //         } else{
-        //             console.log("some other error3")
-        //         }
+        if(id){
+            try {
+                let respose = await axios.post(`http://localhost:3000/car/update/${id}`, carForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }})
+                navigate('/explore')
+            } catch (error) {
+                console.log(error)
+                if(error.response.status == 401){
+                    navigate('/login')
+                }else if(error.response.status == 403){
+                    navigate(`/category/car/${id}`)
+                } else{
+                    console.log("some other error3")
+                }
 
-        //     }
-        //     return;
-        // }
+            }
+            return;
+        }
         //new Addition
         try {
             // Send form data to the backend
@@ -163,7 +164,7 @@ export default function CarForm(){
                 </div>
                 <div className="engine">
                     <label htmlFor="carImage">Choose Image</label>
-                    <input type="file" id="carImage" placeholder="Image" name="carImage" onChange={handleCarForm} required/>
+                    <input type="file" id="carImage" placeholder="Image" name="carImage" onChange={handleCarForm} />
                     <label htmlFor="milage">Enter Milage</label>
                     <input type="number" id="milage" placeholder="Milage" name="milage" onChange={handleCarForm} value={carForm.milage} required/>
                 </div>

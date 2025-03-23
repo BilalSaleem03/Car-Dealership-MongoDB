@@ -15,7 +15,7 @@ module.exports.personalPosts = async (req , res)=>{
         }
         console.log(userInfo)
         // let data = await Car.find({Car_Owner : userInfo.username , Availability : true});
-        let data = await Car.find({Car_Owner : userInfo.username });
+        let data = await Car.find({Car_Owner : userInfo.username , Availability: true });
 
         if(!data){
             return res.status(404).json({error : "No Data Found"})

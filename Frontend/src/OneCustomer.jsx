@@ -14,7 +14,7 @@ export default function OneEmployee(){
     const getData = async ()=>{
         try {
             let response = await axios.get(`http://localhost:3000/customer/${id}` , {withCredentials : true});
-            console.log(response.data);    
+            // console.log(response.data);    
             setdata(response.data);
         } catch (error) {
             console.log(error.response.data.error)

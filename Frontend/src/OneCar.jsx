@@ -43,7 +43,7 @@ export default function OneCar(){
 
     const deleteCar =async ()=>{
         try {
-            let response = await axios.delete(`http://localhost:3000/car/delete/${id}` , {withCredentials : true})
+            let response = await axios.delete(`http://localhost:3000/car/delete/${id}` , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }})
             navigate('/explore')
         } catch (error) {
             if(error.response.status == 401){
@@ -77,15 +77,9 @@ export default function OneCar(){
                     <li>Post Owner: {data.Car_Owner}/-</li>
                     <p className='owner-message'>{notOwner && "You Are Not The Owner"}</p>
                 </ul>
-                <p>
-                    
-                {data.Car_Owner !== globalUser.loggedInUser &&  "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"}
-                </p>
-                {/* <NavLink to={`/car/buy/${data._id}`}><button className='buy_btn'>Buy Car</button></NavLink>
-                <NavLink to={`/car/update/${data._id}`}><button className='buy_btn'>Update Info</button></NavLink>
-                <button onClick={deleteCar}>Delete</button> */}
+                <NavLink to={`/car/update/${data._id}`}>{data.Car_Owner === globalUser.loggedInUser && <button className='buy_btn'>Update Info</button>}</NavLink>
+                {data.Car_Owner === globalUser.loggedInUser && <button onClick={deleteCar}>Delete</button>}
                 <NavLink to={`/car/buy/${data._id}`}>{data.Car_Owner === globalUser.loggedInUser && <button className='buy_btn'>Buy Car</button>}</NavLink>
-                <p>{globalUser.loggedInUser}</p>
 
             </div>
             <Footer/>

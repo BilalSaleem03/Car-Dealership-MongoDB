@@ -1,12 +1,12 @@
 
 .one-car {
-    width: 25vw;
-    height: 70vh; 
+    width: 30vw;
+    height: 80vh; 
     background: rgba(255, 255, 255, 0.1); /* Transparent background */
     backdrop-filter: blur(2px); 
     border-radius: 15px;
     padding: 1vw;
-    position: relative;
+    /* background-color: aquamarine; */
 }
 
 .one-car .card_img{
@@ -21,18 +21,18 @@
 .one-car .list li{
     margin-bottom: 3px;
     color: aliceblue;
-
+    list-style-type: none;
 }
 
 
 .one-car .btns{
-
+    display: flex;
+    justify-content: space-between;
     padding-top: 4vh;
   
 }
 
 .one-car button{
-    /* right: 1vw; */
     background: white;
     color: black;
     font-size: 1vw;

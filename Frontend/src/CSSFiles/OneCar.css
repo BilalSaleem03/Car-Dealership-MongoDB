@@ -7,14 +7,14 @@
 
 .one_car{
     width: 40vw;
-    height: 90vh;
+    height: 100vh;
     background-color: rgb(181, 194, 194);
     margin: auto;
-    /* margin-top: 10vh; */
     border-radius: 4vw;
 }
 
 .one_car img{
+    object-fit:fill;
     height: 35vh;
     width: 40vw;
 }

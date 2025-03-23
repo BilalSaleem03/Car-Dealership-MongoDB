@@ -14,7 +14,7 @@ export default function Explore(){
         try {
             let response = await axios.get("http://localhost:3000/explore" , {withCredentials : true});
             setdata(response.data);
-            console.log(response)
+            // console.log(response)
         } catch (error) {
             console.log(error.response.data.error)
             console.log(error.response.status)

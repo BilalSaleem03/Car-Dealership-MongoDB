@@ -12,7 +12,7 @@ route.get("/:id" , employeeontrollers.specificEmployee)
 
 route.post("/addemployee", isLoggedIn , upload.single("employeeImage"), employeeontrollers.addEmployee);
 
-route.post("/update/:id", isLoggedIn ,  employeeontrollers.updateEmployee);
+route.post("/update/:id", isLoggedIn ,upload.single("employeeImage") ,  employeeontrollers.updateEmployee);
 
 
 module.exports = route;

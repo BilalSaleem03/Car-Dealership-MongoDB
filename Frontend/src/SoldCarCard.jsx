@@ -11,7 +11,7 @@ export default function Card({car}){
 
     const getCarData = async ()=>{
         try {
-            let response = await axios.get(`http://localhost:3000/car/${car.Car_Id}` , {withCredentials : true});
+            let response = await axios.get(`http://localhost:3000/car/${car.Car_Id}` , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }});
             setCarData(response.data);
         } catch (error) {
             console.log(error.response.data.error)
@@ -20,7 +20,7 @@ export default function Card({car}){
     }
     const getCustomerData = async ()=>{
         try {
-            let response = await axios.get(`http://localhost:3000/customer/${car.Customer_Id}` , {withCredentials : true});
+            let response = await axios.get(`http://localhost:3000/customer/${car.Customer_Id}` , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }});
             setCUstomerData(response.data);
         } catch (error) {
             console.log(error.response.data.error)
@@ -29,7 +29,7 @@ export default function Card({car}){
     }
     const getSalesPersonData = async ()=>{
         try {
-            let response = await axios.get(`http://localhost:3000/aboutus/${car.Employee_Id}` , {withCredentials : true});
+            let response = await axios.get(`http://localhost:3000/aboutus/${car.Employee_Id}` , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }});
             setSalesPersonData(response.data);
         } catch (error) {
             console.log(error.response.data.error)
