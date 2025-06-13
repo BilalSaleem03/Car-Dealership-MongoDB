@@ -247,4 +247,4 @@ async function addCar(){
     
 }
 
-// addCar();
+addCar();

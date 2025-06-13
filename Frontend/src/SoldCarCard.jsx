@@ -56,7 +56,7 @@ export default function Card({car}){
                 <li>Asked Amount {car.Asked_Amount}</li>
                 <li>Given Amount {car.Given_Amount}</li>
                 <li>Date: {car.Sale_Date}</li>
-                <li>Date: {car.Payment_Method}</li>
+                <li>Payment Method: {car.Payment_Method}</li>
                 
             </ul>
             
