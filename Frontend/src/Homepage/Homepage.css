@@ -9,7 +9,10 @@
     top: 0px;
     left: 0px;
     right: 0px;
-    background-color: transparent;
+    /* filter: blur(1px); */
+    /* background-color: transparent; */
+    /* position: sticky; top: 0px; */
+    background-color: rgba(0,0,0, 0.4);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -155,8 +158,9 @@
 }
 .screenText{
     position: absolute;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: xx-large;
+    font-weight: bolder;
     width: 40vh;
     right: 15vw;
     bottom: 25vh;

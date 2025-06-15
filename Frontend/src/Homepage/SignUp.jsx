@@ -41,7 +41,7 @@ export default function Login(){
         }
     }
     return(
-        <form className="login" onSubmit={handleSubmit}> 
+        <form className="signup" onSubmit={handleSubmit}> 
             <Navbar/>
             <video src={bgVideo} autoPlay loop muted></video> 
             <div className="content">

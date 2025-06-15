@@ -9,6 +9,8 @@
     
 }
 .card .card_img{
+    object-fit: fill;
+  object-position: 50% 50%;
     height: 25vh;
     width: 30vw;
 }

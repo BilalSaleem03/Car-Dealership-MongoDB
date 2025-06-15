@@ -45,13 +45,13 @@
     font-size: larger;
     color: rgb(15, 15, 15);
 }
-.login .content .username #username,#password{
+.login .content .username #username[type=text] , #password[type=password]{
     height: 5vh;
     width: 20vw;
     padding-left: 1vw;
     font-weight: bold;
     font-size: medium;
-    background: none;
+    background: none;  
     color: rgb(13, 14, 14);
 
 }

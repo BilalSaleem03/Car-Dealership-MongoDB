@@ -34,8 +34,8 @@ module.exports.specificEmployee = async (req , res)=>{
 module.exports.addEmployee =  async (req, res) => {
     let employeeData = req.body;
     let ack;
-    let imageURL = req.file.path;
-    let imageFileName = req.file.filename;
+    let imageURL = req.file?.path;
+    let imageFileName = req.file?.filename;
     try {
         ack = await Employee.create({
             Image: {

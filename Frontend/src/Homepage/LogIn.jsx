@@ -60,7 +60,7 @@ export default function Login(){
         <Navbar/>
             <video src={bgVideo} autoPlay loop muted></video>
             <div className="content">
-            <h3>Log In</h3>
+                <h3>Log In</h3>
                 <div className="username">
                     <label className='username-lable' htmlFor="username">Enter Username</label>
                     <input type="text" name="username" id="username" value={loginInfo.username} onChange={handleForm} required/>

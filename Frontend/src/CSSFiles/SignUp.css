@@ -1,4 +1,4 @@
-.login{
+.signup{
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -7,21 +7,21 @@
     justify-content: center;
     align-items: center;
 }
-.login video{
+.signup video{
     position: relative;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
     z-index: -1;
 }
-.login h3{
+.signup h3{
     margin-top: 2vh;
     color: azure;
     font-size: x-large;
     font-weight: bolder;
 }
 
-.login .content{
+.signup .content{
     position: absolute;
     top: 20vh;
     height: 70vh;
@@ -35,18 +35,18 @@
     background: rgba(255, 255, 255, 0.1); /* Transparent background */
     backdrop-filter: blur(2px); 
 }
-.login .content .username,.email,.password{
+.signup .content .username,.email,.password{
     display: flex;
     flex-direction: column;
 }
-.login .content .username .username-label,.email-label,.password-label{
+.signup .content .username .username-label,.email-label,.password-label{
     margin-bottom: 1vh;
     background: none;
     font-weight: bold;
     font-size: large;
     color: azure;
 }
-.login .content .username #username,#email,#password{
+.signup .content .username #username[type=text],#email[type=email],#password[type=password]{
     height: 5vh;
     width: 20vw;
     padding-left: 1vw;
@@ -56,13 +56,13 @@
     color: azure;
 
 }
-.login .content p{
+.signup .content p{
     color: brown;
     font-weight: bolder;
     font-size: larger;
 }
 
-.login .content button{
+.signup .content button{
     height: 4vh;
     width: 10vw;
     font-weight: bolder;
