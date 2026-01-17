@@ -150,7 +150,6 @@ export default function Navbar() {
     const [search, setSearch] = useState("");
     const [dropdown, setDropdown] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const [searchExpanded, setSearchExpanded] = useState(false);
 
     // Check auth on mount
     const checkCookiesPresence = async () => {
@@ -180,9 +179,12 @@ export default function Navbar() {
         setSearch(event.target.value);
     }
 
-    let clickSearch = (event) => {
-        event.preventDefault();
-        console.log("Searching for:", search);
+    let handleSearchSubmit = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            console.log("Searching for:", search);
+            // Add your search logic here
+        }
     }
 
     // Toggle mobile menu
@@ -277,35 +279,21 @@ export default function Navbar() {
                     </motion.div>
                 </div>
 
-                {/* Search Bar */}
+                {/* ===== UPDATED: Simple Search Bar ===== */}
                 <motion.div 
-                    className={`center-area ${searchExpanded ? 'search-expanded' : ''}`}
+                    className="center-area"
                     whileHover={{ scale: 1.02 }}
                 >
-                    <motion.div 
-                        className="search-wrapper"
-                        animate={{ width: searchExpanded ? "300px" : "250px" }}
-                        transition={{ duration: 0.3 }}
-                    >
+                    <div className="search-wrapper">
                         <Search className="search-icon" size={20} />
                         <input 
                             className="search-area" 
-                            placeholder="Search vehicles..." 
+                            placeholder="Search" 
                             value={search}
                             onChange={handleSearch}
-                            onFocus={() => setSearchExpanded(true)}
-                            onBlur={() => setSearchExpanded(false)}
+                            onKeyDown={handleSearchSubmit}
                         />
-                        <motion.button 
-                            className="search-btn" 
-                            type="submit" 
-                            onClick={clickSearch}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            Search
-                        </motion.button>
-                    </motion.div>
+                    </div>
                 </motion.div>
 
                 {/* Right Area - Auth Buttons */}
@@ -372,6 +360,20 @@ export default function Navbar() {
                             transition={{ duration: 0.3 }}
                         >
                             <div className="mobile-dropdown-content">
+                                {/* Mobile Search */}
+                                <div className="mobile-search">
+                                    <div className="search-wrapper">
+                                        <Search className="mobile-search-icon" size={20} />
+                                        <input 
+                                            className="mobile-search-input"
+                                            placeholder="Search" 
+                                            value={search}
+                                            onChange={handleSearch}
+                                            onKeyDown={handleSearchSubmit}
+                                        />
+                                    </div>
+                                </div>
+                                
                                 {navItems.map((item, index) => (
                                     <motion.div
                                         key={item.path}
