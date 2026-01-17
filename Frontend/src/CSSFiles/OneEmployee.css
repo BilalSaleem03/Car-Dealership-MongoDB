@@ -1,4 +1,4 @@
-.one_employee_window{
+/* .one_employee_window{
     width: 100%;
     height: 110vh;
     background-color: rgb(24, 24, 24);
@@ -39,4 +39,392 @@
         background-color: green;
     }
 
+} */
+
+
+
+
+/* OneEmployee.css - Employee Profile Page Styling */
+
+.employee-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.employee-content {
+    flex: 1;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Loading State */
+.employee-loading {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+.employee-loading h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.employee-loading p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Error State */
+.employee-error {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+.employee-error h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+.employee-error p {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+/* Breadcrumb */
+.employee-breadcrumb {
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: white;
+}
+
+.employee-breadcrumb a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.employee-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.employee-breadcrumb span {
+    color: rgba(255,255,255,0.8);
+    margin-left: 5px;
+}
+
+/* Main Grid Layout */
+.employee-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 992px) {
+    .employee-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Profile Section */
+.employee-profile-section {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-image-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #667eea;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-status {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.status-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+}
+
+.status-manager {
+    background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+}
+
+.status-employee {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+/* Profile Summary */
+.profile-summary {
+    text-align: center;
+    width: 100%;
+}
+
+.profile-summary h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.profile-designation {
+    color: #667eea;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.profile-email, .profile-phone {
+    color: #666;
+    font-size: 14px;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-update-profile {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-update-profile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+/* Details Section */
+.employee-details-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.details-header h1 {
+    font-size: 32px;
+    color: #333;
+    margin: 0;
+}
+
+.hire-date {
+    color: #667eea;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Details Grid */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detail-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+    background: #e9ecef;
+    transform: translateY(-3px);
+}
+
+.detail-icon {
+    font-size: 32px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.detail-content h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.detail-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detail-content li {
+    color: #666;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.detail-content strong {
+    color: #333;
+    min-width: 140px;
+    display: inline-block;
+}
+
+/* Additional Info */
+.additional-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+}
+
+.additional-info h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.additional-info > p {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.contact-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid #667eea;
+}
+
+.contact-box h4 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.contact-box > p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.contact-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.email-btn {
+    background: #667eea;
+    color: white;
+}
+
+.phone-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }

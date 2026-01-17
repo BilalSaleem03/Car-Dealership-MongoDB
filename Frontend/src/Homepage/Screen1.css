@@ -1,0 +1,349 @@
+/* Screen1.css - Complete Styles for Hero Section */
+
+/* CSS Variables for Theme */
+:root {
+    --primary: #1a3a5f;
+    --secondary: #e63946;
+    --dark: #0d1b2a;
+    --light: #f8f9fa;
+    --white: #ffffff;
+    --black: #000000;
+    --transition: all 0.3s ease;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset and Base */
+.screen1 * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Main Hero Container */
+.screen1 {
+    position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Images Container */
+.screen1 .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.screen1 .screen1Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.screen1 .screen1Image2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.7;
+    mix-blend-mode: overlay;
+    z-index: 2;
+}
+
+/* Gradient Overlay */
+.screen1 .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(13, 27, 42, 0.9) 0%,
+        rgba(13, 27, 42, 0.6) 50%,
+        rgba(13, 27, 42, 0.9) 100%
+    );
+    z-index: 3;
+}
+
+/* Hero Content */
+.screen1 .hero-content {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 2rem;
+    text-align: center;
+    color: var(--white);
+    margin-top: 80px; /* Account for fixed navbar */
+}
+
+.screen1 .hero-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--white) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.screen1 .screenText {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    line-height: 1.6;
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+    font-style: italic;
+}
+
+/* Hero Buttons Container */
+.screen1 .hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Button Styles */
+.screen1 .primary-btn,
+.screen1 .secondary-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+}
+
+.screen1 .primary-btn::before,
+.screen1 .secondary-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.screen1 .primary-btn:hover::before,
+.screen1 .secondary-btn:hover::before {
+    left: 100%;
+}
+
+/* Primary Button */
+.screen1 .primary-btn {
+    background: var(--secondary);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+}
+
+.screen1 .primary-btn:hover {
+    background: #c1121f;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.screen1 .primary-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Secondary Button */
+.screen1 .secondary-btn {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.screen1 .secondary-btn:hover {
+    background: var(--white);
+    color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.screen1 .secondary-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Scroll Indicator */
+.screen1 .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.screen1 .scroll-icon {
+    color: var(--white);
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.screen1 .scroll-indicator:hover .scroll-icon {
+    opacity: 1;
+    transform: translateY(5px);
+}
+
+.screen1 .scroll-text {
+    color: var(--white);
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.screen1 .scroll-indicator:hover .scroll-text {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .screen1 .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .screen1 .screenText {
+        font-size: 1.3rem;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .screen1 {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .screen1 .hero-content {
+        margin-top: 100px;
+        padding: 1.5rem;
+    }
+    
+    .screen1 .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .screen1 .screenText {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .screen1 .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        gap: 1rem;
+    }
+    
+    .screen1 .primary-btn,
+    .screen1 .secondary-btn {
+        width: 100%;
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+    }
+    
+    .screen1 .scroll-indicator {
+        bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .screen1 .hero-title {
+        font-size: 2rem;
+    }
+    
+    .screen1 .screenText {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .screen1 .hero-content {
+        margin-top: 120px;
+        padding: 1rem;
+    }
+    
+    .screen1 .screen1Image,
+    .screen1 .screen1Image2 {
+        object-position: 75% center;
+    }
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Apply Animations */
+.screen1 .hero-title {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.screen1 .screenText {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.screen1 .hero-buttons {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.screen1 .scroll-icon {
+    animation: float 2s ease-in-out infinite;
+}

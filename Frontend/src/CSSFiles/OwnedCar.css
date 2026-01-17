@@ -1,12 +1,11 @@
-
+/* 
 .one-car {
     width: 30vw;
     height: 80vh; 
-    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    background: rgba(255, 255, 255, 0.1); 
     backdrop-filter: blur(2px); 
     border-radius: 15px;
     padding: 1vw;
-    /* background-color: aquamarine; */
 }
 
 .one-car .card_img{
@@ -43,4 +42,282 @@
     cursor: pointer;
     outline: none; 
     
+} */
+
+
+
+
+
+
+
+/* OwnedCar.css - Personal Car Card Styling */
+
+.owned-car-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.owned-car-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* Car Image */
+.car-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.car-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.owned-car-card:hover .car-image {
+    transform: scale(1.05);
+}
+
+.car-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.status-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-clean {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.status-accidental {
+    background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+}
+
+/* Car Content */
+.car-content {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.car-name {
+    color: #333;
+    font-size: 20px;
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.car-price {
+    color: #667eea;
+    font-size: 18px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Car Specs */
+.car-specs {
+    flex: 1;
+    margin-bottom: 25px;
+}
+
+.spec-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 576px) {
+    .spec-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.spec-item:hover {
+    background: #e9ecef;
+}
+
+.spec-icon {
+    font-size: 20px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.spec-item div {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.spec-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.spec-value {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Car Actions */
+.car-actions {
+    margin-top: auto;
+}
+
+.delete-confirmation {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.delete-confirmation p {
+    color: #856404;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.confirmation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-confirm-delete,
+.btn-cancel-delete {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-confirm-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-confirm-delete:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.btn-cancel-delete {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-cancel-delete:hover:not(:disabled) {
+    background: #5a6268;
+}
+
+.btn-confirm-delete:disabled,
+.btn-cancel-delete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn-action:last-child {
+    margin-bottom: 0;
+}
+
+.btn-buy {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+}
+
+.btn-buy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-update {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-update:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+}
+
+.btn-delete:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+}
+
+.btn-delete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

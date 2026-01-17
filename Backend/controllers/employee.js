@@ -4,6 +4,8 @@ const Employee = require("../models/Employee.js");
 module.exports.allEmployees = async (req , res)=>{
     try {
         let employeesData = await Employee.find({});
+        console.log("wwwwwww")
+        console.log(employeesData);
         if(!employeesData){
             return res.status(404).json({error:"No data Found for that Employee"})
         } 
@@ -37,6 +39,7 @@ module.exports.addEmployee =  async (req, res) => {
     let imageURL = req.file?.path;
     let imageFileName = req.file?.filename;
     try {
+        console.log(employeeData)
         ack = await Employee.create({
             Image: {
                 url: imageURL, // Store image path in DB
@@ -54,7 +57,7 @@ module.exports.addEmployee =  async (req, res) => {
             Hire_Date: new Date(employeeData.hireDate),
             Designation: employeeData.designation,
             Salary: employeeData.salary,
-            Commission_Rate: employeeData.commessionRate 
+            Commission_Rate: employeeData.commissionRate 
         });
     } catch (error) {
         res.status(500).json({ error: "An error occurred during insertion." });
