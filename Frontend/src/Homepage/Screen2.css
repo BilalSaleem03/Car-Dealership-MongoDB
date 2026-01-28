@@ -329,23 +329,23 @@
 }
 
 .categories-section .customer-form {
-    background: linear-gradient(135deg, var(--secondary) 0%, #c1121f 100%);
-    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3);
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 100%);
+    box-shadow: 0 8px 25px rgba(26, 58, 95, 0.3);
 }
 
 .categories-section .customer-form:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(230, 57, 70, 0.4);
+    box-shadow: 0 15px 35px rgba(26, 58, 95, 0.4);
 }
 
 .categories-section .car-form {
-    background: linear-gradient(135deg, var(--accent) 0%, #1d7873 100%);
-    box-shadow: 0 8px 25px rgba(42, 157, 143, 0.3);
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 100%);
+    box-shadow: 0 8px 25px rgba(26, 58, 95, 0.3);
 }
 
 .categories-section .car-form:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(42, 157, 143, 0.4);
+    box-shadow: 0 15px 35px rgba(26, 58, 95, 0.4);
 }
 
 /* Responsive Design */

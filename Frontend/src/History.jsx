@@ -81,7 +81,7 @@ export default function History() {
         }
     }
 
-    const calculateStats = (salesData) => {
+    const calculateStats = async (salesData) => {
         if (!salesData || salesData.length === 0) return
 
         const totalSales = salesData.length
@@ -100,11 +100,25 @@ export default function History() {
             salesByPerson[a] > salesByPerson[b] ? a : b, Object.keys(salesByPerson)[0]
         )
 
+        try {
+            let response = await axios.get(`http://localhost:3000/aboutus/${topSalesPersonId}`)
+            const fullName = `${response.data.First_Name} ${response.data.Last_Name}`;
+            setStats({
+                totalSales,
+                totalRevenue,
+                avgSalePrice,
+                topSalesPerson: fullName
+            })
+        } catch (error) {
+            console.error('Error fetching employee data:', error)
+            setError('Failed to load team information')
+        }
+
         setStats({
             totalSales,
             totalRevenue,
             avgSalePrice,
-            topSalesPerson: `Employee #${topSalesPersonId}`
+            topSalesPerson, // Fallback to ID if name fetch fails
         })
     }
 

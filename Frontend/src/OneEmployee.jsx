@@ -178,7 +178,7 @@ export default function OneEmployee() {
                             <p className='profile-email'>📧 {data.Email_Address || 'N/A'}</p>
                             <p className='profile-phone'>📱 {formatPhone(data.Phone_Number)}</p>
                             
-                            <NavLink to={`/employee/update/${data._id}`} className="btn-update-profile">
+                            <NavLink to={`/employee/update/${data._id}`} className="btn-update-employee-profile">
                                 ✏️ Update Profile
                             </NavLink>
                         </div>
@@ -261,10 +261,10 @@ export default function OneEmployee() {
                                 <h4>Need to get in touch?</h4>
                                 <p>You can reach {data.First_Name} during business hours for any inquiries.</p>
                                 <div className='contact-options'>
-                                    <a href={`mailto:${data.Email_Address}`} className='contact-btn email-btn'>
+                                    <a href={`mailto:${data.Email_Address}`} className='contact-btn employee-profile-email-btn'>
                                         📧 Send Email
                                     </a>
-                                    <a href={`tel:${data.Phone_Number}`} className='contact-btn phone-btn'>
+                                    <a href={`tel:${data.Phone_Number}`} className='contact-btn employee-profile-phone-btn'>
                                         📞 Call Now
                                     </a>
                                 </div>

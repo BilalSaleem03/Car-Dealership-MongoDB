@@ -57,7 +57,10 @@ import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
 
 export default function ShowSpecificCategory() {
-    const { type } = useParams()
+    let { type } = useParams()
+    // remove colon fron start if present
+    type = type.startsWith(':') ? type.substring(1) : type
+
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -82,6 +85,7 @@ export default function ShowSpecificCategory() {
             let response = await axios.get(`http://localhost:3000/car/category/${type}`, {
                 withCredentials: true
             })
+            console.log(response.data)
             setData(response.data)
             setError(null)
         } catch (error) {

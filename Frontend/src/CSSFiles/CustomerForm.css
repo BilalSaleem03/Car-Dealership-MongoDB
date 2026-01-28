@@ -87,6 +87,10 @@
 
 /* CustomerForm.css - Specific styles for Customer Form */
 
+.FormPage{
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+}
+
 .CustomerForm {
     max-width: 850px;
     margin: 0 auto 3rem;
@@ -189,7 +193,8 @@
 }
 
 .CustomerForm button[type="submit"] {
-    background: linear-gradient(135deg, #1a365d 0%, #28a745 100%);
+    /* background: linear-gradient(135deg, #1a365d 0%, #28a745 100%); */
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
     font-size: 1.1rem;
     padding: 1rem 3rem;
     min-width: 220px;

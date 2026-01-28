@@ -137,7 +137,7 @@
 }
 
 .car-price {
-    color: #667eea;
+    color: #1a3a5f;
     font-size: 18px;
     font-weight: bold;
     white-space: nowrap;
@@ -150,7 +150,7 @@
 }
 
 .spec-row {
-    display: grid;
+    display:grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 15px;
@@ -170,6 +170,7 @@
     background: #f8f9fa;
     border-radius: 10px;
     transition: all 0.3s ease;
+    /* width:100% */
 }
 
 .spec-item:hover {
@@ -279,6 +280,22 @@
     cursor: pointer;
     text-decoration: none;
     transition: all 0.3s ease;
+    width: 90%;
+    margin-bottom: 10px;
+}
+.btn-action-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
     width: 100%;
     margin-bottom: 10px;
 }
@@ -288,33 +305,33 @@
 }
 
 .btn-buy {
-    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
     color: white;
 }
 
 .btn-buy:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(76, 175, 80, 0.3);
 }
 
 .btn-update {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 100%);
     color: white;
 }
 
 .btn-update:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(26, 58, 95, 0.4);
 }
 
 .btn-delete {
-    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    background: linear-gradient(135deg, #dc2626 0%, #1a3a5f 100%);;
     color: white;
 }
 
 .btn-delete:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(143, 36, 32, 0.4);
 }
 
 .btn-delete:disabled {

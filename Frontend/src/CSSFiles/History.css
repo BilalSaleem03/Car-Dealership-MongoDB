@@ -19,16 +19,21 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+    /* flex: 1; */
+    padding: 30px;
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
+    width: 95vw;
 }
 
-.history-content {
+/* .history-content {
     flex: 1;
     padding: 30px;
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-}
+} */
 
 /* Hero Section */
 .history-hero {
@@ -60,13 +65,13 @@
     margin-bottom: 60px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1292px) {
     .sales-stats {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 800px) {
     .sales-stats {
         grid-template-columns: 1fr;
     }
@@ -83,6 +88,18 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
     color: white;
+    
+}
+
+@media (max-width: 500px) {
+    .stat-card {
+        width:350px
+    }
+}
+@media (max-width: 400px) {
+    .stat-card {
+        width:250px
+    }
 }
 
 .stat-card:hover {

@@ -4,16 +4,16 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+    /* flex: 1; */
+    padding: 30px;
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
+    width: 95vw;
 }
 
-.aboutus-content {
-    flex: 1;
-    padding: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-}
+
 
 /* Hero Section */
 .aboutus-hero {
@@ -45,7 +45,7 @@
     margin-bottom: 60px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .team-stats {
         grid-template-columns: repeat(2, 1fr);
     }

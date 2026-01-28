@@ -222,7 +222,7 @@ export default function OwnedCar({ car }) {
                             </NavLink>
                             <button 
                                 onClick={handleDeleteClick} 
-                                className="btn-action btn-delete"
+                                className="btn-action-delete btn-delete"
                                 disabled={isDeleting}
                             >
                                 🗑️ {isDeleting ? 'Deleting...' : 'Delete'}

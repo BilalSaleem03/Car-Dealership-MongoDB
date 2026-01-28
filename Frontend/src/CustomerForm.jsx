@@ -405,7 +405,7 @@ export default function CustomerForm() {
                     </div>
                 </div>
 
-                <div className="customer-type">
+                {/* <div className="customer-type">
                     <label className="required">Customer Type</label>
                     <div className="radio-group">
                         <label className="radio-option">
@@ -434,7 +434,7 @@ export default function CustomerForm() {
                             Fleet
                         </label>
                     </div>
-                </div>
+                </div> */}
 
                 <button type="submit">{id ? "Update Customer" : "Register Customer"}</button>
             </form>

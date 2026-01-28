@@ -2,9 +2,13 @@
 
 .one-car-container {
     min-height: 100vh;
+    padding: 30px;
+    width:100vw;
+    /* height:100vh; */
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
 }
 
 /* Loading State */
@@ -91,9 +95,9 @@
 /* Content Layout */
 .one-car-content {
     flex: 1;
-    padding: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
+    /* padding-top: 30px; */
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
     width: 100%;
 }
 
@@ -185,10 +189,11 @@
 
 /* Owner Actions */
 .owner-actions {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 25px;
     border-radius: 15px;
-    color: white;
+    color: black;
 }
 
 .owner-actions h3 {
@@ -204,7 +209,7 @@
     gap: 15px;
 }
 
-.btn-update, .btn-delete {
+.btn-one-car-update, .btn-one-car-delete {
     flex: 1;
     padding: 12px 20px;
     border: none;
@@ -220,25 +225,24 @@
     text-decoration: none;
 }
 
-.btn-update {
-    background: white;
-    color: #667eea;
-}
-
-.btn-update:hover {
-    background: #f8f9fa;
-    transform: translateY(-2px);
-}
-
-.btn-delete {
-    background: rgba(255,255,255,0.2);
+.btn-one-car-update {
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 100%);
     color: white;
-    border: 2px solid white;
 }
 
-.btn-delete:hover {
-    background: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
+.btn-one-car-update:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(26, 58, 95, 0.4);
+}
+
+.btn-one-car-delete {
+    background: linear-gradient(135deg, #dc2626 0%, #1a3a5f 100%);;
+    color: white;
+}
+
+.btn-one-car-delete:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(143, 36, 32, 0.4);
 }
 
 .owner-message.error {
@@ -467,10 +471,10 @@
 }
 
 .contact-info-box {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     padding: 30px;
     border-radius: 15px;
-    color: white;
+    color: #333;
 }
 
 .contact-info-box h3 {
@@ -479,7 +483,7 @@
 }
 
 .contact-info-box p {
-    color: rgba(255,255,255,0.9);
+    color: #333
     margin-bottom: 20px;
 }
 
@@ -518,7 +522,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .one-car-content {
-        padding: 15px;
+        /* padding-top: 15px; */
     }
     
     .car-header {

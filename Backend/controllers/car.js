@@ -6,11 +6,13 @@ const Car = require("../models/Car.js");
 
 module.exports.catagoryCar = async (req , res)=>{
     let {type} = req.params;
+    console.log(type);
     try {
         let carsData = await Car.find({ Car_Type : type , Availability : true});
         if(!carsData){
             return res.status(404).json({error : "No Relevent Data Found"})
         }
+        console.log(carsData);
         res.status(200).json(carsData);
     } catch (error) {
         res.status(500).json({error : "Some error occur while getting Cars Data"})
@@ -53,6 +55,7 @@ module.exports.addCar = async (req, res) => {
     let carData = req.body;
     let imageURL = req.file.path;
     let imageFileName = req.file.filename;
+    console.log(carData);
     try {
         let ack = await Car.create({
             Image: {
@@ -67,12 +70,13 @@ module.exports.addCar = async (req, res) => {
             Engine_Type: carData.engineType,
             Engine_Number: carData.engineNumber,
             Car_Type:carData.carType,
-            Mileage: carData.milage,
+            Mileage: carData.mileage,
             Accidental: carData.accidental,
             Price: carData.price,
             Availability: carData.availability
         });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: "An error occurred during insertion." });
         return;
     }

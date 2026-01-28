@@ -94,7 +94,9 @@
 
 
 /* CarForm.css - Specific styles for Car Form */
-
+.fORMpage{
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+}
 .CarForm {
     max-width: 1000px;
     margin: 0 auto 3rem;
@@ -212,7 +214,7 @@
 }
 
 .CarForm button[type="submit"] {
-    background: linear-gradient(135deg, #1a365d 0%, #dc3545 100%);
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
     font-size: 1.1rem;
     padding: 1rem 3rem;
     min-width: 220px;

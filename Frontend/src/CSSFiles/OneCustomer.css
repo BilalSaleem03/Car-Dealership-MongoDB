@@ -48,17 +48,19 @@
 
 .customer-container {
     min-height: 100vh;
+    width:100vw;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
 }
 
 .customer-content {
     flex: 1;
     padding: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
+    /* width: 100%; */
 }
 
 /* Loading State */
@@ -167,7 +169,7 @@
     margin-bottom: 30px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid #4CAF50;
+    border: 5px solid #1a3a5f;
 }
 
 .profile-image {
@@ -279,25 +281,26 @@
     transform: translateY(-2px);
 }
 
-.btn-update-profile {
-    display: inline-block;
+.btn-update-customer-profile {
     width: 100%;
-    background: linear-gradient(135deg, #333 0%, #555 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 100%);
+
+    /* background-color: black; */
     color: white;
-    padding: 14px;
+    padding: 14px 50px;
     border: none;
     border-radius: 10px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     transition: all 0.3s ease;
 }
 
-.btn-update-profile:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+.btn-update-customer-profile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(26, 58, 95, 0.4);
 }
 
 /* Details Section */
@@ -324,10 +327,10 @@
 }
 
 .customer-id {
-    color: #666;
+    color: white;
     font-size: 14px;
     font-weight: 500;
-    background: #f8f9fa;
+    background: #1a3a5f;
     padding: 8px 16px;
     border-radius: 20px;
 }

@@ -57,6 +57,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import OwnedCar from "./OwnedCar"
 import Navbar from './Homepage/Navbar.jsx'
+import { NavLink } from 'react-router-dom'
 import Footer from './Homepage/Footer.jsx'
 import personalPageBg from './videos/personal_Page_bg.mp4'
 import './CSSFiles/PersonalPage.css'
@@ -211,7 +212,7 @@ export default function PersonalPage() {
                         <div className="garage-header">
                             <h2>Your Car Listings</h2>
                             <p className="garage-description">
-                                Manage all your listed vehicles. Click on any car to view or edit details.
+                                Manage all your listed vehicles.
                             </p>
                         </div>
 
@@ -226,7 +227,7 @@ export default function PersonalPage() {
                             <h3>Quick Actions</h3>
                             <div className="action-buttons">
                                 <button 
-                                    onClick={() => navigate('/car/create')} 
+                                    onClick={() => navigate('/carForm')} 
                                     className="btn-action-primary"
                                 >
                                     🚗 Add New Car

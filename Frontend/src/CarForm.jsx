@@ -358,6 +358,8 @@ export default function CarForm() {
                             <option value="BMW">BMW</option>
                             <option value="Mercedes">Mercedes</option>
                             <option value="Audi">Audi</option>
+                            <option value="Kia">Kia</option>
+                            <option value="Chingan">Chingan</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -546,7 +548,7 @@ export default function CarForm() {
                     </div>
                 </div>
 
-                <div className="form-row">
+                {/* <div className="form-row">
                     <div className="form-group full-width">
                         <label htmlFor="description">Additional Description</label>
                         <textarea 
@@ -556,7 +558,7 @@ export default function CarForm() {
                             rows="4"
                         />
                     </div>
-                </div>
+                </div> */}
 
                 <button type="submit">{id ? "Update Vehicle" : "Register Vehicle"}</button>
             </form>

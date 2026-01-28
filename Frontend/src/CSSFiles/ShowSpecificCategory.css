@@ -18,16 +18,15 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.category-content {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
     flex: 1;
     padding: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
+    /* max-width: 1400px; */
+    /* margin: 0 auto; */
+    width: 95vw;
 }
+
+
 
 /* Hero Section */
 .category-hero {
@@ -258,6 +257,8 @@
     margin-bottom: 60px;
 }
 
+
+
 @media (max-width: 768px) {
     .cars-grid {
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -377,25 +378,28 @@
 .back-to-explore {
     text-align: center;
     margin-top: 40px;
+    
 }
 
 .btn-explore {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: white;
-    color: #667eea;
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1b2a 100%);
+    color: white;
+    border:5px solid #1a3a5f;
     padding: 15px 30px;
     border-radius: 25px;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
+    margin-bottom: 20px;
 }
 
 .btn-explore:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(26, 58, 95, 0.4);
 }
 
 /* Button Styles */

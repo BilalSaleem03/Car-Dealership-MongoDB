@@ -16,18 +16,17 @@
 
 .customers-container {
     min-height: 100vh;
+    width:95vw;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+    /* flex: 1; */
+    padding: 30px;
+    /* max-width: 1400px; */
 }
 
-.customers-content {
-    flex: 1;
-    padding: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-}
+
 
 /* Hero Section */
 .customers-hero {
@@ -56,7 +55,7 @@
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    padding: 25px;
+    padding: 25px; 
     margin-bottom: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -64,6 +63,7 @@
 .search-container {
     position: relative;
     margin-bottom: 15px;
+    width:90%;
 }
 
 .search-icon {
@@ -73,10 +73,11 @@
     transform: translateY(-50%);
     font-size: 20px;
     color: white;
+    /* width:50%; */
 }
 
 .search-input {
-    width: 100%;
+    width: 95%;
     padding: 16px 20px 16px 60px;
     background: rgba(255, 255, 255, 0.15);
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -85,6 +86,12 @@
     color: white;
     outline: none;
     transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        width: 85%;
+    }
 }
 
 .search-input::placeholder {
@@ -307,10 +314,10 @@
 
 /* Service Info */
 .service-info {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: white;
     border-radius: 20px;
     padding: 50px;
-    color: white;
+    color: #333;
     box-shadow: 0 20px 60px rgba(0,0,0,0.1);
 }
 
@@ -344,16 +351,16 @@
 .feature {
     text-align: center;
     padding: 30px 20px;
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     border-radius: 15px;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
 }
 
 .feature:hover {
-    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 .feature-icon {

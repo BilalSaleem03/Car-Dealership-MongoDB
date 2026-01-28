@@ -234,10 +234,10 @@ export default function OneCar() {
                             <div className='owner-actions'>
                                 <h3><FaUser /> Owner Actions</h3>
                                 <div className='owner-buttons'>
-                                    <NavLink to={`/car/update/${data._id}`} className="btn-update">
+                                    <NavLink to={`/car/update/${data._id}`} className="btn-one-car-update">
                                         <FaEdit /> Update Listing
                                     </NavLink>
-                                    <button onClick={deleteCar} className="btn-delete">
+                                    <button onClick={deleteCar} className="btn-one-car-delete">
                                         <FaTrash /> Delete Listing
                                     </button>
                                 </div>

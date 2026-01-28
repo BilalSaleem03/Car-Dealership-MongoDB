@@ -207,16 +207,16 @@ export default function OneCustomer() {
                                 </div>
                             </div>
                             
-                            <div className='contact-buttons'>
+                            {/* <div className='contact-buttons'>
                                 <a href={`tel:${data.Phone_Number}`} className='contact-btn phone-btn'>
                                     📞 Call Customer
                                 </a>
                                 <a href={`mailto:${data.Email_Address}`} className='contact-btn email-btn'>
                                     📧 Send Email
                                 </a>
-                            </div>
+                            </div> */}
                             
-                            <NavLink to={`/customer/update/${data._id}`} className="btn-update-profile">
+                            <NavLink to={`/customer/update/${data._id}`} className="btn-update-customer-profile">
                                 ✏️ Update Profile
                             </NavLink>
                         </div>
@@ -251,9 +251,9 @@ export default function OneCustomer() {
                                     <h4>Address & Location</h4>
                                     <ul>
                                         <li><strong>Address:</strong> {data.Address || 'N/A'}</li>
-                                        <li><strong>City:</strong> {data.City || 'N/A'}</li>
+                                        {/* <li><strong>City:</strong> {data.City || 'N/A'}</li> */}
                                         <li><strong>Country:</strong> {data.Country || 'Pakistan'}</li>
-                                        <li><strong>Postal Code:</strong> {data.Postal_Code || 'N/A'}</li>
+                                        {/* <li><strong>Postal Code:</strong> {data.Postal_Code || 'N/A'}</li> */}
                                     </ul>
                                 </div>
                             </div>
@@ -279,13 +279,13 @@ export default function OneCustomer() {
                                         <li><strong>Gender:</strong> {data.Gender || 'N/A'}</li>
                                         <li><strong>Occupation:</strong> {data.Occupation || 'N/A'}</li>
                                         <li><strong>Income Level:</strong> {data.Income_Level || 'N/A'}</li>
-                                        <li><strong>Customer Type:</strong> {data.Customer_Type || 'Regular'}</li>
+                                        {/* <li><strong>Customer Type:</strong> {data.Customer_Type || 'Regular'}</li> */}
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Purchase History (if available) */}
+                        {/* Purchase History (if available)
                         <div className='purchase-history'>
                             <h3>Customer History</h3>
                             <div className='history-placeholder'>
@@ -293,10 +293,10 @@ export default function OneCustomer() {
                                 <p>Purchase history and transaction records would appear here</p>
                                 <small>Integrated with your transaction system</small>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* Notes Section */}
-                        <div className='customer-notes'>
+                        {/* <div className='customer-notes'>
                             <h3>Customer Notes</h3>
                             <div className='notes-editor'>
                                 <textarea 
@@ -307,7 +307,7 @@ export default function OneCustomer() {
                                     💾 Save Notes
                                 </button>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
