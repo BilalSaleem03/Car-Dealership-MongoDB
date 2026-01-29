@@ -202,6 +202,7 @@ export default function Navbar() {
                 { withCredentials: true }
             );
             globalIsLoggedIn.updateIsLoggedIn(false);
+            globalUser.updateUser(null);
             setDropdown(false);
         } catch (error) {
             console.log(error);
