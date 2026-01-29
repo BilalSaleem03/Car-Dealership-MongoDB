@@ -76,7 +76,7 @@ module.exports.login = async (req , res)=>{
 module.exports.logout = async (req , res)=>{
     //clearing refreshToken from DB
     await User.findByIdAndUpdate(req.user._id , {$set : { refreshToken : undefined}});
-    const options = {httpOnly : true , secure: false};
+    const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
     return res 
     .status(200)
     .clearCookie("accessToken" , options)
