@@ -197,7 +197,7 @@ export default function Navbar() {
     let handleLogout = async () => {
         try {
             let ack = await axios.post(
-                "http://localhost:3000/authenticate/logout",
+                `${backendURL}/authenticate/logout`,
                 {},
                 { withCredentials: true }
             );
@@ -212,7 +212,7 @@ export default function Navbar() {
     let handleRenewTokens = async () => {
         try {
             let ack = await axios.post(
-                "http://localhost:3000/authenticate/renewAccessToken",
+                `${backendURL}/authenticate/renewAccessToken`,
                 {},
                 { withCredentials: true }
             );
