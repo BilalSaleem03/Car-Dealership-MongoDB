@@ -198,7 +198,7 @@ export default function PersonalPage() {
                         <h3>Your Garage is Empty</h3>
                         <p>You haven't listed any cars yet. Start by adding your first vehicle!</p>
                         <button 
-                            onClick={() => navigate('/car/create')} 
+                            onClick={() => navigate('/carForm')} 
                             className="btn-add-car"
                         >
                             + Add Your First Car

@@ -19,7 +19,7 @@ const saleRoute = require("./routes/sale.js")
 const historyRoute = require("./routes/history.js")
 const authenticateRoute = require("./routes/authenticate.js")
 const personalPostsRoute = require("./routes/personalPosts.js")
- 
+const cloudDatabaseURL = process.env.ATLASDB_URL;
 
 //middleware
 app.use(express.json());
@@ -38,7 +38,8 @@ app.use(cors({
 
 //connection with mongooDB
 async function Main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/Car_Dealership");
+    // await mongoose.connect("mongodb://127.0.0.1:27017/Car_Dealership");
+    await mongoose.connect(cloudDatabaseURL);
 }
 Main().then(()=>{console.log("Database connected")}).catch((err)=>{console.log(err)});
 

@@ -520,7 +520,7 @@ export default function CarForm() {
                     </div>
                 </div>
 
-                <div className="form-row">
+                {/* <div className="form-row">
                     <div className="form-group">
                         <label className="required">Availability</label>
                         <div className="radio-group">
@@ -546,7 +546,7 @@ export default function CarForm() {
                             </label>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* <div className="form-row">
                     <div className="form-group full-width">
