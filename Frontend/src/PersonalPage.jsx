@@ -57,10 +57,9 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import OwnedCar from "./OwnedCar"
 import Navbar from './Homepage/Navbar.jsx'
-import { NavLink } from 'react-router-dom'
 import Footer from './Homepage/Footer.jsx'
 import personalPageBg from './videos/personal_page_bg.mp4'
-import './CSSFiles/PersonalPage.css'
+import './CSSFiles/PersonalPage.css'                // PersonalPage specific styles
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function PersonalPage() {
