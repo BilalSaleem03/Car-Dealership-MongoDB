@@ -300,6 +300,12 @@ export default function EmployeeForm() {
         }
         catch (error) {
             console.error('Error submitting data:', error);
+            if (error.response.status == 401) {
+                navigate('/login')
+            } else {
+                console.log("some other error")
+                console.log(error)
+            }
         }
     }
     return (

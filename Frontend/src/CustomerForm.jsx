@@ -255,8 +255,13 @@ export default function CustomerForm() {
             let response = await axios.post(`${backendURL}/customer/addcustomer`, customerForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
             navigate('/customer')
         } catch (error) {
-            console.log("Not Successfully submitted")
-            console.log(error)
+            console.error('Error submitting data:', error);
+            if (error.response.status == 401) {
+                navigate('/login')
+            } else {
+                console.log("some other error")
+                console.log(error)
+            }
         }
     }
     return (
