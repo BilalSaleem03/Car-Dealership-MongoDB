@@ -37,7 +37,7 @@ module.exports.signup = async (req, res) => {
 
 module.exports.login = async (req , res)=>{
     let accessToken = req.cookies.accessToken;
-    console.log("accessToken" , accessToken)
+    // console.log("accessToken" , accessToken)
     if(accessToken){
         return res.status(403).json({error : 'Already logged IN'})
     }

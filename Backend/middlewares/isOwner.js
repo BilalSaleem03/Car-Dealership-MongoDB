@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = async function isOwner (req , res , next){
     try {
-        console.log("in carOwner")
+        // console.log("in carOwner")
         const accessToken = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer " , "");
         if(!accessToken){
             return res.status(401).json({error : 'Unauthorized Access'});
@@ -17,9 +17,9 @@ module.exports = async function isOwner (req , res , next){
         }
         console.log(user)
         let {id} = req.params;
-        console.log(id)
+        // console.log(id)
         let carOwner = await Car.findById(id , {Car_Owner : 1});
-        console.log(carOwner)
+        // console.log(carOwner)
         if(user.username !== carOwner.Car_Owner){
             return res.status(403).json({error : "You are not the Owner"});
         }

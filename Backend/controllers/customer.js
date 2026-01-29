@@ -9,7 +9,7 @@ module.exports.allCustomers = async (req , res)=>{
         }
         res.status(200).json(customersData)   //array of objects  
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(500).json({ error: 'An error occurred while fetching customer data' });
     }
 }
@@ -23,7 +23,7 @@ module.exports.specificCustomer = async (req , res)=>{
     try {
         let customerData = await Customer.findById(id);
         if (!customerData) {
-            console.log("in if condition")
+            // console.log("in if condition")
             return res.status(404).json({ error: 'Customer not found' });
         }
         res.status(200).json(customerData);

@@ -13,7 +13,7 @@ module.exports.personalPosts = async (req , res)=>{
         if(!userInfo){
             return res.status(403).json({error : 'Unauthorized Access'})
         }
-        console.log(userInfo)
+        // console.log(userInfo)
         // let data = await Car.find({Car_Owner : userInfo.username , Availability : true});
         let data = await Car.find({Car_Owner : userInfo.username , Availability: true });
 

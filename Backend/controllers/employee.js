@@ -4,8 +4,8 @@ const Employee = require("../models/Employee.js");
 module.exports.allEmployees = async (req , res)=>{
     try {
         let employeesData = await Employee.find({});
-        console.log("wwwwwww")
-        console.log(employeesData);
+        // console.log("wwwwwww")
+        // console.log(employeesData);
         if(!employeesData){
             return res.status(404).json({error:"No data Found for that Employee"})
         } 
@@ -39,7 +39,7 @@ module.exports.addEmployee =  async (req, res) => {
     let imageURL = req.file?.path;
     let imageFileName = req.file?.filename;
     try {
-        console.log(employeeData)
+        // console.log(employeeData)
         ack = await Employee.create({
             Image: {
                 url: imageURL, // Store image path in DB
@@ -69,14 +69,14 @@ module.exports.addEmployee =  async (req, res) => {
 module.exports.updateEmployee = async (req, res) => {
     let {id} = req.params;
     let employeeData = req.body;
-    console.log(req.body)
+    // console.log(req.body)
     let ack;
     let imageURL = req.file?.path;
     let imageFileName = req.file?.filename;
 
     let  updatedEmployee;
     if(req.file){
-        console.log("has file")
+        // console.log("has file")
         updatedEmployee = {
             Image: {
                 url: imageURL,
@@ -99,7 +99,7 @@ module.exports.updateEmployee = async (req, res) => {
     }
     else{
         
-        console.log("No file")
+        // console.log("No file")
         updatedEmployee = {
             First_Name: employeeData.firstName,
             Last_Name: employeeData.lastName,

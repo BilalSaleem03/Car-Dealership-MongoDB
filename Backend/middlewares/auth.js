@@ -8,9 +8,9 @@ const verifyJWT = async (req , res , next)=>{
         if(!accessToken){
             return res.status(401).json({error : 'Unauthorized Access'});
         }
-        console.log("befor decode" , accessToken)
+        // console.log("befor decode" , accessToken)
         const decodedTokenInfo = jwt.verify(accessToken , process.env.ACCESS_TOKEN_SECRET);
-        console.log(decodedTokenInfo)
+        // console.log(decodedTokenInfo)
         const user = await User.findById(decodedTokenInfo._id).select("-password -refreshToken");
     
         if(!user){

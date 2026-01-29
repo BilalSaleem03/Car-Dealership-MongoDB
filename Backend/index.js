@@ -25,10 +25,10 @@ const cloudDatabaseURL = process.env.ATLASDB_URL;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));         
 app.use(cookieParser()); 
-app.use((req, res, next) => {
-    console.log("req", req.cookies);
-    next();
-});
+// app.use((req, res, next) => {
+//     console.log("req", req.cookies);
+//     next();
+// });
 
 
 app.use(cors({
@@ -42,7 +42,7 @@ async function Main() {
     // await mongoose.connect("mongodb://127.0.0.1:27017/Car_Dealership");
     await mongoose.connect(cloudDatabaseURL);
 }
-Main().then(()=>{console.log("Database connected")}).catch((err)=>{console.log(err)});
+Main().then(()=>{console.log("Database connected...")}).catch((err)=>{console.log(err)});
 
 
 //Routes
@@ -58,5 +58,5 @@ app.use("/personalPosts" , personalPostsRoute);
 
 console.log("port 3000");
 app.listen(3000 , ()=>{
-    console.log("Server running on port 3000")
+    console.log("Server running....")
 })
