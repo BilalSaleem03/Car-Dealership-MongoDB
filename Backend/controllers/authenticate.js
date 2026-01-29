@@ -60,7 +60,7 @@ module.exports.login = async (req , res)=>{
         // const userToSendToClient = await User.findById(userFromDatabase._id).select("-password -refreshToken");
         
         //setting cookies and sening response
-        const options = {httpOnly : true , secure: false, maxAge: 7 * 24 * 60 * 60 * 1000};   //by setting theseoptions noe cookies can't be updated from client side  but only from sever
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 7 * 24 * 60 * 60 * 1000};   //by setting theseoptions noe cookies can't be updated from client side  but only from sever
         return res
         .status(200)
         .cookie("accessToken" , accessToken , options)
@@ -75,7 +75,6 @@ module.exports.login = async (req , res)=>{
 
 module.exports.logout = async (req , res)=>{
     //clearing refreshToken from DB
-    console.log("xnskxnksxsakxnsakx")
     await User.findByIdAndUpdate(req.user._id , {$set : { refreshToken : undefined}});
     const options = {httpOnly : true , secure: false};
     return res 
@@ -105,7 +104,7 @@ module.exports.renewAccessToken = async(req , res)=>{
     //generating new Tokens
     let {accessToken , refreshToken} = await generateAccessAndRefreshToken(user._id);
 
-    const options = {httpOnly : true , secure: false, maxAge: 7 * 24 * 60 * 60 * 1000};
+    const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 7 * 24 * 60 * 60 * 1000};
     return res
     .status(200)
     .cookie("accessToken" , accessToken , options)

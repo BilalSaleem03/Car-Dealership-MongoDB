@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));         
 app.use(cookieParser()); 
 app.use((req, res, next) => {
-    // console.log("req", req.cookies);
+    console.log("req", req.cookies);
     next();
 });
 
