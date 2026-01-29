@@ -59,7 +59,7 @@ import OwnedCar from "./OwnedCar"
 import Navbar from './Homepage/Navbar.jsx'
 import { NavLink } from 'react-router-dom'
 import Footer from './Homepage/Footer.jsx'
-import personalPageBg from './videos/personal_Page_bg.mp4'
+import personalPageBg from './videos/personal_page_bg.mp4'
 import './CSSFiles/PersonalPage.css'
 const backendURL = import.meta.env.VITE_BackendURL;
 
