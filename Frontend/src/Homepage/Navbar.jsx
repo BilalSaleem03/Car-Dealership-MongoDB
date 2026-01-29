@@ -161,6 +161,7 @@ export default function Navbar() {
         } catch(error) {
             console.log(error)
             globalIsLoggedIn.updateIsLoggedIn(false);
+            globalUser.updateUser(null);
         }
     }
 
