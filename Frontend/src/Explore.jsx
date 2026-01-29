@@ -54,6 +54,7 @@ import Card from './Card.jsx'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
 import './CSSFiles/Explore.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function Explore() {
     const [data, setData] = useState([])
@@ -91,7 +92,7 @@ export default function Explore() {
         setLoading(true)
         setError(null)
         try {
-            let response = await axios.get("http://localhost:3000/explore", {
+            let response = await axios.get(`${backendURL}/explore`, {
                 withCredentials: true,
             })
             

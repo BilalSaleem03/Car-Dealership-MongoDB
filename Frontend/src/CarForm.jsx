@@ -207,6 +207,7 @@ import { v4 as uuidv4 } from 'uuid';
 import "./CSSFiles/CarForm.css"
 import "./CSSFiles/FormStyles.css"
 import Navbar from "./Homepage/Navbar"
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function CarForm() {
     let [carForm, setCarForm] = useState({
@@ -229,7 +230,7 @@ export default function CarForm() {
 
     let setPreviousData = () => {
         let showPreviousData = async (id) => {
-            let previousData = await axios.get(`http://localhost:3000/car/${id}`, { withCredentials: true });
+            let previousData = await axios.get(`${backendURL}/car/${id}`, { withCredentials: true });
             setCarForm({
                 carImage: null,
                 manufacturer: previousData.data.Manufacturer,
@@ -287,7 +288,7 @@ export default function CarForm() {
 
         if (id) {
             try {
-                let response = await axios.post(`http://localhost:3000/car/update/${id}`, carForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
+                let response = await axios.post(`${backendURL}/car/update/${id}`, carForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
                 navigate('/explore')
             } catch (error) {
                 console.log(error)
@@ -303,7 +304,7 @@ export default function CarForm() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/car/addcar', carForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
+            const response = await axios.post(`${backendURL}/car/addcar`, carForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
             navigate('/explore')
         }
         catch (error) {

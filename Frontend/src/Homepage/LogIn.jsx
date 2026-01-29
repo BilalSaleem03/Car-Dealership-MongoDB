@@ -90,6 +90,7 @@ import { useContext } from "react"
 import UserContext from "../context/UserContext.js"
 import LoginContext from "../context/LoginContext"
 import './LogIn.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function Login() {
     const globalUser = useContext(UserContext)
@@ -120,7 +121,8 @@ export default function Login() {
         setMessage({ text: "", type: "" })
 
         try {
-            const ack = await axios.post("http://localhost:3000/authenticate/login", loginInfo, {
+            
+            const ack = await axios.post(`${backendURL}/authenticate/login`, loginInfo, {
                 withCredentials: true,
             })
             

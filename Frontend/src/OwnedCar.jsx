@@ -59,6 +59,7 @@ import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
 import carImage from './assets/car_image.jpeg'
 import './CSSFiles/OwnedCar.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function OwnedCar({ car }) {
     const navigate = useNavigate()
@@ -73,7 +74,7 @@ export default function OwnedCar({ car }) {
     const deleteCar = async () => {
         try {
             setIsDeleting(true)
-            await axios.delete(`http://localhost:3000/car/delete/${car._id}`, {
+            await axios.delete(`${backendURL}/car/delete/${car._id}`, {
                 withCredentials: true
             })
             navigate('/explore')

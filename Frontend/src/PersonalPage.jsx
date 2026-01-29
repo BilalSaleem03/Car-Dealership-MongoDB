@@ -61,6 +61,7 @@ import { NavLink } from 'react-router-dom'
 import Footer from './Homepage/Footer.jsx'
 import personalPageBg from './videos/personal_Page_bg.mp4'
 import './CSSFiles/PersonalPage.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function PersonalPage() {
     const [data, setData] = useState([])
@@ -76,7 +77,7 @@ export default function PersonalPage() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get("http://localhost:3000/personalPosts", {
+            let response = await axios.get(`${backendURL}/personalPosts`, {
                 withCredentials: true
             })
             setData(response.data)

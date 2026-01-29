@@ -168,7 +168,7 @@ import "./CSSFiles/CustomerForm.css"
 import "./CSSFiles/FormStyles.css"
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+const backendURL = import.meta.env.VITE_BackendURL;
 import Navbar from "./Homepage/Navbar"
 
 export default function CustomerForm() {
@@ -190,7 +190,7 @@ export default function CustomerForm() {
 
     let setPreviousData = () => {
         let showPreviousData = async (id) => {
-            let previousData = await axios.get(`http://localhost:3000/customer/${id}`, { withCredentials: true });
+            let previousData = await axios.get(`${backendURL}/customer/${id}`, { withCredentials: true });
             setCustomerForm({
                 customerImage: null,
                 firstName: previousData.data.First_Name,
@@ -243,7 +243,7 @@ export default function CustomerForm() {
 
         if (id) {
             try {
-                let response = await axios.post(`http://localhost:3000/customer/update/${id}`, customerForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
+                let response = await axios.post(`${backendURL}/customer/update/${id}`, customerForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
                 navigate('/customer')
             } catch (error) {
                 console.log("error   ", error)
@@ -252,7 +252,7 @@ export default function CustomerForm() {
         }
 
         try {
-            let response = await axios.post('http://localhost:3000/customer/addcustomer', customerForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
+            let response = await axios.post(`${backendURL}/customer/addcustomer`, customerForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
             navigate('/customer')
         } catch (error) {
             console.log("Not Successfully submitted")

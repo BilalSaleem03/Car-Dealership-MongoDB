@@ -196,10 +196,10 @@
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 import "./CSSFiles/EmployeeForm.css"
 import "./CSSFiles/FormStyles.css"
 import Navbar from "./Homepage/Navbar"
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function EmployeeForm() {
     let [employeeForm, setEmployeeForm] = useState({
@@ -239,7 +239,7 @@ export default function EmployeeForm() {
 
     let setPreviousData = () => {
         let showPreviousData = async (id) => {
-            let previousData = await axios.get(`http://localhost:3000/aboutus/${id}`, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
+            let previousData = await axios.get(`${backendURL}/aboutus/${id}`, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
             setEmployeeForm({
                 employeeImage: null,
                 firstName: previousData.data.First_Name,
@@ -286,7 +286,7 @@ export default function EmployeeForm() {
 
         if (id) {
             try {
-                let response = await axios.post(`http://localhost:3000/aboutus/update/${id}`, employeeForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
+                let response = await axios.post(`${backendURL}/aboutus/update/${id}`, employeeForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
                 navigate('/aboutus')
             } catch (error) {
                 console.log(error)
@@ -295,7 +295,7 @@ export default function EmployeeForm() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/aboutus/addemployee', employeeForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
+            const response = await axios.post(`${backendURL}/aboutus/addemployee`, employeeForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
             navigate('/aboutus')
         }
         catch (error) {

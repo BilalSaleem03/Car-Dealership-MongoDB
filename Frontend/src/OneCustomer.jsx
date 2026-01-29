@@ -60,6 +60,7 @@ import personImage from './assets/human_image.jpeg'
 import './CSSFiles/OneCustomer.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function OneCustomer() {
     const { id } = useParams()
@@ -71,7 +72,7 @@ export default function OneCustomer() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get(`http://localhost:3000/customer/${id}`, {
+            let response = await axios.get(`${backendURL}/customer/${id}`, {
                 withCredentials: true
             })
             setData(response.data)

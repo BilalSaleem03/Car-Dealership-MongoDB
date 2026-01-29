@@ -125,6 +125,7 @@ import axios from 'axios';
 import './CSSFiles/BuyCar.css'
 import Navbar from "./Homepage/Navbar"
 import Footer from "./Homepage/Footer"
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function BuyCar() {
     let { id } = useParams();
@@ -158,7 +159,7 @@ export default function BuyCar() {
     let handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:3000/addsales/${id}`, salesForm, { withCredentials: true });
+            const response = await axios.post(`${backendURL}/addsales/${id}`, salesForm, { withCredentials: true });
             navigate('/');
         }
         catch (error) {

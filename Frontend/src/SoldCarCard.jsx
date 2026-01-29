@@ -81,6 +81,7 @@ import { NavLink } from 'react-router-dom'
 import carImage from './assets/car_image.jpeg'
 import personImage from './assets/human_image.jpeg'
 import './CSSFiles/SoldCarCard.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function SoldCarCard({ sale }) {
     const [carData, setCarData] = useState({})
@@ -114,7 +115,7 @@ export default function SoldCarCard({ sale }) {
 
     const getCarData = async () => {
         try {
-            let response = await axios.get(`http://localhost:3000/car/${sale.Car_Id}`, {
+            let response = await axios.get(`${backendURL}/car/${sale.Car_Id}`, {
                 withCredentials: true
             })
             setCarData(response.data)
@@ -125,7 +126,7 @@ export default function SoldCarCard({ sale }) {
 
     const getCustomerData = async () => {
         try {
-            let response = await axios.get(`http://localhost:3000/customer/${sale.Customer_Id}`, {
+            let response = await axios.get(`${backendURL}/customer/${sale.Customer_Id}`, {
                 withCredentials: true
             })
             setCustomerData(response.data)
@@ -136,7 +137,7 @@ export default function SoldCarCard({ sale }) {
 
     const getSalesPersonData = async () => {
         try {
-            let response = await axios.get(`http://localhost:3000/aboutus/${sale.Employee_Id}`, {
+            let response = await axios.get(`${backendURL}/aboutus/${sale.Employee_Id}`, {
                 withCredentials: true
             })
             setSalesPersonData(response.data)

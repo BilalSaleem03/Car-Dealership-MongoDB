@@ -76,6 +76,7 @@ import axios from 'axios'
 import bgVideo from '../videos/signup_bg.mp4'
 import Navbar from './Navbar.jsx'
 import './SignUp.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function SignUp() {
     const [signupInfo, setSignupInfo] = useState({
@@ -178,7 +179,7 @@ export default function SignUp() {
         }
 
         try {
-            const ack = await axios.post("http://localhost:3000/authenticate/signup", signupInfo, {
+            const ack = await axios.post(`${backendURL}/authenticate/signup`, signupInfo, {
                 withCredentials: true,
             })
             

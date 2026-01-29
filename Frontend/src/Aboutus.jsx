@@ -50,7 +50,7 @@ import EmployeeCard from './EmployeeCard.jsx'
 import './CSSFiles/Aboutus.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
-
+const backendURL = import.meta.env.VITE_BackendURL;
 export default function Aboutus() {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
@@ -59,7 +59,7 @@ export default function Aboutus() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get("http://localhost:3000/aboutus", {
+            let response = await axios.get(`${backendURL}/aboutus`, {
                 withCredentials: true
             })
             setData(response.data)

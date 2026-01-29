@@ -52,6 +52,7 @@ import SoldCarCard from './SoldCarCard.jsx'
 import './CSSFiles/History.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function History() {
     const [data, setData] = useState([])
@@ -67,7 +68,7 @@ export default function History() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get("http://localhost:3000/history", {
+            let response = await axios.get(`${backendURL}/history`, {
                 withCredentials: true
             })
             setData(response.data)
@@ -101,7 +102,7 @@ export default function History() {
         )
 
         try {
-            let response = await axios.get(`http://localhost:3000/aboutus/${topSalesPersonId}`)
+            let response = await axios.get(`${backendURL}/aboutus/${topSalesPersonId}`)
             const fullName = `${response.data.First_Name} ${response.data.Last_Name}`;
             setStats({
                 totalSales,

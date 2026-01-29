@@ -68,6 +68,7 @@ import personImage from './assets/human_image.jpeg'
 import './CSSFiles/OneEmployee.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function OneEmployee() {
     const { id } = useParams()
@@ -79,7 +80,7 @@ export default function OneEmployee() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get(`http://localhost:3000/aboutus/${id}`, {
+            let response = await axios.get(`${backendURL}/aboutus/${id}`, {
                 withCredentials: true
             })
             setData(response.data)

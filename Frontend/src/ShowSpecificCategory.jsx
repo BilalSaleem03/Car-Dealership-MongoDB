@@ -55,6 +55,7 @@ import Card from './Card.jsx'
 import './CSSFiles/ShowSpecificCategory.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function ShowSpecificCategory() {
     let { type } = useParams()
@@ -82,7 +83,7 @@ export default function ShowSpecificCategory() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get(`http://localhost:3000/car/category/${type}`, {
+            let response = await axios.get(`${backendURL}/car/category/${type}`, {
                 withCredentials: true
             })
             console.log(response.data)

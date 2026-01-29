@@ -521,9 +521,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .one-car-content {
-        /* padding-top: 15px; */
-    }
     
     .car-header {
         flex-direction: column;

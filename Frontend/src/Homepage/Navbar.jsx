@@ -141,6 +141,7 @@ import { useContext } from "react";
 import LoginContext from "../context/LoginContext";
 import UserContext from "../context/UserContext.js";
 import './Navbar.css';
+const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function Navbar() {
     let globalIsLoggedIn = useContext(LoginContext)
@@ -154,7 +155,7 @@ export default function Navbar() {
     // Check auth on mount
     const checkCookiesPresence = async () => {
         try {
-            let response = await axios.post("http://localhost:3000/authenticate/is-logged-in", {}, { withCredentials: true })
+            let response = await axios.post(`${backendURL}/authenticate/is-logged-in`, {}, { withCredentials: true })
             globalIsLoggedIn.updateIsLoggedIn(true);
             globalUser.updateUser(response.data.user)
         } catch(error) {

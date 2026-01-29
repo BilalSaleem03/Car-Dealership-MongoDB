@@ -98,6 +98,7 @@ import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
 import carImage from './assets/car_image.jpeg'
 import './CSSFiles/OneCar.css'
+const backendURL = import.meta.env.VITE_BackendURL;
 import { FaCar, FaPalette, FaCogs, FaGasPump, FaTachometerAlt, FaKey, FaExclamationTriangle, FaTag, FaUser, FaEdit, FaTrash, FaShoppingCart } from 'react-icons/fa'
 
 export default function OneCar() {
@@ -114,7 +115,7 @@ export default function OneCar() {
     const getData = async () => {
         try {
             setLoading(true)
-            const response = await axios.get(`http://localhost:3000/car/${id}`, {
+            const response = await axios.get(`${backendURL}/car/${id}`, {
                 withCredentials: true
             })
             setData(response.data)
@@ -146,7 +147,7 @@ export default function OneCar() {
         }
 
         try {
-            await axios.delete(`http://localhost:3000/car/delete/${id}`, {
+            await axios.delete(`${backendURL}/car/delete/${id}`, {
                 withCredentials: true,
                 headers: { "Content-Type": "multipart/form-data" }
             })
