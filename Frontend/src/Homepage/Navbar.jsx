@@ -152,6 +152,21 @@ export default function Navbar() {
     const [dropdown, setDropdown] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
+    let handleLogout = async () => {
+        try {
+            let ack = await axios.post(
+                `${backendURL}/authenticate/logout`,
+                {},
+                { withCredentials: true }
+            );
+            globalIsLoggedIn.updateIsLoggedIn(false);
+            globalUser.updateUser(null);
+            setDropdown(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // Check auth on mount
     const checkCookiesPresence = async () => {
         try {
@@ -195,20 +210,20 @@ export default function Navbar() {
     }
 
     // Logout function
-    let handleLogout = async () => {
-        try {
-            let ack = await axios.post(
-                `${backendURL}/authenticate/logout`,
-                {},
-                { withCredentials: true }
-            );
-            globalIsLoggedIn.updateIsLoggedIn(false);
-            globalUser.updateUser(null);
-            setDropdown(false);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    // let handleLogout = async () => {
+    //     try {
+    //         let ack = await axios.post(
+    //             `${backendURL}/authenticate/logout`,
+    //             {},
+    //             { withCredentials: true }
+    //         );
+    //         globalIsLoggedIn.updateIsLoggedIn(false);
+    //         globalUser.updateUser(null);
+    //         setDropdown(false);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
     // Renew tokens
     let handleRenewTokens = async () => {

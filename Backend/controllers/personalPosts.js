@@ -5,10 +5,12 @@ const jwt = require('jsonwebtoken')
 
 module.exports.personalPosts = async (req , res)=>{
     try{
+        // console.log("Inside personal posts controller");
         let accessToken = req.cookies.accessToken;
         if(!accessToken){
             return res.status(401).json({error : 'Not logged IN'})
         }
+        // console.log("accessToken" , accessToken);
         let userInfo = jwt.verify(accessToken , process.env.ACCESS_TOKEN_SECRET);
         if(!userInfo){
             return res.status(403).json({error : 'Unauthorized Access'})

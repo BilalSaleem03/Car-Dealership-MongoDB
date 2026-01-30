@@ -119,13 +119,25 @@ module.exports.isLoggedIn = async (req , res)=>{
         if(!accessToken){
             return res.status(401).json({error : 'Unauthorized Access'});
         }
+        // console.log("aaaaaa", accessToken);
+        // console.log("process.env.ACCESS_TOKEN_SECRET" , process.env.ACCESS_TOKEN_SECRET);
         const decodedTokenInfo = jwt.verify(accessToken , process.env.ACCESS_TOKEN_SECRET);
+        // console.log("decodedTokenInfo" , decodedTokenInfo);
         const user = await User.findById(decodedTokenInfo._id).select("-password -refreshToken");
+        // console.log("user" , user);
         if(!user){
             return res.status(401).json({error : "Invalid AccessToken"})
         }
         return res.status(200).json({user : user.username})
     } catch(error){
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
+        // console.log("error in isLoggedIn" , error.name);
+        if(error.name === 'TokenExpiredError'){
+            return res.status(401)
+            .clearCookie("accessToken" , options)
+            .clearCookie("refreshToken" , options)
+            .json({error : "Access Token Expired"})
+        }
         res.status(500).json({error : "something went wrong"})
     }
 }
