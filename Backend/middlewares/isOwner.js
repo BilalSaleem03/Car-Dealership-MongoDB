@@ -26,6 +26,14 @@ module.exports = async function isOwner (req , res , next){
         next();
     } catch (error) {
         console.log(error)
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
+        if(error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError'){
+            return res.status(401)
+            .clearCookie("accessToken" , options)
+            .clearCookie("refreshToken" , options)
+            .json({error : "Access Token Expired"})
+        }
+        
         return res.status(500).json({error : "Something went wrong"})
     }
 }

@@ -19,6 +19,14 @@ const verifyJWT = async (req , res , next)=>{
         req.user = user;
         next();
     } catch (error) {
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
+        // console.log("error in verifyJWT middleware" , error.name);
+        if(error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError'){
+            return res.status(401)
+            .clearCookie("accessToken" , options)
+            .clearCookie("refreshToken" , options)
+            .json({error : "Access Token Expired"})
+        }
         return res.status(500).json({error : "Something went wrong"})
     }
 }

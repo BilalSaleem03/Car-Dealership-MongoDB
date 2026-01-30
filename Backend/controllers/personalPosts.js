@@ -24,7 +24,14 @@ module.exports.personalPosts = async (req , res)=>{
         }
         return res.status(200).json(data);
     } catch(error){
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
         console.log(error);
+        if(error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError'){
+            return res.status(401)
+            .clearCookie("accessToken" , options)
+            .clearCookie("refreshToken" , options)
+            .json({error : "Access Token Expired"})
+        }
         return res.status(500).json({error : "Server side error"})
     }
 } 

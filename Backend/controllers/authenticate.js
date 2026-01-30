@@ -85,31 +85,43 @@ module.exports.logout = async (req , res)=>{
 }
 
 module.exports.renewAccessToken = async(req , res)=>{
-    let oldRefreshToken = req.cookies?.refreshToken || req.body.refreshtoken;
-
-    if(!oldRefreshToken){
-        return res.status(401).json({error : "Unaurhorized2 Access Please Login!!"});
+    try {
+        let oldRefreshToken = req.cookies?.refreshToken || req.body.refreshtoken;
+    
+        if(!oldRefreshToken){
+            return res.status(401).json({error : "Unaurhorized2 Access Please Login!!"});
+        }
+    
+        let decodedRefreshToken = jwt.verify(oldRefreshToken , process.env.REFRESH_TOKEN_SECRET);
+        //get user 
+        const user = await User.findById(decodedRefreshToken._id);
+        if(!user){
+            return res.status(401).json({error : "Unaurhorized Access Please Login!!"});
+        }
+    
+        if(user.refreshToken !== oldRefreshToken){
+            return re.status(401).json({error : "Invalid Refresh Token!!"});
+        }
+        //generating new Tokens
+        let {accessToken , refreshToken} = await generateAccessAndRefreshToken(user._id);
+    
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 7 * 24 * 60 * 60 * 1000};
+        return res
+        .status(200)
+        .cookie("accessToken" , accessToken , options)
+        .cookie("refreshToken" , refreshToken , options)
+        .json({success : "Login session Revived"});
+    } catch (error) {
+        const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
+        console.log(error);
+        if(error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError'){
+            return res.status(401)
+            .clearCookie("accessToken" , options)
+            .clearCookie("refreshToken" , options)
+            .json({error : "Access Token Expired"})
+        }
+        res.status(500).json({error : "Something went wrong"})
     }
-
-    let decodedRefreshToken = jwt.verify(oldRefreshToken , process.env.REFRESH_TOKEN_SECRET);
-    //get user 
-    const user = await User.findById(decodedRefreshToken._id);
-    if(!user){
-        return res.status(401).json({error : "Unaurhorized Access Please Login!!"});
-    }
-
-    if(user.refreshToken !== oldRefreshToken){
-        return re.status(401).json({error : "Invalid Refresh Token!!"});
-    }
-    //generating new Tokens
-    let {accessToken , refreshToken} = await generateAccessAndRefreshToken(user._id);
-
-    const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 7 * 24 * 60 * 60 * 1000};
-    return res
-    .status(200)
-    .cookie("accessToken" , accessToken , options)
-    .cookie("refreshToken" , refreshToken , options)
-    .json({success : "Login session Revived"});
 
 }
 
@@ -132,7 +144,7 @@ module.exports.isLoggedIn = async (req , res)=>{
     } catch(error){
         const options = {httpOnly : true , secure: true, sameSite: "none" ,maxAge: 0};
         // console.log("error in isLoggedIn" , error.name);
-        if(error.name === 'TokenExpiredError'){
+        if(error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError'){
             return res.status(401)
             .clearCookie("accessToken" , options)
             .clearCookie("refreshToken" , options)
