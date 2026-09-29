@@ -51,6 +51,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, NavLink } from 'react-router-dom'
+import { Car, ShieldCheck, DollarSign, Award, X } from 'lucide-react'
 import Card from './Card.jsx'
 import './CSSFiles/ShowSpecificCategory.css'
 import Navbar from './Homepage/Navbar.jsx'
@@ -129,13 +130,6 @@ export default function ShowSpecificCategory() {
     }
 
     const categoryName = categoryNames[type] || type
-    const categoryIcon = {
-        'sedan': '🚗',
-        'suv': '🚙',
-        'hatchback': '🚘',
-        'mini': '🚗',
-        'van': '🚐'
-    }[type] || '🚗'
 
     return (
         <div className='category-container'>
@@ -144,7 +138,7 @@ export default function ShowSpecificCategory() {
             <div className='category-content'>
                 {/* Hero Section */}
                 <div className='category-hero'>
-                    <div className='hero-icon'>{categoryIcon}</div>
+                    <div className='hero-icon'><Car size={36} /></div>
                     <h1>{categoryName} Vehicles</h1>
                     <p className='hero-subtitle'>
                         Browse our curated selection of {categoryName.toLowerCase()} vehicles. 
@@ -231,7 +225,7 @@ export default function ShowSpecificCategory() {
                     </div>
                     <div className='filter-actions'>
                         <button onClick={clearFilters} className='btn-clear'>
-                            ✕ Clear Filters
+                            <X size={14} /> Clear Filters
                         </button>
                         <div className='filter-results'>
                             Showing {filteredCars.length} of {data.length} vehicles
@@ -275,7 +269,7 @@ export default function ShowSpecificCategory() {
                             </div>
                         ) : (
                             <div className='no-cars'>
-                                <div className='no-cars-icon'>🚗</div>
+                                <div className='no-cars-icon'><Car size={40} /></div>
                                 <h3>No vehicles found</h3>
                                 <p>
                                     {Object.values(filter).some(val => val) ? 
@@ -313,17 +307,17 @@ export default function ShowSpecificCategory() {
                                 </div>
                                 <div className='info-features'>
                                     <div className='feature'>
-                                        <span className='feature-icon'>⭐</span>
+                                        <span className='feature-icon'><Award size={20} /></span>
                                         <h4>Quality Assurance</h4>
                                         <p>Thoroughly inspected vehicles</p>
                                     </div>
                                     <div className='feature'>
-                                        <span className='feature-icon'>🛡️</span>
+                                        <span className='feature-icon'><ShieldCheck size={20} /></span>
                                         <h4>Warranty</h4>
                                         <p>Comprehensive warranty options</p>
                                     </div>
                                     <div className='feature'>
-                                        <span className='feature-icon'>💰</span>
+                                        <span className='feature-icon'><DollarSign size={20} /></span>
                                         <h4>Financing</h4>
                                         <p>Flexible payment plans available</p>
                                     </div>

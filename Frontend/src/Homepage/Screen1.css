@@ -1,88 +1,98 @@
-/* Screen1.css - Complete Styles for Hero Section */
+/* ===================================================
+   Screen1.css - Prestige Motors Executive Hero
+=================================================== */
 
-/* CSS Variables for Theme */
 :root {
-    --primary: #1a3a5f;
-    --secondary: #e63946;
-    --dark: #0d1b2a;
-    --light: #f8f9fa;
-    --white: #ffffff;
-    --black: #000000;
-    --transition: all 0.3s ease;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    --hero-primary: #1a3a5f;
+    --hero-gold: #c5a059;
+    --hero-dark: #0a0f1d;
+    --hero-surface-glass: rgba(15, 23, 42, 0.72);
+    --hero-border-glass: rgba(255, 255, 255, 0.14);
+    --hero-text: #f8fafc;
+    --hero-text-muted: #cbd5e1;
+    --hero-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    --hero-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset and Base */
 .screen1 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-family: inherit;
 }
 
-/* Main Hero Container */
+/* Main Hero Section */
 .screen1 {
     position: relative;
     min-height: 100vh;
-    height: 100vh;
-    overflow: hidden;
-    background: var(--dark);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--hero-dark);
+    overflow: hidden;
+    color: var(--hero-text);
 }
 
-/* Background Images Container */
+/* Background Layers */
 .screen1 .hero-background {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     z-index: 1;
     overflow: hidden;
 }
 
 .screen1 .screen1Image {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
+    object-position: center 38%;
     z-index: 1;
 }
 
 .screen1 .screen1Image2 {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.7;
     mix-blend-mode: overlay;
     z-index: 2;
+    pointer-events: none;
 }
 
-/* Gradient Overlay */
+/* Sophisticated Cinematic Overlay */
 .screen1 .hero-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(13, 27, 42, 0.9) 0%,
-        rgba(13, 27, 42, 0.6) 50%,
-        rgba(13, 27, 42, 0.9) 100%
+    inset: 0;
+    background: radial-gradient(
+        ellipse 90% 70% at 50% 40%,
+        rgba(10, 15, 29, 0.5) 0%,
+        rgba(10, 15, 29, 0.85) 75%,
+        rgba(10, 15, 29, 0.98) 100%
     );
     z-index: 3;
+    pointer-events: none;
 }
 
-/* Hero Content */
+.screen1 .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 15, 29, 0.85) 0%,
+        transparent 20%,
+        transparent 70%,
+        rgba(10, 15, 29, 0.98) 100%
+    );
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Hero Content Area */
 .screen1 .hero-content {
     position: relative;
     z-index: 4;
@@ -90,260 +100,229 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    padding: 2rem;
+    width: 100%;
+    max-width: 1160px;
+    padding: 8rem 1.5rem 3.5rem;
+    margin: auto 0;
     text-align: center;
-    color: var(--white);
-    margin-top: 80px; /* Account for fixed navbar */
 }
 
+/* Marque Pill Badge */
+.screen1 .hero-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.45rem 1.25rem;
+    border-radius: 9999px;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.screen1 .badge-pulse-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    animation: heroPulse 2s infinite ease-in-out;
+}
+
+@keyframes heroPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.screen1 .badge-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--hero-gold);
+    text-transform: uppercase;
+}
+
+/* Hero Headline */
 .screen1 .hero-title {
-    font-size: 4rem;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
     font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     margin-bottom: 1.5rem;
-    line-height: 1.1;
-    background: linear-gradient(135deg, var(--white) 0%, var(--secondary) 100%);
+    color: #ffffff;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(180deg, #ffffff 40%, #e2e8f0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.screen1 .screenText {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 3rem;
-    max-width: 600px;
+/* Subtitle Tagline */
+.screen1 .hero-tagline {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-weight: 400;
     line-height: 1.6;
-    opacity: 0.9;
-    letter-spacing: 0.5px;
-    font-style: italic;
-}
-
-/* Hero Buttons Container */
-.screen1 .hero-buttons {
+    color: #f1f5f9;
+    max-width: 820px;
+    margin: 0 auto 3.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     display: flex;
-    gap: 1.5rem;
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0.65rem;
 }
 
-/* Button Styles */
-.screen1 .primary-btn,
-.screen1 .secondary-btn {
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: var(--transition);
-    border: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+.screen1 .hero-tagline-sub {
+    font-size: 0.95rem;
+    color: var(--hero-text-muted);
+    font-weight: 300;
+    line-height: 1.55;
+}
+
+/* Floating Prestige Trust Highlights Ribbon */
+.screen1 .hero-highlights-ribbon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1020px;
+    background: var(--hero-surface-glass);
+    border: 1px solid var(--hero-border-glass);
+    border-radius: 16px;
+    padding: 1.35rem 2rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+}
+
+.screen1 .highlight-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    text-align: left;
+    padding: 0 1rem;
+}
+
+.screen1 .highlight-icon-wrap {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    border-radius: 12px;
+    background: rgba(197, 160, 89, 0.14);
+    border: 1px solid rgba(197, 160, 89, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 180px;
+    padding: 9px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.screen1 .primary-btn::before,
-.screen1 .secondary-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
+.screen1 .highlight-svg {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-    z-index: -1;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
-.screen1 .primary-btn:hover::before,
-.screen1 .secondary-btn:hover::before {
-    left: 100%;
+.screen1 .highlight-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
 }
 
-/* Primary Button */
-.screen1 .primary-btn {
-    background: var(--secondary);
-    color: var(--white);
-    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+.screen1 .highlight-headline {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
 }
 
-.screen1 .primary-btn:hover {
-    background: #c1121f;
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
+.screen1 .highlight-sub {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    line-height: 1.35;
 }
 
-.screen1 .primary-btn:active {
-    transform: translateY(-1px);
+.screen1 .highlight-divider {
+    width: 1px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.12);
 }
 
-/* Secondary Button */
-.screen1 .secondary-btn {
-    background: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-}
-
-.screen1 .secondary-btn:hover {
-    background: var(--white);
-    color: var(--dark);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
-}
-
-.screen1 .secondary-btn:active {
-    transform: translateY(-1px);
-}
-
-/* Scroll Indicator */
+/* Scroll to Showroom Indicator */
 .screen1 .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     z-index: 4;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.45rem;
+    padding-bottom: 2rem;
     cursor: pointer;
+    opacity: 0.85;
+    transition: var(--hero-transition);
+    user-select: none;
 }
 
-.screen1 .scroll-icon {
-    color: var(--white);
-    opacity: 0.7;
-    transition: var(--transition);
-}
-
-.screen1 .scroll-indicator:hover .scroll-icon {
+.screen1 .scroll-indicator:hover {
     opacity: 1;
-    transform: translateY(5px);
+    transform: translateY(3px);
 }
 
-.screen1 .scroll-text {
-    color: var(--white);
-    font-size: 0.8rem;
-    margin-top: 0.5rem;
-    opacity: 0.7;
-    transition: var(--transition);
+.screen1 .scroll-caption {
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--hero-gold);
+    text-transform: uppercase;
 }
 
-.screen1 .scroll-indicator:hover .scroll-text {
-    opacity: 1;
+.screen1 .scroll-arrow {
+    color: var(--hero-gold);
+    animation: heroBounce 1.8s infinite ease-in-out;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .screen1 .hero-title {
-        font-size: 3.5rem;
-    }
-    
-    .screen1 .screenText {
-        font-size: 1.3rem;
-        max-width: 500px;
-    }
+@keyframes heroBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
 }
 
-@media (max-width: 768px) {
-    .screen1 {
-        height: auto;
-        min-height: 100vh;
-    }
-    
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
     .screen1 .hero-content {
-        margin-top: 100px;
-        padding: 1.5rem;
+        padding: 7rem 1.25rem 2.5rem;
     }
-    
-    .screen1 .hero-title {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    .screen1 .screenText {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        padding: 0 1rem;
-    }
-    
-    .screen1 .hero-buttons {
+
+    .screen1 .hero-highlights-ribbon {
         flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-        gap: 1rem;
+        gap: 1.25rem;
+        padding: 1.5rem 1.5rem;
     }
-    
-    .screen1 .primary-btn,
-    .screen1 .secondary-btn {
+
+    .screen1 .highlight-card {
         width: 100%;
-        padding: 0.9rem 2rem;
-        font-size: 1rem;
+        padding: 0;
     }
-    
-    .screen1 .scroll-indicator {
-        bottom: 1.5rem;
+
+    .screen1 .highlight-divider {
+        width: 100%;
+        height: 1px;
     }
 }
 
-@media (max-width: 480px) {
-    .screen1 .hero-title {
-        font-size: 2rem;
-    }
-    
-    .screen1 .screenText {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
+@media (max-width: 640px) {
     .screen1 .hero-content {
-        margin-top: 120px;
-        padding: 1rem;
+        padding: 6rem 1rem 2rem;
     }
-    
-    .screen1 .screen1Image,
-    .screen1 .screen1Image2 {
-        object-position: 75% center;
+
+    .screen1 .hero-title {
+        font-size: 2.3rem;
     }
-}
 
-/* Animation Keyframes */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    .screen1 .hero-tagline {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-/* Apply Animations */
-.screen1 .hero-title {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-.screen1 .screenText {
-    animation: fadeInUp 0.8s ease-out 0.2s both;
-}
-
-.screen1 .hero-buttons {
-    animation: fadeInUp 0.8s ease-out 0.4s both;
-}
-
-.screen1 .scroll-icon {
-    animation: float 2s ease-in-out infinite;
 }

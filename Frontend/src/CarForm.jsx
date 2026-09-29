@@ -1,216 +1,31 @@
-// import {useEffect , useState } from "react"
-// import {useParams , useNavigate } from 'react-router-dom'
-// import axios from 'axios';
-// import { v4 as uuidv4 } from 'uuid';
-// import "./CSSFiles/CarForm.css"
-// import logo from "./assets/logo.png"
-// import Navbar from "./Homepage/Navbar"
-
-
-// export default function CarForm(){
-//     let [carForm , setCarForm] = useState({
-//         carImage:null,
-//         manufacturer:"",
-//         carName:"",
-//         model:2024,
-//         color:"",
-//         engineType:"",    
-//         engineNumber:"",    
-//         milage:1000,
-//         carType:"",          
-//         accidental:false,     
-//         price:10000,
-//         availability:true
-//     })
-//     const navigate = useNavigate();
-
-//     let {id} = useParams();
-
-//     let setPreviousData = ()=>{
-//         let showPreviousData = async (id)=>{
-//             let previousData = await axios.get(`http://localhost:3000/car/${id}` , {withCredentials : true});  
-//             setCarForm({
-//                 carImage:null,
-//                 manufacturer : previousData.data.Manufacturer,
-//                 carName : previousData.data.Car_Name,
-//                 model : previousData.data.Model_Number,
-//                 color : previousData.data.Color,
-//                 engineType : previousData.data.Engine_Type,    
-//                 engineNumber : previousData.data.Engine_Number,    
-//                 milage : previousData.data.Mileage,
-//                 carType : previousData.data.Car_Type,          
-//                 accidental : previousData.data.Accidental,     
-//                 price : previousData.data.Price,
-//                 availability : true
-//             })
-    
-//         }
-//         if(id){
-//             showPreviousData(id);
-//         }
-//     }   
-//     useEffect(()=>{
-//         setPreviousData();
-//     } , [])
-
-
-//     let handleCarForm = (event)=>{
-//         let field = event.target.name;
-//         let newValue;
-//         if (field === "carImage") {
-//             setCarForm((preValues) => ({
-//                 ...preValues,
-//                 [field]: event.target.files[0], // Store the file object
-//             }));
-//         } else {
-//             if(field === "accidental"){
-//             newValue = event.target.value === "true" ? true : event.target.value === "false" ? false : event.target.value;
-//             }else{
-
-//                 newValue = event.target.value;
-//             }
-//             carForm[field] = newValue;
-//             setCarForm((currValues)=>{
-//                 return({...currValues , [field]:newValue})
-//             })
-//         }
-//     }
-//     let handleSubmit =async (event)=>{
-//         event.preventDefault();
-//         console.log(carForm);
-//         const formData = new FormData();
-//         formData.append("carImage", carForm.carImage); // Append image file
-//         formData.append("manufacturer", carForm.manufacturer);
-//         formData.append("carName", carForm.carName);
-//         formData.append("model", carForm.model);
-//         formData.append("color", carForm.color);
-//         formData.append("engineType", carForm.engineType);
-//         formData.append("engineNumber", carForm.engineNumber);
-//         formData.append("mileage", carForm.mileage);
-//         formData.append("carType", carForm.carType);
-//         formData.append("accidental", carForm.accidental);
-//         formData.append("price", carForm.price);
-//         formData.append("availability", carForm.availability);
-
-//         setCarForm({
-//             carImage: null,
-//             manufacturer: "",
-//             carName: "",
-//             model: 2024,
-//             color: "",
-//             engineType: "",   
-//             engineNumber: "",   
-//             mileage: 1000,
-//             carType: "",            
-//             accidental: false,     
-//             price: 10000,
-//             availability: true
-//         });
-//         console.log(carForm);
-//         //updating
-//         if(id){
-//             try {
-//                 let respose = await axios.post(`http://localhost:3000/car/update/${id}`, carForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }})
-//                 navigate('/explore')
-//             } catch (error) {
-//                 console.log(error)
-//                 if(error.response.status == 401){
-//                     navigate('/login')
-//                 }else if(error.response.status == 403){
-//                     navigate(`/category/car/${id}`)
-//                 } else{
-//                     console.log("some other error3")
-//                 }
-
-//             }
-//             return;
-//         }
-//         //new Addition
-//         try {
-//             // Send form data to the backend
-//             const response = await axios.post('http://localhost:3000/car/addcar', carForm , {withCredentials : true ,headers: { "Content-Type": "multipart/form-data" }});
-//             navigate('/explore')
-//         }
-//         catch (error) {
-//             console.error('Error submitting data:', error);
-//             if(error.response.status == 401){
-//                 navigate('/login')
-//             } else{
-//                 console.log("some other error")
-//                 console.log(error)
-//             }
-//         }
-//     }
-
-
-//     return(
-//         <div className="FormPage">
-//             <Navbar/>
-            
-//             <h3>Car Registration Form</h3>
-
-//             <form action="" className="CarForm" onSubmit={handleSubmit} encType="multipart/form-data">
-//                 <div className="primaryInfo">
-//                     <label htmlFor="EngineNumber">Enter Engine Number</label> 
-//                     <input type="text" id="EngineNumber" placeholder="Engine # " name="engineNumber" onChange={handleCarForm} value={carForm.engineNumber} required/>
-//                     <label htmlFor="manufacturer">Enter Manufacturer</label>
-//                     <input type="text" id="manufacturer" placeholder="Manufacturer" name="manufacturer" onChange={handleCarForm} value={carForm.manufacturer} required/>
-//                 </div>
-//                 <div className="name">
-//                     <label htmlFor="carName">Enter Car Name</label>
-//                     <input type="text" id="carName" placeholder="Car Name" name="carName" onChange={handleCarForm} value={carForm.carName} required/>
-//                     <label htmlFor="model">Enter Car Model</label>
-//                     <input type="number" id="model" placeholder="Car Model" name="model" onChange={handleCarForm} value={carForm.model} required/>
-//                 </div>
-//                 <div className="engine">
-//                     <label htmlFor="carImage">Choose Image</label>
-//                     <input type="file" id="carImage" placeholder="Image" name="carImage" onChange={handleCarForm} />
-//                     <label htmlFor="milage">Enter Milage</label>
-//                     <input type="number" id="milage" placeholder="Milage" name="milage" onChange={handleCarForm} value={carForm.milage} required/>
-//                 </div>
-//                 <div className="type">
-//                     <label htmlFor="carType">Enter Car Type</label>
-//                     <select name="carType" id="carType" value={carForm.carType} onChange={handleCarForm} required>
-//                         <option value="">Select</option>
-//                         <option value="Sedan">Sedan</option>
-//                         <option value="SUV">SUV</option>
-//                         <option value="Hatchback">Hatchback</option>
-//                         <option value="Mini">Mini</option>
-//                         <option value="Van">Van</option>
-//                     </select>
-//                     <label htmlFor="color">Enter Color</label>
-//                     <input type="text" id="color" placeholder="Car Color" name="color" onChange={handleCarForm} value={carForm.color} required/>
-//                 </div>
-//                 <div className="condition">
-//                     <label htmlFor="engineType">Enter Engine Type</label>
-//                     <input type="text" id="engineType" placeholder="Engine Type" name="engineType" onChange={handleCarForm} value={carForm.engineType} required/>
-//                     <label className="radioTag"><input type="radio" name="accidental" value="true" onChange={handleCarForm} ></input>Accidental</label>
-//                     <label className="radioTag"><input type='radio' name="accidental" value="false" onChange={handleCarForm} ></input>Not Accidental</label>
-//                 </div>
-//                 <div className="pricing">
-                    
-//                     <label htmlFor="price">Enter Price</label>
-//                     <input type="number" id="price" placeholder="Price in Dollars" name="price" onChange={handleCarForm} value={carForm.price} required/>
-//                 </div>
-//                 <button type="submit">{id ? "Update" : "Add Car"}</button>
-//             </form>
-//         </div>
-//     )
-// }
-
-
-
-import { useEffect, useState } from "react"
-import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect, useState } from "react"
+import { useParams, useNavigate, NavLink } from 'react-router-dom'
+import axios from 'axios'
 import "./CSSFiles/CarForm.css"
 import "./CSSFiles/FormStyles.css"
 import Navbar from "./Homepage/Navbar"
+import Footer from "./Homepage/Footer"
+import {
+    Car,
+    FileText,
+    Wrench,
+    DollarSign,
+    Upload,
+    ArrowLeft,
+    ChevronRight,
+    CheckCircle2,
+    AlertCircle
+} from 'lucide-react'
+
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function CarForm() {
-    let [carForm, setCarForm] = useState({
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [submitting, setSubmitting] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
+
+    const [carForm, setCarForm] = useState({
         carImage: null,
         manufacturer: "",
         carName: "",
@@ -223,57 +38,59 @@ export default function CarForm() {
         accidental: "false",
         price: "",
         availability: "true"
-    })
-    const navigate = useNavigate();
+    });
 
-    let { id } = useParams();
-
-    let setPreviousData = () => {
-        let showPreviousData = async (id) => {
-            let previousData = await axios.get(`${backendURL}/car/${id}`, { withCredentials: true });
-            setCarForm({
-                carImage: null,
-                manufacturer: previousData.data.Manufacturer,
-                carName: previousData.data.Car_Name,
-                model: previousData.data.Model_Number,
-                color: previousData.data.Color,
-                engineType: previousData.data.Engine_Type,
-                engineNumber: previousData.data.Engine_Number,
-                mileage: previousData.data.Mileage,
-                carType: previousData.data.Car_Type,
-                accidental: previousData.data.Accidental.toString(),
-                price: previousData.data.Price,
-                availability: previousData.data.Availability.toString()
-            })
-        }
-        if (id) {
-            showPreviousData(id);
-        }
-    }
     useEffect(() => {
-        setPreviousData();
-    }, [])
+        if (id) {
+            const fetchPreviousData = async () => {
+                try {
+                    const res = await axios.get(`${backendURL}/car/${id}`, { withCredentials: true });
+                    const car = res.data;
+                    setCarForm({
+                        carImage: null,
+                        manufacturer: car.Manufacturer || "",
+                        carName: car.Car_Name || "",
+                        model: car.Model_Number || new Date().getFullYear(),
+                        color: car.Color || "",
+                        engineType: car.Engine_Type || "",
+                        engineNumber: car.Engine_Number || "",
+                        mileage: car.Mileage || "",
+                        carType: car.Car_Type || "",
+                        accidental: car.Accidental ? "true" : "false",
+                        price: car.Price || "",
+                        availability: car.Availability ? "true" : "false"
+                    });
+                } catch (err) {
+                    console.error("Failed to load vehicle data:", err);
+                    setErrorMsg("Unable to retrieve vehicle listing information.");
+                }
+            };
+            fetchPreviousData();
+        }
+    }, [id]);
 
-    let handleCarForm = (event) => {
-        let field = event.target.name;
-        let newValue;
-        if (field === "carImage") {
-            setCarForm((preValues) => ({
-                ...preValues,
-                [field]: event.target.files[0],
+    const handleCarForm = (event) => {
+        const { name, value, files } = event.target;
+        if (name === "carImage") {
+            setCarForm((prev) => ({
+                ...prev,
+                carImage: files[0] || null
             }));
         } else {
-            newValue = event.target.value;
-            setCarForm((currValues) => {
-                return ({ ...currValues, [field]: newValue })
-            })
+            setCarForm((prev) => ({
+                ...prev,
+                [name]: value
+            }));
         }
-    }
+    };
 
-    let handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        setSubmitting(true);
+        setErrorMsg("");
+
         const formData = new FormData();
-        formData.append("carImage", carForm.carImage);
+        if (carForm.carImage) formData.append("carImage", carForm.carImage);
         formData.append("manufacturer", carForm.manufacturer);
         formData.append("carName", carForm.carName);
         formData.append("model", carForm.model);
@@ -286,283 +103,293 @@ export default function CarForm() {
         formData.append("price", carForm.price);
         formData.append("availability", carForm.availability);
 
-        if (id) {
-            try {
-                let response = await axios.post(`${backendURL}/car/update/${id}`, carForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } })
-                navigate('/explore')
-            } catch (error) {
-                console.log(error)
-                if (error.response.status == 401) {
-                    navigate('/login')
-                } else if (error.response.status == 403) {
-                    navigate(`/category/car/${id}`)
-                } else {
-                    console.log("some other error3")
-                }
-            }
-            return;
-        }
-
         try {
-            const response = await axios.post(`${backendURL}/car/addcar`, carForm, { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } });
-            navigate('/explore')
-        }
-        catch (error) {
-            console.error('Error submitting data:', error);
-            if (error.response.status == 401) {
-                navigate('/login')
+            if (id) {
+                await axios.post(`${backendURL}/car/update/${id}`, carForm, {
+                    withCredentials: true,
+                    headers: { "Content-Type": "multipart/form-data" }
+                });
             } else {
-                console.log("some other error")
-                console.log(error)
+                await axios.post(`${backendURL}/car/addcar`, carForm, {
+                    withCredentials: true,
+                    headers: { "Content-Type": "multipart/form-data" }
+                });
             }
+            navigate('/explore');
+        } catch (err) {
+            console.error("Error submitting vehicle listing:", err);
+            if (err.response?.status === 401) {
+                navigate('/login');
+            } else if (err.response?.status === 403) {
+                setErrorMsg("Authorization denied: Only the listing owner may perform edits.");
+            } else {
+                setErrorMsg(err.response?.data?.error || "Error saving vehicle record. Please verify all fields.");
+            }
+        } finally {
+            setSubmitting(false);
         }
-    }
+    };
 
     return (
         <div className="FormPage">
             <Navbar />
 
-            <h3>{id ? "Update Vehicle" : "Register New Vehicle"}</h3>
+            <div className="form-page-container">
+                {/* Breadcrumbs */}
+                <nav className="one-car-breadcrumb" aria-label="Breadcrumb">
+                    <NavLink to="/">Home</NavLink>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <NavLink to="/explore">Inventory</NavLink>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <span className="breadcrumb-current">
+                        {id ? "Edit Vehicle" : "Register Vehicle"}
+                    </span>
+                </nav>
 
-            <form className="CarForm" onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className="form-row">
-                    <div className="form-group full-width">
-                        <label htmlFor="carImage" className="required">
-                            {id ? "Update Vehicle Images" : "Upload Vehicle Images"}
-                        </label>
-                        <input 
-                            type="file" 
-                            id="carImage" 
-                            accept="image/*" 
-                            multiple
-                            name="carImage" 
-                            onChange={handleCarForm} 
-                        />
-                        <small className="file-hint">Upload multiple images showing different angles</small>
-                    </div>
+                <div className="form-header-box">
+                    <span className="form-header-badge">Inventory Management</span>
+                    <h1 className="form-title">{id ? "Update Vehicle Listing" : "Register New Vehicle"}</h1>
+                    <p className="form-subtitle">Complete the verified dealership specification sheet below.</p>
                 </div>
 
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="manufacturer" className="required">Manufacturer</label>
-                        <select 
-                            name="manufacturer" 
-                            id="manufacturer" 
-                            value={carForm.manufacturer} 
-                            onChange={handleCarForm} 
-                            required
-                        >
-                            <option value="">Select Manufacturer</option>
-                            <option value="Toyota">Toyota</option>
-                            <option value="Honda">Honda</option>
-                            <option value="Suzuki">Suzuki</option>
-                            <option value="BMW">BMW</option>
-                            <option value="Mercedes">Mercedes</option>
-                            <option value="Audi">Audi</option>
-                            <option value="Kia">Kia</option>
-                            <option value="Chingan">Chingan</option>
-                            <option value="Other">Other</option>
-                        </select>
+                {errorMsg && (
+                    <div className="error-message">
+                        <AlertCircle size={18} />
+                        <span>{errorMsg}</span>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="carName" className="required">Vehicle Name</label>
-                        <input 
-                            type="text" 
-                            id="carName" 
-                            placeholder="e.g., Corolla, City, Civic" 
-                            name="carName" 
-                            onChange={handleCarForm} 
-                            value={carForm.carName} 
-                            required 
-                        />
-                    </div>
-                </div>
+                )}
 
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="model" className="required">Model Year</label>
-                        <select 
-                            name="model" 
-                            id="model" 
-                            value={carForm.model} 
-                            onChange={handleCarForm} 
-                            required
-                        >
-                            <option value="">Select Year</option>
-                            {Array.from({ length: 30 }, (_, i) => {
-                                const year = new Date().getFullYear() - i;
-                                return <option key={year} value={year}>{year}</option>
-                            })}
-                        </select>
+                <form className="CarForm" onSubmit={handleSubmit} encType="multipart/form-data">
+                    {/* Section 1: Vehicle Identity */}
+                    <div className="form-section-header">
+                        <Car size={18} className="form-section-icon" />
+                        <span>Vehicle Identification</span>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="carType" className="required">Vehicle Type</label>
-                        <select 
-                            name="carType" 
-                            id="carType" 
-                            value={carForm.carType} 
-                            onChange={handleCarForm} 
-                            required
-                        >
-                            <option value="">Select Type</option>
-                            <option value="Sedan">Sedan</option>
-                            <option value="SUV">SUV</option>
-                            <option value="Hatchback">Hatchback</option>
-                            <option value="Mini">Mini</option>
-                            <option value="Van">Van</option>
-                            <option value="Pickup">Pickup</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="engineNumber" className="required">Engine Number</label>
-                        <input 
-                            type="text" 
-                            id="engineNumber" 
-                            placeholder="Enter engine number" 
-                            name="engineNumber" 
-                            onChange={handleCarForm} 
-                            value={carForm.engineNumber} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="engineType" className="required">Engine Type</label>
-                        <select 
-                            name="engineType" 
-                            id="engineType" 
-                            value={carForm.engineType} 
-                            onChange={handleCarForm} 
-                            required
-                        >
-                            <option value="">Select Engine Type</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Diesel">Diesel</option>
-                            <option value="Hybrid">Hybrid</option>
-                            <option value="Electric">Electric</option>
-                            <option value="CNG">CNG</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="color" className="required">Color</label>
-                        <select 
-                            name="color" 
-                            id="color" 
-                            value={carForm.color} 
-                            onChange={handleCarForm} 
-                            required
-                        >
-                            <option value="">Select Color</option>
-                            <option value="White">White</option>
-                            <option value="Black">Black</option>
-                            <option value="Silver">Silver</option>
-                            <option value="Gray">Gray</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Red">Red</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="mileage" className="required">Mileage (km)</label>
-                        <input 
-                            type="number" 
-                            id="mileage" 
-                            placeholder="Current mileage" 
-                            name="mileage" 
-                            onChange={handleCarForm} 
-                            value={carForm.mileage} 
-                            required 
-                        />
-                    </div>
-                </div>
-
-                <div className="form-row">
-                    <div className="form-group">
-                        <label htmlFor="price" className="required">Price (PKR)</label>
-                        <input 
-                            type="number" 
-                            id="price" 
-                            placeholder="Enter price" 
-                            name="price" 
-                            onChange={handleCarForm} 
-                            value={carForm.price} 
-                            required 
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="required">Accidental History</label>
-                        <div className="radio-group">
-                            <label className="radio-option">
-                                <input 
-                                    type="radio" 
-                                    name="accidental" 
-                                    value="true" 
-                                    onChange={handleCarForm} 
-                                    checked={carForm.accidental === "true"}
-                                />
-                                Yes
+                    <div className="form-row">
+                        <div className="form-group full-width">
+                            <label htmlFor="carImage">
+                                {id ? "Update Vehicle Cover Image" : "Vehicle Photography"}
                             </label>
-                            <label className="radio-option">
-                                <input 
-                                    type="radio" 
-                                    name="accidental" 
-                                    value="false" 
-                                    onChange={handleCarForm} 
-                                    checked={carForm.accidental === "false"}
-                                />
-                                No
-                            </label>
+                            <input 
+                                type="file" 
+                                id="carImage" 
+                                accept="image/*" 
+                                name="carImage" 
+                                onChange={handleCarForm} 
+                            />
+                            <small className="file-hint">Upload high-resolution vehicle photo (JPG, PNG, WebP up to 5MB)</small>
                         </div>
                     </div>
-                </div>
 
-                {/* <div className="form-row">
-                    <div className="form-group">
-                        <label className="required">Availability</label>
-                        <div className="radio-group">
-                            <label className="radio-option">
-                                <input 
-                                    type="radio" 
-                                    name="availability" 
-                                    value="true" 
-                                    onChange={handleCarForm} 
-                                    checked={carForm.availability === "true"}
-                                />
-                                Available
-                            </label>
-                            <label className="radio-option">
-                                <input 
-                                    type="radio" 
-                                    name="availability" 
-                                    value="false" 
-                                    onChange={handleCarForm} 
-                                    checked={carForm.availability === "false"}
-                                />
-                                Sold
-                            </label>
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="manufacturer" className="required">Manufacturer</label>
+                            <select 
+                                name="manufacturer" 
+                                id="manufacturer" 
+                                value={carForm.manufacturer} 
+                                onChange={handleCarForm} 
+                                required
+                            >
+                                <option value="">Select Manufacturer</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Honda">Honda</option>
+                                <option value="Suzuki">Suzuki</option>
+                                <option value="BMW">BMW</option>
+                                <option value="Mercedes">Mercedes-Benz</option>
+                                <option value="Audi">Audi</option>
+                                <option value="Kia">Kia</option>
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Changan">Changan</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="carName" className="required">Model / Variant Name</label>
+                            <input 
+                                type="text" 
+                                id="carName" 
+                                placeholder="e.g., Civic Oriel, Corolla Altis, Land Cruiser" 
+                                name="carName" 
+                                onChange={handleCarForm} 
+                                value={carForm.carName} 
+                                required 
+                            />
                         </div>
                     </div>
-                </div> */}
 
-                {/* <div className="form-row">
-                    <div className="form-group full-width">
-                        <label htmlFor="description">Additional Description</label>
-                        <textarea 
-                            id="description" 
-                            placeholder="Describe vehicle condition, features, special modifications, etc." 
-                            name="description" 
-                            rows="4"
-                        />
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="model" className="required">Model Production Year</label>
+                            <select 
+                                name="model" 
+                                id="model" 
+                                value={carForm.model} 
+                                onChange={handleCarForm} 
+                                required
+                            >
+                                <option value="">Select Year</option>
+                                {Array.from({ length: 30 }, (_, i) => {
+                                    const year = new Date().getFullYear() + 1 - i;
+                                    return <option key={year} value={year}>{year}</option>
+                                })}
+                            </select>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="carType" className="required">Body Classification</label>
+                            <select 
+                                name="carType" 
+                                id="carType" 
+                                value={carForm.carType} 
+                                onChange={handleCarForm} 
+                                required
+                            >
+                                <option value="">Select Body Style</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Hatchback">Hatchback</option>
+                                <option value="Crossover">Crossover</option>
+                                <option value="Mini">Mini</option>
+                                <option value="Van">Van / MPV</option>
+                                <option value="Pickup">Pickup Truck</option>
+                            </select>
+                        </div>
                     </div>
-                </div> */}
 
-                <button type="submit">{id ? "Update Vehicle" : "Register Vehicle"}</button>
-            </form>
+                    {/* Section 2: Technical Specs */}
+                    <div className="form-section-header">
+                        <Wrench size={18} className="form-section-icon" />
+                        <span>Powertrain & Mechanical Specifications</span>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="engineNumber" className="required">Engine Serial Number</label>
+                            <input 
+                                type="text" 
+                                id="engineNumber" 
+                                placeholder="Official engine serial code" 
+                                name="engineNumber" 
+                                onChange={handleCarForm} 
+                                value={carForm.engineNumber} 
+                                required 
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="engineType" className="required">Powertrain / Fuel Type</label>
+                            <select 
+                                name="engineType" 
+                                id="engineType" 
+                                value={carForm.engineType} 
+                                onChange={handleCarForm} 
+                                required
+                            >
+                                <option value="">Select Fuel & Engine</option>
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Electric">Electric (EV)</option>
+                                <option value="CNG">CNG</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="color" className="required">Exterior Finish</label>
+                            <select 
+                                name="color" 
+                                id="color" 
+                                value={carForm.color} 
+                                onChange={handleCarForm} 
+                                required
+                            >
+                                <option value="">Select Color</option>
+                                <option value="White">White / Pearl White</option>
+                                <option value="Black">Black / Metallic Black</option>
+                                <option value="Silver">Silver / Metallic Silver</option>
+                                <option value="Gray">Gray / Graphite</option>
+                                <option value="Blue">Blue / Navy</option>
+                                <option value="Red">Red / Maroon</option>
+                                <option value="Other">Other Color</option>
+                            </select>
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="mileage" className="required">Current Mileage (km)</label>
+                            <input 
+                                type="number" 
+                                id="mileage" 
+                                placeholder="e.g., 45000" 
+                                name="mileage" 
+                                onChange={handleCarForm} 
+                                value={carForm.mileage} 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    {/* Section 3: Financials & History */}
+                    <div className="form-section-header">
+                        <DollarSign size={18} className="form-section-icon" />
+                        <span>Pricing & Vehicle History</span>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label htmlFor="price" className="required">Listing Price (PKR)</label>
+                            <input 
+                                type="number" 
+                                id="price" 
+                                placeholder="Price in PKR" 
+                                name="price" 
+                                onChange={handleCarForm} 
+                                value={carForm.price} 
+                                required 
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="required">Accidental Damage Record</label>
+                            <div className="radio-group">
+                                <label className="radio-option">
+                                    <input 
+                                        type="radio" 
+                                        name="accidental" 
+                                        value="false" 
+                                        onChange={handleCarForm} 
+                                        checked={carForm.accidental === "false"}
+                                    />
+                                    <span>Clean / Non-Accidental</span>
+                                </label>
+                                <label className="radio-option">
+                                    <input 
+                                        type="radio" 
+                                        name="accidental" 
+                                        value="true" 
+                                        onChange={handleCarForm} 
+                                        checked={carForm.accidental === "true"}
+                                    />
+                                    <span>Accidental History</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-actions-wrap">
+                        <button type="submit" disabled={submitting}>
+                            <CheckCircle2 size={18} />
+                            <span>{submitting ? "Saving Listing..." : id ? "Update Vehicle Record" : "Register Vehicle in Inventory"}</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <Footer />
         </div>
     )
 }

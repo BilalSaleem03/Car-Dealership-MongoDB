@@ -17,35 +17,33 @@
 
 .history-container {
     min-height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
-    /* flex: 1; */
-    padding: 30px;
-    /* max-width: 1400px; */
-    /* margin: 0 auto; */
-    width: 95vw;
+    padding: 100px 2rem 4rem;
 }
 
-/* .history-content {
-    flex: 1;
-    padding: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
+.history-content {
+    max-width: 1300px;
     width: 100%;
-} */
+    margin: 0 auto;
+    flex: 1;
+    box-sizing: border-box;
+}
 
 /* Hero Section */
 .history-hero {
     text-align: center;
-    padding: 60px 20px;
+    padding: 40px 20px 30px;
     color: white;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .history-hero h1 {
     font-size: 48px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     font-weight: 700;
 }
 
@@ -62,70 +60,97 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-@media (max-width: 1292px) {
+@media (max-width: 1200px) {
     .sales-stats {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 640px) {
     .sales-stats {
         grid-template-columns: 1fr;
     }
 }
 
-.stat-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 25px;
+.history-container .stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 22px 24px;
     display: flex;
     align-items: center;
-    gap: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
+    gap: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     color: white;
-    
+    box-sizing: border-box;
+    width: 100%;
 }
 
-@media (max-width: 500px) {
-    .stat-card {
-        width:350px
-    }
-}
-@media (max-width: 400px) {
-    .stat-card {
-        width:250px
-    }
+.history-container .stat-card:hover {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-.stat-card:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-5px);
+.history-container .stat-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 14px;
+    background: rgba(197, 160, 89, 0.16);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e2ba6f;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
 }
 
-.stat-icon {
-    font-size: 40px;
-    min-width: 60px;
-    text-align: center;
+.history-container .stat-card:hover .stat-icon {
+    background: rgba(197, 160, 89, 0.25);
+    border-color: rgba(197, 160, 89, 0.5);
+    transform: scale(1.05);
 }
 
-.stat-content {
+.history-container .stat-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 2.2;
+}
+
+.history-container .stat-content {
     flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.stat-number {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 5px;
+.history-container .stat-number {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+    word-break: break-word;
 }
 
-.stat-label {
-    font-size: 14px;
-    opacity: 0.9;
+.history-container .stat-label {
+    font-size: 0.76rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
 }
 
 /* Loading State */
@@ -211,8 +236,21 @@
 }
 
 .no-sales-icon {
-    font-size: 64px;
-    margin-bottom: 20px;
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    background: rgba(197, 160, 89, 0.15);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #e2ba6f;
+}
+
+.no-sales-icon svg {
+    width: 36px;
+    height: 36px;
 }
 
 .no-sales h3 {

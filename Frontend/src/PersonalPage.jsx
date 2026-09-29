@@ -55,11 +55,16 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { 
+    Car, DollarSign, BarChart2, TrendingUp, 
+    Search, ClipboardList, Camera, FileText, 
+    Clock, PlusCircle 
+} from 'lucide-react'
 import OwnedCar from "./OwnedCar"
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
 import personalPageBg from './videos/personal_page_bg.mp4'
-import './CSSFiles/personalPage.css'                // PersonalPage specific styles
+import './CSSFiles/personalPage.css'
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function PersonalPage() {
@@ -144,28 +149,28 @@ export default function PersonalPage() {
                 {/* Stats Overview */}
                 <div className="garage-stats">
                     <div className="stat-card">
-                        <div className="stat-icon">🚗</div>
+                        <div className="stat-icon"><Car size={26} /></div>
                         <div className="stat-content">
                             <div className="stat-number">{stats.totalCars}</div>
                             <div className="stat-label">Total Listings</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">💰</div>
+                        <div className="stat-icon"><DollarSign size={26} /></div>
                         <div className="stat-content">
                             <div className="stat-number">{formatPrice(stats.totalValue)}</div>
                             <div className="stat-label">Total Value</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">📊</div>
+                        <div className="stat-icon"><BarChart2 size={26} /></div>
                         <div className="stat-content">
                             <div className="stat-number">{formatPrice(stats.avgPrice)}</div>
                             <div className="stat-label">Average Price</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">📈</div>
+                        <div className="stat-icon"><TrendingUp size={26} /></div>
                         <div className="stat-content">
                             <div className="stat-number">{data.filter(car => !car.Accidental).length}</div>
                             <div className="stat-label">Clean History</div>
@@ -194,7 +199,7 @@ export default function PersonalPage() {
                 {/* Empty State */}
                 {!loading && !error && data.length === 0 && (
                     <div className="empty-garage">
-                        <div className="empty-icon">🚗</div>
+                        <div className="empty-icon"><Car size={48} /></div>
                         <h3>Your Garage is Empty</h3>
                         <p>You haven't listed any cars yet. Start by adding your first vehicle!</p>
                         <button 
@@ -229,20 +234,23 @@ export default function PersonalPage() {
                                 <button 
                                     onClick={() => navigate('/carForm')} 
                                     className="btn-action-primary"
+                                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
                                 >
-                                    🚗 Add New Car
+                                    <Car size={16} /> <span>Add New Car</span>
                                 </button>
                                 <button 
                                     onClick={() => navigate('/explore')} 
                                     className="btn-action-secondary"
+                                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
                                 >
-                                    🔍 Browse Marketplace
+                                    <Search size={16} /> <span>Browse Marketplace</span>
                                 </button>
                                 <button 
                                     onClick={() => navigate('/history')} 
                                     className="btn-action-secondary"
+                                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}
                                 >
-                                    📋 View Sales History
+                                    <ClipboardList size={16} /> <span>View Sales History</span>
                                 </button>
                             </div>
                         </div>
@@ -252,22 +260,22 @@ export default function PersonalPage() {
                             <h3>Selling Tips</h3>
                             <div className="tips-grid">
                                 <div className="tip-card">
-                                    <div className="tip-icon">📸</div>
+                                    <div className="tip-icon"><Camera size={22} /></div>
                                     <h4>Quality Photos</h4>
                                     <p>Use clear, well-lit photos from multiple angles to attract buyers.</p>
                                 </div>
                                 <div className="tip-card">
-                                    <div className="tip-icon">📝</div>
+                                    <div className="tip-icon"><FileText size={22} /></div>
                                     <h4>Detailed Description</h4>
                                     <p>Include all relevant information and be honest about the condition.</p>
                                 </div>
                                 <div className="tip-card">
-                                    <div className="tip-icon">💰</div>
+                                    <div className="tip-icon"><DollarSign size={22} /></div>
                                     <h4>Competitive Pricing</h4>
                                     <p>Research similar vehicles to set a fair and competitive price.</p>
                                 </div>
                                 <div className="tip-card">
-                                    <div className="tip-icon">⏰</div>
+                                    <div className="tip-icon"><Clock size={22} /></div>
                                     <h4>Regular Updates</h4>
                                     <p>Keep your listings updated with current information and availability.</p>
                                 </div>

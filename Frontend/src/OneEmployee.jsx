@@ -1,73 +1,27 @@
-// import axios from 'axios';
-// import personImage from './assets/human_image.jpeg'
-// import { useParams , useNavigate, NavLink } from 'react-router-dom';
-// import { useEffect, useState } from 'react';
-// import './CSSFiles/OneEmployee.css'
-// import Navbar from './Homepage/Navbar.jsx'
-// import Footer from './Homepage/Footer.jsx'
-
-// export default function OneEmployee(){
-//     let { id } = useParams();
-//     const [data , setdata] = useState([]);
-//     // id = id.replace(":", "");
-//     const navigate = useNavigate();
-//     const getData = async ()=>{
-//         try {
-//             let response = await axios.get(`http://localhost:3000/aboutus/${id}` , {withCredentials : true});
-//             setdata(response.data);
-//             console.log(response.data)
-
-//         } catch (error) {
-//             console.log(error.response.data.error)
-//             console.log(error.response.status)
-//         }
-//     }
-//     useEffect(()=>{
-//         getData();
-//     } , [])
-    
-//     const formatDate = (dateString) => {
-//         return dateString ? dateString.split('T')[0] : 'N/A';
-//     };
-
-//     return(
-//         <div className='one_employee_window'>
-//             <Navbar/>
-//             <div className='one_employee'>
-//                 <img src={data.Image?.url || personImage} alt="car Image" />
-//                 <h3>{data.First_Name} {data.Last_Name}</h3>
-//                 <ul>
-//                     <li>Designation: {data.Designation}</li>
-//                     <li>Date of Birth: {formatDate(data.Date_of_Birth)}</li>
-//                     <li>Email Address: {data.Email_Address}</li>
-//                     <li>Gender: {data.Gender}</li>
-//                     <li>Phone# {data.Phone_Number}</li>
-//                     <li>Telephone# {data.Telephone}</li>
-//                     <li>Hire Date: {formatDate(data.Hire_Date)}</li>
-//                     <li>Salary: PKR {data.Salary}/-</li>
-//                     <li>Commession Rate: {data.Commission_Rate}%</li>
-//                     <li>Address: {data.Address}</li>
-//                 </ul>
-//                 <NavLink  to={`/employee/update/${data._id}`}><button>Update</button></NavLink>
-//             </div>
-//             <Footer/>
-//         </div>
-//     )
-// }
-
-
-
-
-
-
-
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate, NavLink } from 'react-router-dom'
 import personImage from './assets/human_image.jpeg'
 import './CSSFiles/OneEmployee.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+import {
+    User,
+    Mail,
+    Phone,
+    Briefcase,
+    Calendar,
+    Award,
+    DollarSign,
+    Percent,
+    Edit3,
+    ChevronRight,
+    ArrowLeft,
+    AlertCircle,
+    Building2,
+    ShieldCheck
+} from 'lucide-react'
+
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function OneEmployee() {
@@ -80,13 +34,13 @@ export default function OneEmployee() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get(`${backendURL}/aboutus/${id}`, {
+            const response = await axios.get(`${backendURL}/aboutus/${id}`, {
                 withCredentials: true
             })
             setData(response.data)
             setError(null)
-        } catch (error) {
-            console.error('Error fetching employee data:', error)
+        } catch (err) {
+            console.error('Error fetching employee data:', err)
             setError('Failed to load employee information')
         } finally {
             setLoading(false)
@@ -109,17 +63,18 @@ export default function OneEmployee() {
 
     const formatPhone = (phone) => {
         if (!phone) return 'N/A'
-        return phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
+        const str = String(phone)
+        return str.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
     }
 
     if (loading) {
         return (
-            <div className='employee-container'>
+            <div className='one-employee-container'>
                 <Navbar />
-                <div className='employee-loading'>
-                    <div className="loading-spinner"></div>
-                    <h2>Loading Profile...</h2>
-                    <p>Please wait while we fetch employee information</p>
+                <div className='one-employee-loading-state'>
+                    <div className="one-employee-spinner"></div>
+                    <h2>Loading Staff Profile</h2>
+                    <p>Accessing verified personnel directory...</p>
                 </div>
                 <Footer />
             </div>
@@ -128,14 +83,17 @@ export default function OneEmployee() {
 
     if (error) {
         return (
-            <div className='employee-container'>
+            <div className='one-employee-container'>
                 <Navbar />
-                <div className='employee-error'>
-                    <div className="error-icon">!</div>
-                    <h2>Profile Not Found</h2>
+                <div className='one-employee-error-state'>
+                    <div className="error-icon-box">
+                        <AlertCircle size={36} />
+                    </div>
+                    <h2>Staff Profile Unavailable</h2>
                     <p>{error}</p>
-                    <button className="btn-primary" onClick={() => navigate('/aboutus')}>
-                        ← Back to Team
+                    <button className="btn-back-team" onClick={() => navigate('/aboutus')}>
+                        <ArrowLeft size={16} />
+                        <span>Return to Team Directory</span>
                     </button>
                 </div>
                 <Footer />
@@ -143,137 +101,213 @@ export default function OneEmployee() {
         )
     }
 
+    const isManager = data.Designation?.toLowerCase().includes('manager')
+
     return (
-        <div className='employee-container'>
+        <div className='one-employee-container'>
             <Navbar />
             
-            <div className='employee-content'>
-                <div className='employee-breadcrumb'>
-                    <NavLink to="/">Home</NavLink> / 
-                    <NavLink to="/aboutus">Our Team</NavLink> / 
-                    <span>{data.First_Name} {data.Last_Name}</span>
-                </div>
+            <main className='one-employee-main'>
+                {/* Clean Breadcrumb */}
+                <nav className='one-employee-breadcrumb' aria-label="Breadcrumb">
+                    <NavLink to="/">Home</NavLink>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <NavLink to="/aboutus">Leadership & Team</NavLink>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <span className="breadcrumb-current">
+                        {data.First_Name} {data.Last_Name}
+                    </span>
+                </nav>
 
-                <div className='employee-grid'>
-                    {/* Left Column - Employee Image & Basic Info */}
-                    <div className='employee-profile-section'>
-                        <div className='profile-image-container'>
+                <div className='one-employee-layout'>
+                    {/* Left Column: Personnel Identity Summary */}
+                    <aside className='employee-summary-card'>
+                        <div className='employee-avatar-frame'>
                             <img 
                                 src={data.Image?.url || personImage} 
                                 alt={`${data.First_Name} ${data.Last_Name}`}
-                                className='profile-image'
+                                className='employee-avatar-img'
                                 onError={(e) => {
                                     e.target.src = personImage
                                 }}
                             />
-                            <div className='profile-status'>
-                                <span className={`status-badge ${data.Designation?.toLowerCase().includes('manager') ? 'status-manager' : 'status-employee'}`}>
-                                    {data.Designation?.toLowerCase().includes('manager') ? '👑 Manager' : '👤 Employee'}
-                                </span>
+                            <div className={`staff-role-badge ${isManager ? 'role-manager' : 'role-staff'}`}>
+                                <Award size={14} />
+                                <span>{data.Designation || 'Team Member'}</span>
                             </div>
                         </div>
 
-                        <div className='profile-summary'>
-                            <h2>{data.First_Name} {data.Last_Name}</h2>
-                            <h3 className='profile-designation'>{data.Designation}</h3>
-                            <p className='profile-email'>📧 {data.Email_Address || 'N/A'}</p>
-                            <p className='profile-phone'>📱 {formatPhone(data.Phone_Number)}</p>
-                            
-                            <NavLink to={`/employee/update/${data._id}`} className="btn-update-employee-profile">
-                                ✏️ Update Profile
+                        <div className='employee-bio-block'>
+                            <h2 className='employee-full-name'>
+                                {data.First_Name} {data.Last_Name}
+                            </h2>
+                            <p className='employee-department-label'>
+                                Prestige Motors Staff
+                            </p>
+                        </div>
+
+                        <div className='employee-contact-stack'>
+                            <div className='contact-item'>
+                                <Mail size={16} className="contact-icon" />
+                                <span>{data.Email_Address || 'N/A'}</span>
+                            </div>
+                            <div className='contact-item'>
+                                <Phone size={16} className="contact-icon" />
+                                <span>{formatPhone(data.Phone_Number)}</span>
+                            </div>
+                            <div className='contact-item'>
+                                <Calendar size={16} className="contact-icon" />
+                                <span>Joined {formatDate(data.Hire_Date)}</span>
+                            </div>
+                        </div>
+
+                        <div className='employee-actions-row'>
+                            <NavLink to={`/employee/update/${data._id}`} className="btn-edit-employee">
+                                <Edit3 size={16} />
+                                <span>Update Profile</span>
                             </NavLink>
                         </div>
-                    </div>
+                    </aside>
 
-                    {/* Right Column - Detailed Information */}
-                    <div className='employee-details-section'>
-                        <div className='details-header'>
-                            <h1>Employee Profile</h1>
-                            <div className='hire-date'>
-                                🗓️ Joined: {formatDate(data.Hire_Date)}
+                    {/* Right Column: Structured Staff Dossier */}
+                    <section className='employee-records-col'>
+                        <div className='staff-header-banner'>
+                            <div>
+                                <h1 className='staff-heading'>Personnel Dossier</h1>
+                                <p className='staff-sub'>Official dealership employee record and employment credentials</p>
                             </div>
                         </div>
 
-                        <div className='details-grid'>
-                            <div className='detail-card'>
-                                <div className='detail-icon'>👤</div>
-                                <div className='detail-content'>
-                                    <h4>Personal Information</h4>
-                                    <ul>
-                                        <li><strong>Gender:</strong> {data.Gender || 'N/A'}</li>
-                                        <li><strong>Date of Birth:</strong> {formatDate(data.Date_of_Birth)}</li>
-                                        <li><strong>Address:</strong> {data.Address || 'N/A'}</li>
-                                    </ul>
+                        <div className='staff-grid'>
+                            {/* Card 1: Personal Details */}
+                            <div className='staff-card'>
+                                <div className='staff-card-header'>
+                                    <User size={18} className="staff-header-icon" />
+                                    <h3>Personal Information</h3>
+                                </div>
+                                <div className='staff-data-list'>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Gender</span>
+                                        <span className='data-value'>{data.Gender || 'N/A'}</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Date of Birth</span>
+                                        <span className='data-value'>{formatDate(data.Date_of_Birth)}</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Address</span>
+                                        <span className='data-value'>{data.Address || 'Official dealership location'}</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className='detail-card'>
-                                <div className='detail-icon'>💼</div>
-                                <div className='detail-content'>
-                                    <h4>Employment Details</h4>
-                                    <ul>
-                                        <li><strong>Designation:</strong> {data.Designation || 'N/A'}</li>
-                                        <li><strong>Hire Date:</strong> {formatDate(data.Hire_Date)}</li>
-                                        <li><strong>Years with Company:</strong> 
+                            {/* Card 2: Employment Status */}
+                            <div className='staff-card'>
+                                <div className='staff-card-header'>
+                                    <Building2 size={18} className="staff-header-icon" />
+                                    <h3>Employment Details</h3>
+                                </div>
+                                <div className='staff-data-list'>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Current Designation</span>
+                                        <span className='data-value'>{data.Designation || 'Specialist'}</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Hire Date</span>
+                                        <span className='data-value'>{formatDate(data.Hire_Date)}</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Tenure</span>
+                                        <span className='data-value'>
                                             {data.Hire_Date ? 
-                                                Math.floor((new Date() - new Date(data.Hire_Date)) / (365 * 24 * 60 * 60 * 1000)) 
-                                                : 'N/A'} years
-                                        </li>
-                                    </ul>
+                                                `${Math.max(1, Math.floor((new Date() - new Date(data.Hire_Date)) / (365 * 24 * 60 * 60 * 1000)))} year(s) with firm` 
+                                                : 'Active'}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className='detail-card'>
-                                <div className='detail-icon'>💰</div>
-                                <div className='detail-content'>
-                                    <h4>Compensation</h4>
-                                    <ul>
-                                        <li><strong>Salary:</strong> PKR {data.Salary?.toLocaleString() || '0'}/month</li>
-                                        <li><strong>Annual Salary:</strong> PKR {(data.Salary * 12)?.toLocaleString() || '0'}</li>
-                                        <li><strong>Commission Rate:</strong> {data.Commission_Rate || '0'}%</li>
-                                    </ul>
+                            {/* Card 3: Compensation Package */}
+                            <div className='staff-card'>
+                                <div className='staff-card-header'>
+                                    <DollarSign size={18} className="staff-header-icon" />
+                                    <h3>Compensation & Commission</h3>
+                                </div>
+                                <div className='staff-data-list'>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Monthly Base Salary</span>
+                                        <span className='data-value'>PKR {data.Salary?.toLocaleString() || '0'} / mo</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Annualized Package</span>
+                                        <span className='data-value'>PKR {(data.Salary * 12)?.toLocaleString() || '0'} / yr</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Sales Commission Rate</span>
+                                        <span className='data-value'>{data.Commission_Rate || '0'}%</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className='detail-card'>
-                                <div className='detail-icon'>📞</div>
-                                <div className='detail-content'>
-                                    <h4>Contact Information</h4>
-                                    <ul>
-                                        <li><strong>Mobile:</strong> {formatPhone(data.Phone_Number)}</li>
-                                        <li><strong>Telephone:</strong> {data.Telephone || 'N/A'}</li>
-                                        <li><strong>Email:</strong> {data.Email_Address || 'N/A'}</li>
-                                    </ul>
+                            {/* Card 4: Contact Reach */}
+                            <div className='staff-card'>
+                                <div className='staff-card-header'>
+                                    <Phone size={18} className="staff-header-icon" />
+                                    <h3>Direct Communications</h3>
+                                </div>
+                                <div className='staff-data-list'>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Direct Line</span>
+                                        <span className='data-value'>
+                                            {data.Phone_Number ? (
+                                                <a href={`tel:${data.Phone_Number}`} className="data-link">
+                                                    {formatPhone(data.Phone_Number)}
+                                                </a>
+                                            ) : 'N/A'}
+                                        </span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Internal Telephone</span>
+                                        <span className='data-value'>{data.Telephone || 'Extension active'}</span>
+                                    </div>
+                                    <div className='staff-data-item'>
+                                        <span className='data-label'>Corporate Email</span>
+                                        <span className='data-value'>
+                                            {data.Email_Address ? (
+                                                <a href={`mailto:${data.Email_Address}`} className="data-link">
+                                                    {data.Email_Address}
+                                                </a>
+                                            ) : 'N/A'}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Additional Info */}
-                        <div className='additional-info'>
-                            <h3>About {data.First_Name}</h3>
-                            <p>
-                                {data.First_Name} is a valued member of our team, bringing expertise and dedication 
-                                to their role as {data.Designation || 'a team member'}. 
-                                {data.Hire_Date && ` They have been with the company since ${formatDate(data.Hire_Date)}`}, 
-                                contributing significantly to our success.
-                            </p>
-                            
-                            <div className='contact-box'>
-                                <h4>Need to get in touch?</h4>
-                                <p>You can reach {data.First_Name} during business hours for any inquiries.</p>
-                                <div className='contact-options'>
-                                    <a href={`mailto:${data.Email_Address}`} className='contact-btn employee-profile-email-btn'>
-                                        📧 Send Email
+                        {/* Contact Card */}
+                        <div className='staff-action-box'>
+                            <div className='staff-action-text'>
+                                <h4>Direct Dealership Communication</h4>
+                                <p>Inquiries, vehicle consultations, and official appointments with {data.First_Name}.</p>
+                            </div>
+                            <div className='staff-action-buttons'>
+                                {data.Email_Address && (
+                                    <a href={`mailto:${data.Email_Address}`} className="btn-contact-email">
+                                        <Mail size={16} />
+                                        <span>Send Email</span>
                                     </a>
-                                    <a href={`tel:${data.Phone_Number}`} className='contact-btn employee-profile-phone-btn'>
-                                        📞 Call Now
+                                )}
+                                {data.Phone_Number && (
+                                    <a href={`tel:${data.Phone_Number}`} className="btn-contact-call">
+                                        <Phone size={16} />
+                                        <span>Call Extension</span>
                                     </a>
-                                </div>
+                                )}
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
-            </div>
+            </main>
 
             <Footer />
         </div>

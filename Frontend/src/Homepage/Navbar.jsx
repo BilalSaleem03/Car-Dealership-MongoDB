@@ -133,6 +133,7 @@
 
 import React, { useEffect, useState } from 'react';
 import logoImg from '../assets/logo.png';
+import logoSvg from '../assets/icons/logo.svg';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Menu, X, LogOut, RefreshCw, User } from 'lucide-react';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -250,190 +251,138 @@ export default function Navbar() {
 
     return (
         <>
-            <motion.nav 
-                className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.5, type: "spring" }}
-            >
+            <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
                 <div className='left-area'>
-                    <motion.div 
-                        className="logo-wrapper"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                    >
-                        <img className='logoImage' src={logoImg} alt="logo" />
-                    </motion.div>
+                    <NavLink to="/" className="navbar-brand" title="Prestige Car Dealership">
+                        <div className="logo-badge">
+                            <img 
+                                className='logoImage' 
+                                src={logoSvg} 
+                                alt="PCD Logo" 
+                                onError={(e) => { e.target.src = logoImg; }} 
+                            />
+                        </div>
+                        <div className="brand-text-container">
+                            <span className="brand-title">Prestige</span>
+                            <span className="brand-subtitle">Dealership</span>
+                        </div>
+                    </NavLink>
                     
                     {/* Desktop Navigation */}
                     <div className="desktop-nav">
-                        {navItems.map((item, index) => (
-                            <motion.div
+                        {navItems.map((item) => (
+                            <NavLink 
                                 key={item.path}
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
+                                to={item.path} 
+                                className={({ isActive }) => 
+                                    `nav-link ${isActive ? 'nav-link-active' : ''}`
+                                }
                             >
-                                <NavLink 
-                                    to={item.path} 
-                                    className={({ isActive }) => 
-                                        `nav-link ${isActive ? 'nav-link-active' : ''}`
-                                    }
-                                >
-                                    {item.label}
-                                </NavLink>
-                            </motion.div>
+                                {item.label}
+                            </NavLink>
                         ))}
                     </div>
-
-                    {/* Mobile Menu Toggle */}
-                    <motion.div 
-                        className="mobile-menu-toggle"
-                        whileTap={{ scale: 0.9 }}
-                    >
-                        <button onClick={handleDropdown} className="menu-btn">
-                            {dropdown ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </motion.div>
                 </div>
 
-                {/* ===== UPDATED: Simple Search Bar ===== */}
-                <motion.div 
-                    className="center-area"
-                    whileHover={{ scale: 1.02 }}
-                >
+                {/* Search Bar */}
+                <div className="center-area">
                     <div className="search-wrapper">
-                        <Search className="search-icon" size={20} />
+                        <Search className="search-icon" size={18} />
                         <input 
                             className="search-area" 
-                            placeholder="Search" 
+                            placeholder="Search vehicles, models..." 
                             value={search}
                             onChange={handleSearch}
                             onKeyDown={handleSearchSubmit}
                         />
                     </div>
-                </motion.div>
+                </div>
 
-                {/* Right Area - Auth Buttons */}
+                {/* Right Area - Auth Buttons & Mobile Toggle */}
                 <div className="right-area">
-                    <AnimatePresence mode="wait">
-                        {!globalIsLoggedIn.isLoggedIn ? (
-                            <motion.div 
-                                key="auth-buttons"
-                                className="auth-buttons"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                            >
-                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <NavLink to="/login" className="login-btn">
-                                        <User size={18} />
-                                        <span>Log in</span>
-                                    </NavLink>
-                                </motion.div>
-                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <NavLink to="/signup" className="signup-btn">
-                                        Sign up
-                                    </NavLink>
-                                </motion.div>
-                            </motion.div>
-                        ) : (
-                            <motion.div 
-                                key="user-buttons"
-                                className="user-buttons"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                            >
-                                <motion.button 
-                                    onClick={handleLogout}
-                                    className="logout-btn"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <LogOut size={18} />
-                                    <span>Log Out</span>
-                                </motion.button>
-                                <motion.button 
-                                    onClick={handleRenewTokens}
-                                    className="renew-btn"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    <RefreshCw size={18} />
-                                </motion.button>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {!globalIsLoggedIn.isLoggedIn ? (
+                        <div className="auth-buttons">
+                            <NavLink to="/login" className="login-btn">
+                                <User size={16} />
+                                <span>Log In</span>
+                            </NavLink>
+                            <NavLink to="/signup" className="signup-btn">
+                                <span>Sign Up</span>
+                            </NavLink>
+                        </div>
+                    ) : (
+                        <div className="user-buttons">
+                            <button onClick={handleLogout} className="logout-btn" title="Log Out">
+                                <LogOut size={16} />
+                                <span>Log Out</span>
+                            </button>
+                            <button onClick={handleRenewTokens} className="renew-btn" title="Refresh Session">
+                                <RefreshCw size={16} />
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Mobile Menu Toggle Button */}
+                    <div className="mobile-menu-toggle">
+                        <button onClick={handleDropdown} className="menu-btn" aria-label="Toggle Navigation">
+                            {dropdown ? <X size={22} /> : <Menu size={22} />}
+                        </button>
+                    </div>
                 </div>
 
                 {/* Mobile Dropdown Menu */}
-                <AnimatePresence>
-                    {dropdown && (
-                        <motion.div 
-                            className="mobile-dropdown"
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <div className="mobile-dropdown-content">
-                                {/* Mobile Search */}
-                                <div className="mobile-search">
-                                    <div className="search-wrapper">
-                                        <Search className="mobile-search-icon" size={20} />
-                                        <input 
-                                            className="mobile-search-input"
-                                            placeholder="Search" 
-                                            value={search}
-                                            onChange={handleSearch}
-                                            onKeyDown={handleSearchSubmit}
-                                        />
-                                    </div>
-                                </div>
-                                
-                                {navItems.map((item, index) => (
-                                    <motion.div
-                                        key={item.path}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.05 }}
-                                    >
-                                        <NavLink 
-                                            to={item.path} 
-                                            className="mobile-nav-link"
-                                            onClick={() => setDropdown(false)}
-                                        >
-                                            {item.label}
-                                        </NavLink>
-                                    </motion.div>
-                                ))}
-                                <div className="mobile-auth">
-                                    {!globalIsLoggedIn.isLoggedIn ? (
-                                        <>
-                                            <NavLink to="/login" className="mobile-login" onClick={() => setDropdown(false)}>
-                                                Log in
-                                            </NavLink>
-                                            <NavLink to="/signup" className="mobile-signup" onClick={() => setDropdown(false)}>
-                                                Sign up
-                                            </NavLink>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <button onClick={handleLogout} className="mobile-logout">
-                                                Log Out
-                                            </button>
-                                            <button onClick={handleRenewTokens} className="mobile-renew">
-                                                Renew Tokens
-                                            </button>
-                                        </>
-                                    )}
+                {dropdown && (
+                    <div className="mobile-dropdown">
+                        <div className="mobile-dropdown-content">
+                            <div className="mobile-search">
+                                <div className="search-wrapper">
+                                    <Search className="mobile-search-icon" size={18} />
+                                    <input 
+                                        className="mobile-search-input"
+                                        placeholder="Search vehicles..." 
+                                        value={search}
+                                        onChange={handleSearch}
+                                        onKeyDown={handleSearchSubmit}
+                                    />
                                 </div>
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </motion.nav>
+                            
+                            {navItems.map((item) => (
+                                <NavLink 
+                                    key={item.path}
+                                    to={item.path} 
+                                    className="mobile-nav-link"
+                                    onClick={() => setDropdown(false)}
+                                >
+                                    {item.label}
+                                </NavLink>
+                            ))}
+
+                            <div className="mobile-auth">
+                                {!globalIsLoggedIn.isLoggedIn ? (
+                                    <>
+                                        <NavLink to="/login" className="mobile-login" onClick={() => setDropdown(false)}>
+                                            Log In
+                                        </NavLink>
+                                        <NavLink to="/signup" className="mobile-signup" onClick={() => setDropdown(false)}>
+                                            Sign Up
+                                        </NavLink>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button onClick={handleLogout} className="mobile-logout">
+                                            Log Out
+                                        </button>
+                                        <button onClick={handleRenewTokens} className="mobile-renew">
+                                            Renew Session
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </nav>
         </>
     );
 }

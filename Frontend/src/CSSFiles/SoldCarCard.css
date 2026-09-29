@@ -139,14 +139,18 @@
 
 .sale-image-section {
     position: relative;
+    width: 100%;
     height: 250px;
     overflow: hidden;
+    background: #0f172a;
 }
 
 .sale-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
     transition: transform 0.5s ease;
 }
 

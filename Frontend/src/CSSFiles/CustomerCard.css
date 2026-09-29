@@ -67,14 +67,18 @@
 
 .customer-image-container {
     position: relative;
-    height: 200px;
+    height: 220px;
+    width: 100%;
     overflow: hidden;
+    background: #e2e8f0;
 }
 
 .customer-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 20%;
+    display: block;
     transition: transform 0.5s ease;
 }
 

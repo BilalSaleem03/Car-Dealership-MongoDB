@@ -1,23 +1,7 @@
-// import personImage from './assets/human_image.jpeg'
-// import { NavLink } from 'react-router-dom';
-// import './CSSFiles/CustomerCard.css'
-// export default function CustomerCard({customer}){
-//     // console.log(employee.Employee_id);
-//     return(
-//         <NavLink to={`/customer/${customer._id}`} className="navlink">
-//             <div className='customer_card'>
-//                 <img src={customer.Image?.url || personImage} alt="person Image" />
-//                 <h3>{customer.First_Name} {customer.Last_Name}</h3>
-//                 <h4>Contact: {customer.Phone_Number}</h4>
-//             </div>
-//         </NavLink>
-//     )
-// }
-
-
-
+import React from 'react'
 import personImage from './assets/human_image.jpeg'
 import { NavLink } from 'react-router-dom'
+import { Phone, Mail, CreditCard, MapPin, ChevronRight } from 'lucide-react'
 import './CSSFiles/CustomerCard.css'
 
 export default function CustomerCard({ customer }) {
@@ -52,7 +36,10 @@ export default function CustomerCard({ customer }) {
                         }}
                     />
                     <div className='customer-overlay'>
-                        <span className='view-profile'>View Details →</span>
+                        <span className='view-profile'>
+                            <span>View Details</span>
+                            <ChevronRight size={14} />
+                        </span>
                     </div>
                 </div>
                 
@@ -63,23 +50,23 @@ export default function CustomerCard({ customer }) {
                     
                     <div className='customer-contact'>
                         <div className='contact-item'>
-                            <span className='contact-icon'>📱</span>
+                            <span className='contact-icon'><Phone size={14} /></span>
                             <span className='contact-text'>{formatPhone(customer.Phone_Number)}</span>
                         </div>
                         <div className='contact-item'>
-                            <span className='contact-icon'>📧</span>
-                            <span className='contact-text'>{customer.Email_Address || 'No email'}</span>
+                            <span className='contact-icon'><Mail size={14} /></span>
+                            <span className='contact-text'>{customer.Email_Address || 'No email registered'}</span>
                         </div>
                     </div>
 
                     <div className='customer-meta'>
                         <span className='meta-item'>
-                            <span className='meta-icon'>🆔</span>
+                            <span className='meta-icon'><CreditCard size={13} /></span>
                             <span className='meta-text'>CNIC: {formatCNIC(customer.CNIC)}</span>
                         </span>
                         {customer.Address && (
                             <span className='meta-item'>
-                                <span className='meta-icon'>📍</span>
+                                <span className='meta-icon'><MapPin size={13} /></span>
                                 <span className='meta-text'>{formatAddress(customer.Address)}</span>
                             </span>
                         )}

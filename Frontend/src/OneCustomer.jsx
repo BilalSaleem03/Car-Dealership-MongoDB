@@ -1,65 +1,29 @@
-// import axios from 'axios';
-// import personImage from './assets/human_image.jpeg'
-// import { useParams ,useNavigate, NavLink } from 'react-router-dom';
-// import { useEffect, useState } from 'react';
-// import './CSSFiles/OneCustomer.css'
-// import Navbar from './Homepage/Navbar.jsx'
-// import Footer from './Homepage/Footer.jsx'
-
-// export default function OneEmployee(){
-//     let { id } = useParams();
-//     const [data , setdata] = useState([]);
-//     const navigate = useNavigate();
-
-//     const getData = async ()=>{
-//         try {
-//             let response = await axios.get(`http://localhost:3000/customer/${id}` , {withCredentials : true});
-//             // console.log(response.data);    
-//             setdata(response.data);
-//         } catch (error) {
-//             console.log(error.response.data.error)
-//             console.log(error.response.status)
-//         }
-//     }
-//     useEffect(()=>{
-//         getData();
-//     } , [])
-//     const formatDate = (dateString) => {
-//         return dateString ? dateString.split('T')[0] : 'N/A';
-//     };
-
-//     return(
-//         <div className='one_customer_window'>
-//             <Navbar/>
-//             <div className='one_customer'>
-//                 <img src={data.Image?.url || personImage} alt="person Image" />
-//                 <h3>{data.First_Name} {data.Last_Name}</h3>
-//                 <ul>
-//                     <li>CNIC# {data.CNIC}</li>
-//                     <li>Date of Birth: {formatDate(data.Date_of_Birth)}</li>
-//                     <li>Email Address: {data.Email_Address}</li>
-//                     <li>Gender: {data.Gender}</li>
-//                     <li>Phone# {data.Phone_Number}</li>
-//                     <li>Telephone# {data.Telephone}</li>
-//                     <li>Address: {data.Address}</li>
-//                 </ul>
-//                 <NavLink to={`/customer/update/${data._id}`}><button>Update Info</button></NavLink>
-//             </div>
-//             <Footer/>
-//         </div>
-//     )
-// }
-
-
-
-
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate, NavLink } from 'react-router-dom'
 import personImage from './assets/human_image.jpeg'
+import verifiedBadgeSvg from './assets/icons/verified-badge.svg'
 import './CSSFiles/OneCustomer.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+import {
+    User,
+    Mail,
+    Phone,
+    MapPin,
+    CreditCard,
+    Calendar,
+    ShieldCheck,
+    Briefcase,
+    TrendingUp,
+    Edit3,
+    ChevronRight,
+    ArrowLeft,
+    AlertCircle,
+    Clock,
+    PhoneCall
+} from 'lucide-react'
+
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function OneCustomer() {
@@ -72,14 +36,14 @@ export default function OneCustomer() {
     const getData = async () => {
         try {
             setLoading(true)
-            let response = await axios.get(`${backendURL}/customer/${id}`, {
+            const response = await axios.get(`${backendURL}/customer/${id}`, {
                 withCredentials: true
             })
             setData(response.data)
             setError(null)
-        } catch (error) {
-            console.error('Error fetching customer data:', error)
-            setError('Failed to load customer information')
+        } catch (err) {
+            console.error('Error fetching customer data:', err)
+            setError('Failed to load customer profile')
         } finally {
             setLoading(false)
         }
@@ -108,7 +72,6 @@ export default function OneCustomer() {
         return phoneStr
     }
 
-    // Update this function in OneCustomer.jsx:
     const formatCNIC = (cnic) => {
         if (!cnic) return 'N/A'
         const cnicStr = String(cnic)
@@ -132,12 +95,12 @@ export default function OneCustomer() {
 
     if (loading) {
         return (
-            <div className='customer-container'>
+            <div className='one-customer-container'>
                 <Navbar />
-                <div className='customer-loading'>
-                    <div className="loading-spinner"></div>
-                    <h2>Loading Customer Profile...</h2>
-                    <p>Please wait while we fetch customer information</p>
+                <div className='one-customer-loading-state'>
+                    <div className="one-customer-spinner"></div>
+                    <h2>Loading Customer Record</h2>
+                    <p>Accessing verified client database...</p>
                 </div>
                 <Footer />
             </div>
@@ -146,14 +109,17 @@ export default function OneCustomer() {
 
     if (error) {
         return (
-            <div className='customer-container'>
+            <div className='one-customer-container'>
                 <Navbar />
-                <div className='customer-error'>
-                    <div className="error-icon">!</div>
-                    <h2>Profile Not Found</h2>
+                <div className='one-customer-error-state'>
+                    <div className="error-icon-box">
+                        <AlertCircle size={36} />
+                    </div>
+                    <h2>Customer Profile Unavailable</h2>
                     <p>{error}</p>
-                    <button className="btn-primary" onClick={() => navigate('/customers')}>
-                        ← Back to Customers
+                    <button className="btn-back-customers" onClick={() => navigate('/customer')}>
+                        <ArrowLeft size={16} />
+                        <span>Return to Directory</span>
                     </button>
                 </div>
                 <Footer />
@@ -162,156 +128,204 @@ export default function OneCustomer() {
     }
 
     return (
-        <div className='customer-container'>
+        <div className='one-customer-container'>
             <Navbar />
             
-            <div className='customer-content'>
-                <div className='customer-breadcrumb'>
-                    <NavLink to="/">Home</NavLink> / 
-                    <NavLink to="/customers">Customers</NavLink> / 
-                    <span>{data.First_Name} {data.Last_Name}</span>
-                </div>
+            <main className='one-customer-main'>
+                {/* Clean Breadcrumb */}
+                <nav className='one-customer-breadcrumb' aria-label="Breadcrumb">
+                    <NavLink to="/">Home</NavLink>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <NavLink to="/customer">Customer Directory</NavLink>
+                    <ChevronRight size={14} className="breadcrumb-separator" />
+                    <span className="breadcrumb-current">
+                        {data.First_Name} {data.Last_Name}
+                    </span>
+                </nav>
 
-                <div className='customer-grid'>
-                    {/* Left Column - Customer Profile */}
-                    <div className='customer-profile-section'>
-                        <div className='profile-image-container'>
+                <div className='one-customer-layout'>
+                    {/* Left Column: Client Identity Summary */}
+                    <aside className='customer-summary-card'>
+                        <div className='avatar-container'>
                             <img 
                                 src={data.Image?.url || personImage} 
                                 alt={`${data.First_Name} ${data.Last_Name}`}
-                                className='profile-image'
+                                className='customer-avatar-img'
                                 onError={(e) => {
                                     e.target.src = personImage
                                 }}
                             />
-                            <div className='profile-status'>
-                                <span className='status-badge status-vip'>
-                                    👑 Valued Customer
-                                </span>
+                            <div className='client-status-badge'>
+                                <img src={verifiedBadgeSvg} alt="Verified" style={{ width: '13px', height: '13px', filter: 'brightness(0) invert(1)' }} />
+                                <span>Verified Client</span>
                             </div>
                         </div>
 
-                        <div className='profile-summary'>
-                            <h2>{data.First_Name} {data.Last_Name}</h2>
-                            <div className='profile-details'>
-                                <div className='detail-item'>
-                                    <span className='detail-label'>Age</span>
-                                    <span className='detail-value'>{calculateAge(data.Date_of_Birth)}</span>
-                                </div>
-                                <div className='detail-item'>
-                                    <span className='detail-label'>Gender</span>
-                                    <span className='detail-value'>{data.Gender || 'N/A'}</span>
-                                </div>
-                                <div className='detail-item'>
-                                    <span className='detail-label'>Member Since</span>
-                                    <span className='detail-value'>{formatDate(data.createdAt)}</span>
-                                </div>
+                        <div className='summary-bio'>
+                            <h2 className='customer-full-name'>
+                                {data.First_Name} {data.Last_Name}
+                            </h2>
+                            <p className='customer-reg-date'>
+                                Registered client since {data.createdAt ? new Date(data.createdAt).getFullYear() : '2024'}
+                            </p>
+                        </div>
+
+                        <div className='quick-metrics-row'>
+                            <div className='quick-metric-item'>
+                                <span className='metric-label'>Age</span>
+                                <span className='metric-val'>{calculateAge(data.Date_of_Birth)}</span>
                             </div>
-                            
-                            {/* <div className='contact-buttons'>
-                                <a href={`tel:${data.Phone_Number}`} className='contact-btn phone-btn'>
-                                    📞 Call Customer
-                                </a>
-                                <a href={`mailto:${data.Email_Address}`} className='contact-btn email-btn'>
-                                    📧 Send Email
-                                </a>
-                            </div> */}
-                            
-                            <NavLink to={`/customer/update/${data._id}`} className="btn-update-customer-profile">
-                                ✏️ Update Profile
+                            <div className='metric-divider'></div>
+                            <div className='quick-metric-item'>
+                                <span className='metric-label'>Gender</span>
+                                <span className='metric-val'>{data.Gender || 'N/A'}</span>
+                            </div>
+                        </div>
+
+                        <div className='summary-actions-block'>
+                            <NavLink to={`/customer/update/${data._id}`} className="btn-edit-profile">
+                                <Edit3 size={16} />
+                                <span>Update Profile</span>
                             </NavLink>
-                        </div>
-                    </div>
-
-                    {/* Right Column - Customer Details */}
-                    <div className='customer-details-section'>
-                        <div className='details-header'>
-                            <h1>Customer Profile</h1>
-                            <div className='customer-id'>
-                                🆔 ID: {data._id?.substring(0, 8)}...
-                            </div>
+                            {data.Phone_Number && (
+                                <a href={`tel:${data.Phone_Number}`} className="btn-quick-contact">
+                                    <PhoneCall size={16} />
+                                    <span>Direct Call</span>
+                                </a>
+                            )}
                         </div>
 
-                        <div className='details-grid'>
-                            <div className='detail-card'>
-                                <div className='detail-icon'>🆔</div>
-                                <div className='detail-content'>
-                                    <h4>Identification</h4>
-                                    <ul>
-                                        <li><strong>CNIC:</strong> {formatCNIC(data.CNIC)}</li>
-                                        <li><strong>Full Name:</strong> {data.First_Name} {data.Last_Name}</li>
-                                        <li><strong>Date of Birth:</strong> {formatDate(data.Date_of_Birth)}</li>
-                                        <li><strong>Age:</strong> {calculateAge(data.Date_of_Birth)}</li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div className='client-id-bar'>
+                            <span className='id-label'>Account Reference</span>
+                            <span className='id-code'>{data._id}</span>
+                        </div>
+                    </aside>
 
-                            <div className='detail-card'>
-                                <div className='detail-icon'>📍</div>
-                                <div className='detail-content'>
-                                    <h4>Address & Location</h4>
-                                    <ul>
-                                        <li><strong>Address:</strong> {data.Address || 'N/A'}</li>
-                                        {/* <li><strong>City:</strong> {data.City || 'N/A'}</li> */}
-                                        <li><strong>Country:</strong> {data.Country || 'Pakistan'}</li>
-                                        {/* <li><strong>Postal Code:</strong> {data.Postal_Code || 'N/A'}</li> */}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div className='detail-card'>
-                                <div className='detail-icon'>📞</div>
-                                <div className='detail-content'>
-                                    <h4>Contact Information</h4>
-                                    <ul>
-                                        <li><strong>Mobile:</strong> {formatPhone(data.Phone_Number)}</li>
-                                        <li><strong>Telephone:</strong> {data.Telephone || 'N/A'}</li>
-                                        <li><strong>Email:</strong> {data.Email_Address || 'N/A'}</li>
-                                        <li><strong>Preferred Contact:</strong> {data.Preferred_Contact || 'Phone'}</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div className='detail-card'>
-                                <div className='detail-icon'>📊</div>
-                                <div className='detail-content'>
-                                    <h4>Additional Information</h4>
-                                    <ul>
-                                        <li><strong>Gender:</strong> {data.Gender || 'N/A'}</li>
-                                        <li><strong>Occupation:</strong> {data.Occupation || 'N/A'}</li>
-                                        <li><strong>Income Level:</strong> {data.Income_Level || 'N/A'}</li>
-                                        {/* <li><strong>Customer Type:</strong> {data.Customer_Type || 'Regular'}</li> */}
-                                    </ul>
-                                </div>
+                    {/* Right Column: Structured Record Dossier */}
+                    <section className='customer-records-col'>
+                        <div className='dossier-header-bar'>
+                            <div>
+                                <h1 className='dossier-heading'>Client Dossier</h1>
+                                <p className='dossier-sub'>Confidential customer account and contact file</p>
                             </div>
                         </div>
 
-                        {/* Purchase History (if available)
-                        <div className='purchase-history'>
-                            <h3>Customer History</h3>
-                            <div className='history-placeholder'>
-                                <div className='placeholder-icon'>📋</div>
-                                <p>Purchase history and transaction records would appear here</p>
-                                <small>Integrated with your transaction system</small>
+                        <div className='dossier-grid'>
+                            {/* Card 1: Official Identification */}
+                            <div className='dossier-card'>
+                                <div className='dossier-card-header'>
+                                    <CreditCard size={18} className="dossier-header-icon" />
+                                    <h3>National Identity</h3>
+                                </div>
+                                <div className='dossier-data-list'>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>CNIC Number</span>
+                                        <span className='data-value mono'>{formatCNIC(data.CNIC)}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Full Legal Name</span>
+                                        <span className='data-value'>{data.First_Name} {data.Last_Name}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Date of Birth</span>
+                                        <span className='data-value'>{formatDate(data.Date_of_Birth)}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Age Calculation</span>
+                                        <span className='data-value'>{calculateAge(data.Date_of_Birth)}</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div> */}
 
-                        {/* Notes Section */}
-                        {/* <div className='customer-notes'>
-                            <h3>Customer Notes</h3>
-                            <div className='notes-editor'>
-                                <textarea 
-                                    placeholder="Add notes about this customer (preferences, special requirements, etc.)..."
-                                    className='notes-textarea'
-                                />
-                                <button className='save-notes-btn'>
-                                    💾 Save Notes
-                                </button>
+                            {/* Card 2: Contact Channels */}
+                            <div className='dossier-card'>
+                                <div className='dossier-card-header'>
+                                    <Phone size={18} className="dossier-header-icon" />
+                                    <h3>Contact Channels</h3>
+                                </div>
+                                <div className='dossier-data-list'>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Primary Mobile</span>
+                                        <span className='data-value'>
+                                            {data.Phone_Number ? (
+                                                <a href={`tel:${data.Phone_Number}`} className="data-link">
+                                                    {formatPhone(data.Phone_Number)}
+                                                </a>
+                                            ) : 'Not specified'}
+                                        </span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Telephone / Landline</span>
+                                        <span className='data-value'>{data.Telephone || 'N/A'}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Email Address</span>
+                                        <span className='data-value'>
+                                            {data.Email_Address ? (
+                                                <a href={`mailto:${data.Email_Address}`} className="data-link">
+                                                    {data.Email_Address}
+                                                </a>
+                                            ) : 'Not specified'}
+                                        </span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Preferred Channel</span>
+                                        <span className='data-value'>{data.Preferred_Contact || 'Phone Call'}</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div> */}
-                    </div>
+
+                            {/* Card 3: Residential Address */}
+                            <div className='dossier-card'>
+                                <div className='dossier-card-header'>
+                                    <MapPin size={18} className="dossier-header-icon" />
+                                    <h3>Address & Residence</h3>
+                                </div>
+                                <div className='dossier-data-list'>
+                                    <div className='dossier-data-item full'>
+                                        <span className='data-label'>Street Address</span>
+                                        <span className='data-value'>{data.Address || 'No address registered on file'}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Country</span>
+                                        <span className='data-value'>{data.Country || 'Pakistan'}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Jurisdiction Status</span>
+                                        <span className='data-value'>Domestic Resident</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Card 4: Employment & Financial */}
+                            <div className='dossier-card'>
+                                <div className='dossier-card-header'>
+                                    <Briefcase size={18} className="dossier-header-icon" />
+                                    <h3>Financial & Profile Details</h3>
+                                </div>
+                                <div className='dossier-data-list'>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Occupation</span>
+                                        <span className='data-value'>{data.Occupation || 'Client'}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Income Classification</span>
+                                        <span className='data-value'>{data.Income_Level || 'Standard Verified'}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Gender Specification</span>
+                                        <span className='data-value'>{data.Gender || 'Unspecified'}</span>
+                                    </div>
+                                    <div className='dossier-data-item'>
+                                        <span className='data-label'>Membership Tier</span>
+                                        <span className='data-value badge-tier'>Prime Member</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </div>
+            </main>
 
             <Footer />
         </div>

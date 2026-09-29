@@ -50,6 +50,7 @@ import EmployeeCard from './EmployeeCard.jsx'
 import './CSSFiles/Aboutus.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+import { Award, Handshake, Heart } from 'lucide-react'
 const backendURL = import.meta.env.VITE_BackendURL;
 export default function Aboutus() {
     const [data, setData] = useState([])
@@ -163,17 +164,17 @@ export default function Aboutus() {
                                 </p>
                                 <div className='company-values'>
                                     <div className='value-item'>
-                                        <span className='value-icon'>🏆</span>
+                                        <span className='value-icon'><Award size={28} /></span>
                                         <h4>Excellence</h4>
                                         <p>Striving for the best in everything we do</p>
                                     </div>
                                     <div className='value-item'>
-                                        <span className='value-icon'>🤝</span>
+                                        <span className='value-icon'><Handshake size={28} /></span>
                                         <h4>Integrity</h4>
                                         <p>Honest and transparent dealings</p>
                                     </div>
                                     <div className='value-item'>
-                                        <span className='value-icon'>❤️</span>
+                                        <span className='value-icon'><Heart size={28} /></span>
                                         <h4>Customer Care</h4>
                                         <p>Putting our customers first</p>
                                     </div>

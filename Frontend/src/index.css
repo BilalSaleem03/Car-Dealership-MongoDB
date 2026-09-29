@@ -1,0 +1,93 @@
+/* Global Styles & Design Tokens */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
+
+:root {
+    /* Typography Tokens */
+    --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-serif-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Legacy font compatibility */
+    --font-primary: var(--font-body);
+    --font-family: var(--font-body);
+
+    /* Brand Colors */
+    --color-primary: #1a3a5f;
+    --color-primary-hover: #132a45;
+    --color-secondary: #c5a059;
+    --color-dark: #0d1b2a;
+    --color-light: #f8fafc;
+    --color-text: #1e293b;
+    --color-text-muted: #64748b;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Headings: serif-sans (system sans-serif) */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.heading,
+.title,
+.hero-title,
+.section-title,
+.category-label,
+.car-name,
+.customer-name,
+.employee-name {
+    font-family: var(--font-heading) !important;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+/* All other writings: Poppins */
+p, span, a, input, select, textarea, button, label, li, small, strong, b, em, i, th, td, div {
+    font-family: var(--font-body);
+}
+
+/* Universal Image Fitting & Aspect Safety */
+img, video {
+    max-width: 100%;
+    display: block;
+}
+
+/* Ensure all image containers maintain proper object-fit without stretching */
+.card-image,
+.sale-image,
+.car-image,
+.car-hero-img,
+.category-image,
+.employee-image,
+.customer-image,
+.customer-avatar-img,
+.employee-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Specific portrait centering for human profile photos so faces are never cropped */
+.customer-image,
+.employee-image,
+.customer-avatar-img,
+.employee-avatar-img {
+    object-position: center 20%;
+}

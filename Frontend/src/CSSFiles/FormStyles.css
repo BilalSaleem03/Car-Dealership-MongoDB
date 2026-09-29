@@ -1,162 +1,339 @@
-/* FormStyles.css - Shared styles for all forms */
+/* FormStyles.css - Unified Executive Form Design System */
 
-/* ===== FORM CONTAINER ===== */
+:root {
+    --form-bg: #f8fafc;
+    --form-surface: #ffffff;
+    --form-border: #e2e8f0;
+    --form-border-focus: #1a3a5f;
+    --form-text: #0f172a;
+    --form-text-muted: #64748b;
+    --form-primary: #1a3a5f;
+    --form-primary-hover: #122842;
+    --form-accent: #e63946;
+    --form-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+    --form-shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.03);
+}
+
+/* Page Container */
 .FormPage {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--form-bg);
+    padding-top: 80px; /* Space for fixed navbar */
+    box-sizing: border-box;
 }
 
-.FormPage h3 {
-  text-align: center;
-  font-size: 2rem;
-  color: #1a365d;
-  margin: 2rem 0;
-  padding-bottom: 0.5rem;
-  border-bottom: 3px solid #d4af37;
-  font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+.form-page-container {
+    flex: 1;
+    max-width: 920px;
+    width: 100%;
+    margin: 2.5rem auto 4rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
 }
 
-/* ===== FORM STYLES ===== */
-form {
-  max-width: 800px;
-  margin: 0 auto 3rem;
-  padding: 2rem;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e9ecef;
+/* Form Card Header */
+.form-header-box {
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
+.form-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #e2e8f0;
+    color: var(--form-primary);
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+}
+
+.FormPage h3,
+.form-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--form-text);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem 0;
+    border: none;
+    font-family: inherit;
+    text-align: center;
+}
+
+.form-subtitle {
+    font-size: 0.95rem;
+    color: var(--form-text-muted);
+    margin: 0;
+}
+
+/* Form Card Container */
+form,
+.CarForm,
+.CustomerForm,
+.SalesForm,
+.EmployeeForm {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: var(--form-surface);
+    border-radius: 16px;
+    border: 1px solid var(--form-border);
+    box-shadow: var(--form-shadow-lg);
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Form Section Breaks */
+.form-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--form-text);
+    margin: 2rem 0 1.25rem 0;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.form-section-header:first-of-type {
+    margin-top: 0;
+}
+
+.form-section-icon {
+    color: var(--form-primary);
+}
+
+/* Form Layout Grid */
 .form-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+@media (max-width: 680px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    form,
+    .CarForm,
+    .CustomerForm,
+    .SalesForm,
+    .EmployeeForm {
+        padding: 1.75rem 1.25rem;
+    }
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
 }
 
 .form-group.full-width {
-  grid-column: 1 / -1;
+    grid-column: 1 / -1;
 }
 
-/* ===== FORM ELEMENTS ===== */
+/* Labels */
 label {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #2d4a8a;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.875rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0;
 }
 
 label.required::after {
-  content: "*";
-  color: #dc3545;
+    content: "*";
+    color: var(--form-accent);
+    font-weight: 700;
 }
 
-input, select, textarea {
-  padding: 0.75rem 1rem;
-  border: 2px solid #e9ecef;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: all 0.3s ease;
-  background: white;
+/* Inputs, Selects, Textareas - Scoped to FormPage */
+.FormPage input[type="text"],
+.FormPage input[type="number"],
+.FormPage input[type="email"],
+.FormPage input[type="tel"],
+.FormPage input[type="date"],
+.FormPage select,
+.FormPage textarea,
+.form-card input[type="text"],
+.form-card input[type="number"],
+.form-card input[type="email"],
+.form-card input[type="tel"],
+.form-card input[type="date"],
+.form-card select,
+.form-card textarea {
+    width: 100%;
+    height: 44px;
+    padding: 0.65rem 0.95rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--form-text);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: inherit;
+    outline: none;
 }
 
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  border-color: #2d4a8a;
-  box-shadow: 0 0 0 3px rgba(45, 74, 138, 0.1);
+.FormPage textarea,
+.form-card textarea {
+    height: auto;
+    min-height: 95px;
+    resize: vertical;
+    line-height: 1.5;
 }
 
+.FormPage input:focus,
+.FormPage select:focus,
+.FormPage textarea:focus,
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+    border-color: var(--form-primary);
+    box-shadow: 0 0 0 3px rgba(26, 58, 95, 0.12);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Custom Select Dropdown Arrow */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 24 24'%3E%3Cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+/* File Upload Field */
 input[type="file"] {
-  padding: 0.5rem;
-  border: 2px dashed #e9ecef;
-  background: #f8f9fa;
-  cursor: pointer;
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.875rem;
+    color: #475569;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
 input[type="file"]:hover {
-  border-color: #2d4a8a;
-  background: #f0f4f8;
+    border-color: var(--form-primary);
+    background-color: #f1f5f9;
 }
 
-input[type="radio"], input[type="checkbox"] {
-  width: auto;
-  margin-right: 0.5rem;
-  cursor: pointer;
+.file-hint {
+    font-size: 0.75rem;
+    color: var(--form-text-muted);
+    margin-top: 0.25rem;
 }
 
-/* ===== RADIO/CHEKBOX GROUPS ===== */
+/* Modern Segmented Radio Controls */
 .radio-group {
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem 0;
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
 }
 
 .radio-option {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #334155;
+    transition: all 0.2s ease;
+    flex: 1;
+    justify-content: center;
 }
 
-/* ===== BUTTONS ===== */
+.radio-option:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+.radio-option input[type="radio"] {
+    accent-color: var(--form-primary);
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Submit Action Button */
+.form-actions-wrap {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
 button[type="submit"] {
-  background: linear-gradient(135deg, #1a365d 0%, #2d4a8a 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: block;
-  margin: 2rem auto 0;
-  min-width: 200px;
-  box-shadow: 0 4px 6px rgba(26, 54, 93, 0.2);
+    width: 100%;
+    background: linear-gradient(135deg, var(--form-primary) 0%, #0d1b2a 100%);
+    color: #ffffff;
+    border: none;
+    padding: 0.95rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(26, 58, 95, 0.2);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
 
 button[type="submit"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(26, 54, 93, 0.25);
-  background: linear-gradient(135deg, #2d4a8a 0%, #3a5ba0 100%);
+    background: linear-gradient(135deg, #153050 0%, #071018 100%);
+    box-shadow: 0 6px 16px rgba(26, 58, 95, 0.3);
 }
 
-/* ===== ERROR MESSAGES ===== */
+button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+/* Error Alert Box */
 .error-message {
-  color: #dc3545;
-  background: #f8d7da;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  margin: 1rem 0;
-  border-left: 4px solid #dc3545;
-  font-size: 0.9rem;
-  grid-column: 1 / -1;
-}
-
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-  form {
-    padding: 1.5rem;
-    margin: 0 1rem 2rem;
-  }
-  
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .FormPage h3 {
-    font-size: 1.75rem;
-    margin: 1.5rem 1rem;
-  }
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #991b1b;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    padding: 0.85rem 1.15rem;
+    border-radius: 8px;
+    margin: 1.25rem 0;
+    font-size: 0.875rem;
+    font-weight: 500;
 }

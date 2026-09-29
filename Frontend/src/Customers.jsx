@@ -49,6 +49,7 @@ import CustomerCard from './CustomerCard.jsx'
 import './CSSFiles/Customers.css'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
+import { Search, X, Users, Star, RefreshCw, Phone, Target, ShieldCheck, Zap } from 'lucide-react'
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function Customers() {
@@ -106,7 +107,7 @@ export default function Customers() {
                 {/* Search Bar */}
                 <div className='customers-search'>
                     <div className='search-container'>
-                        <span className='search-icon'>🔍</span>
+                        <span className='search-icon'><Search size={18} /></span>
                         <input
                             type="text"
                             placeholder="Search customers by name, phone, or email..."
@@ -118,8 +119,9 @@ export default function Customers() {
                             <button 
                                 onClick={() => setSearchTerm('')}
                                 className='clear-search'
+                                aria-label="Clear search"
                             >
-                                ✕
+                                <X size={16} />
                             </button>
                         )}
                     </div>
@@ -164,7 +166,7 @@ export default function Customers() {
                             </div>
                         ) : (
                             <div className='no-customers'>
-                                <div className='no-customers-icon'>👥</div>
+                                <div className='no-customers-icon'><Users size={44} /></div>
                                 <h3>No customers found</h3>
                                 <p>
                                     {searchTerm ? 
@@ -188,28 +190,28 @@ export default function Customers() {
                             <h3>Customer Insights</h3>
                             <div className='stats-grid'>
                                 <div className='insight-card'>
-                                    <div className='insight-icon'>👥</div>
+                                    <div className='insight-icon'><Users size={24} /></div>
                                     <div className='insight-content'>
                                         <div className='insight-number'>{data.length}</div>
                                         <div className='insight-label'>Total Customers</div>
                                     </div>
                                 </div>
                                 <div className='insight-card'>
-                                    <div className='insight-icon'>⭐</div>
+                                    <div className='insight-icon'><Star size={24} /></div>
                                     <div className='insight-content'>
                                         <div className='insight-number'>98%</div>
                                         <div className='insight-label'>Satisfaction Rate</div>
                                     </div>
                                 </div>
                                 <div className='insight-card'>
-                                    <div className='insight-icon'>🔄</div>
+                                    <div className='insight-icon'><RefreshCw size={24} /></div>
                                     <div className='insight-content'>
                                         <div className='insight-number'>75%</div>
                                         <div className='insight-label'>Return Customers</div>
                                     </div>
                                 </div>
                                 <div className='insight-card'>
-                                    <div className='insight-icon'>📞</div>
+                                    <div className='insight-icon'><Phone size={24} /></div>
                                     <div className='insight-content'>
                                         <div className='insight-number'>24/7</div>
                                         <div className='insight-label'>Support Available</div>
@@ -227,17 +229,17 @@ export default function Customers() {
                             </p>
                             <div className='service-features'>
                                 <div className='feature'>
-                                    <span className='feature-icon'>🎯</span>
+                                    <span className='feature-icon'><Target size={24} /></span>
                                     <h4>Personalized Service</h4>
                                     <p>Tailored solutions for your specific needs</p>
                                 </div>
                                 <div className='feature'>
-                                    <span className='feature-icon'>🛡️</span>
+                                    <span className='feature-icon'><ShieldCheck size={24} /></span>
                                     <h4>Trust & Transparency</h4>
                                     <p>Honest dealings and clear communication</p>
                                 </div>
                                 <div className='feature'>
-                                    <span className='feature-icon'>⚡</span>
+                                    <span className='feature-icon'><Zap size={24} /></span>
                                     <h4>Quick Response</h4>
                                     <p>Fast and efficient service delivery</p>
                                 </div>

@@ -47,9 +47,10 @@
 
 
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import { motion } from 'framer-motion'
-import { Search, Filter, Grid, List, Car, RefreshCw } from 'lucide-react'
+import { Search, Filter, Grid, List, Car, RefreshCw, AlertCircle } from 'lucide-react'
 import Card from './Card.jsx'
 import Navbar from './Homepage/Navbar.jsx'
 import Footer from './Homepage/Footer.jsx'
@@ -57,11 +58,13 @@ import './CSSFiles/Explore.css'
 const backendURL = import.meta.env.VITE_BackendURL;
 
 export default function Explore() {
+    const [searchParams] = useSearchParams()
+    const urlQuery = searchParams.get('search') || ''
     const [data, setData] = useState([])
     const [filteredData, setFilteredData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState(urlQuery)
     const [selectedFilters, setSelectedFilters] = useState({
         manufacturer: 'all',
         carType: 'all',
@@ -441,7 +444,7 @@ export default function Explore() {
                 {/* Error State */}
                 {error && !loading && (
                     <div className="error-container">
-                        <div className="error-icon">⚠️</div>
+                        <div className="error-icon"><AlertCircle size={40} /></div>
                         <h3>Something went wrong</h3>
                         <p>{error}</p>
                         <button

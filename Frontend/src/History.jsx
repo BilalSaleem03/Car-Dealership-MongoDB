@@ -48,6 +48,7 @@
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { DollarSign, Car, BarChart2, Award, ClipboardList } from 'lucide-react'
 import SoldCarCard from './SoldCarCard.jsx'
 import './CSSFiles/History.css'
 import Navbar from './Homepage/Navbar.jsx'
@@ -144,28 +145,28 @@ export default function History() {
                 {/* Stats Overview */}
                 <div className='sales-stats'>
                     <div className='stat-card'>
-                        <div className='stat-icon'>💰</div>
+                        <div className='stat-icon'><DollarSign size={26} /></div>
                         <div className='stat-content'>
                             <div className='stat-number'>${stats.totalRevenue.toLocaleString()}</div>
                             <div className='stat-label'>Total Revenue</div>
                         </div>
                     </div>
                     <div className='stat-card'>
-                        <div className='stat-icon'>🚗</div>
+                        <div className='stat-icon'><Car size={26} /></div>
                         <div className='stat-content'>
                             <div className='stat-number'>{stats.totalSales}</div>
                             <div className='stat-label'>Cars Sold</div>
                         </div>
                     </div>
                     <div className='stat-card'>
-                        <div className='stat-icon'>📊</div>
+                        <div className='stat-icon'><BarChart2 size={26} /></div>
                         <div className='stat-content'>
                             <div className='stat-number'>${stats.avgSalePrice.toLocaleString(undefined, {minimumFractionDigits: 0})}</div>
                             <div className='stat-label'>Average Sale Price</div>
                         </div>
                     </div>
                     <div className='stat-card'>
-                        <div className='stat-icon'>🏆</div>
+                        <div className='stat-icon'><Award size={26} /></div>
                         <div className='stat-content'>
                             <div className='stat-number'>{stats.topSalesPerson}</div>
                             <div className='stat-label'>Top Salesperson</div>
@@ -209,7 +210,7 @@ export default function History() {
                             </div>
                         ) : (
                             <div className='no-sales'>
-                                <div className='no-sales-icon'>📋</div>
+                                <div className='no-sales-icon'><ClipboardList size={40} /></div>
                                 <h3>No Sales History</h3>
                                 <p>No sales transactions have been recorded yet.</p>
                             </div>

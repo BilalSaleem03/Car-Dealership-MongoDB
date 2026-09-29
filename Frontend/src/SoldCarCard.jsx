@@ -78,6 +78,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom'
+import { CheckCircle2, BarChart2, User, Briefcase, ChevronRight } from 'lucide-react'
 import carImage from './assets/car_image.jpeg'
 import personImage from './assets/human_image.jpeg'
 import './CSSFiles/SoldCarCard.css'
@@ -180,7 +181,7 @@ export default function SoldCarCard({ sale }) {
         <div className='sale-card'>
             <div className='sale-header'>
                 <div className='sale-badge'>
-                    <span className='badge-sold'>✅ SOLD</span>
+                    <span className='badge-sold'><CheckCircle2 size={13} /> SOLD</span>
                     <span className='sale-date'>{formatDate(sale.Sale_Date)}</span>
                 </div>
                 <div className='sale-price'>
@@ -205,7 +206,9 @@ export default function SoldCarCard({ sale }) {
 
                 <div className='sale-details'>
                     <div className='detail-section'>
-                        <h4>📊 Sale Details</h4>
+                        <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                            <BarChart2 size={16} /> Sale Details
+                        </h4>
                         <div className='detail-grid'>
                             <div className='detail-item'>
                                 <span className='detail-label'>Asked Amount:</span>
@@ -233,7 +236,7 @@ export default function SoldCarCard({ sale }) {
                     <div className='participants-section'>
                         <div className='participant-card'>
                             <div className='participant-header'>
-                                <span className='participant-icon'>👤</span>
+                                <span className='participant-icon'><User size={14} /></span>
                                 <h5>Customer</h5>
                             </div>
                             <div className='participant-info'>
@@ -248,7 +251,7 @@ export default function SoldCarCard({ sale }) {
 
                         <div className='participant-card'>
                             <div className='participant-header'>
-                                <span className='participant-icon'>👔</span>
+                                <span className='participant-icon'><Briefcase size={14} /></span>
                                 <h5>Salesperson</h5>
                             </div>
                             <div className='participant-info'>

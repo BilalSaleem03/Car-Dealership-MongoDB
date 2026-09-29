@@ -57,6 +57,11 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { 
+    AlertTriangle, ShieldCheck, Building2, Palette, 
+    Calendar, Car, Fuel, Gauge, Hash, User, 
+    ShoppingBag, Edit3, Trash2 
+} from 'lucide-react'
 import carImage from './assets/car_image.jpeg'
 import './CSSFiles/OwnedCar.css'
 const backendURL = import.meta.env.VITE_BackendURL;
@@ -111,7 +116,11 @@ export default function OwnedCar({ car }) {
                 />
                 <div className='car-status'>
                     <span className={`status-badge ${car.Accidental ? 'status-accidental' : 'status-clean'}`}>
-                        {car.Accidental ? '⚠️ Accidental' : '✅ Clean'}
+                        {car.Accidental ? (
+                            <><AlertTriangle size={13} /> Accidental</>
+                        ) : (
+                            <><ShieldCheck size={13} /> Clean</>
+                        )}
                     </span>
                 </div>
             </div>
@@ -125,14 +134,14 @@ export default function OwnedCar({ car }) {
                 <div className='car-specs'>
                     <div className='spec-row'>
                         <div className='spec-item'>
-                            <span className='spec-icon'>🏭</span>
+                            <span className='spec-icon'><Building2 size={16} /></span>
                             <div>
                                 <span className='spec-label'>Manufacturer</span>
                                 <span className='spec-value'>{car.Manufacturer || 'N/A'}</span>
                             </div>
                         </div>
                         <div className='spec-item'>
-                            <span className='spec-icon'>🎨</span>
+                            <span className='spec-icon'><Palette size={16} /></span>
                             <div>
                                 <span className='spec-label'>Color</span>
                                 <span className='spec-value'>{car.Color || 'N/A'}</span>
@@ -142,14 +151,14 @@ export default function OwnedCar({ car }) {
 
                     <div className='spec-row'>
                         <div className='spec-item'>
-                            <span className='spec-icon'>🔢</span>
+                            <span className='spec-icon'><Calendar size={16} /></span>
                             <div>
                                 <span className='spec-label'>Model</span>
                                 <span className='spec-value'>{car.Model_Number || 'N/A'}</span>
                             </div>
                         </div>
                         <div className='spec-item'>
-                            <span className='spec-icon'>🚗</span>
+                            <span className='spec-icon'><Car size={16} /></span>
                             <div>
                                 <span className='spec-label'>Type</span>
                                 <span className='spec-value'>{car.Car_Type || 'N/A'}</span>
@@ -159,14 +168,14 @@ export default function OwnedCar({ car }) {
 
                     <div className='spec-row'>
                         <div className='spec-item'>
-                            <span className='spec-icon'>⚙️</span>
+                            <span className='spec-icon'><Fuel size={16} /></span>
                             <div>
                                 <span className='spec-label'>Engine</span>
                                 <span className='spec-value'>{car.Engine_Type || 'N/A'}</span>
                             </div>
                         </div>
                         <div className='spec-item'>
-                            <span className='spec-icon'>📊</span>
+                            <span className='spec-icon'><Gauge size={16} /></span>
                             <div>
                                 <span className='spec-label'>Mileage</span>
                                 <span className='spec-value'>{car.Mileage || 'N/A'}</span>
@@ -176,14 +185,14 @@ export default function OwnedCar({ car }) {
 
                     <div className='spec-row'>
                         <div className='spec-item'>
-                            <span className='spec-icon'>🔑</span>
+                            <span className='spec-icon'><Hash size={16} /></span>
                             <div>
                                 <span className='spec-label'>Engine #</span>
                                 <span className='spec-value'>{car.Engine_Number || 'N/A'}</span>
                             </div>
                         </div>
                         <div className='spec-item'>
-                            <span className='spec-icon'>👤</span>
+                            <span className='spec-icon'><User size={16} /></span>
                             <div>
                                 <span className='spec-label'>Owner</span>
                                 <span className='spec-value'>{car.Car_Owner || 'N/A'}</span>
@@ -216,17 +225,17 @@ export default function OwnedCar({ car }) {
                     ) : (
                         <>
                             <NavLink to={`/car/buy/${car._id}`} className="btn-action btn-buy">
-                                🛒 Buy Car
+                                <ShoppingBag size={15} /> <span>Buy Car</span>
                             </NavLink>
                             <NavLink to={`/car/update/${car._id}`} className="btn-action btn-update">
-                                ✏️ Update Info
+                                <Edit3 size={15} /> <span>Update Info</span>
                             </NavLink>
                             <button 
                                 onClick={handleDeleteClick} 
                                 className="btn-action-delete btn-delete"
                                 disabled={isDeleting}
                             >
-                                🗑️ {isDeleting ? 'Deleting...' : 'Delete'}
+                                <Trash2 size={15} /> <span>{isDeleting ? 'Deleting...' : 'Delete'}</span>
                             </button>
                         </>
                     )}

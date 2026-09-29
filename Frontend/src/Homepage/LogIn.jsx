@@ -82,7 +82,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { User, Lock, LogIn, AlertCircle, Eye, EyeOff, ArrowRight } from 'lucide-react'
+import { User, Lock, LogIn, AlertCircle, Eye, EyeOff, ArrowRight, CheckCircle2 } from 'lucide-react'
 import axios from 'axios'
 import Navbar from './Navbar.jsx'
 import bgVideo from '../videos/login_bg.mp4'
@@ -319,7 +319,7 @@ export default function Login() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 {message.type === 'success' ? 
-                                    <span className="alert-icon">✓</span> : 
+                                    <CheckCircle2 size={18} /> : 
                                     <AlertCircle size={18} />
                                 }
                                 <span>{message.text}</span>
