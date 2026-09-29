@@ -31,9 +31,20 @@ app.use(cookieParser());
 // });
 
 
+const allowedOrigins = [
+    'https://autonexus-nu.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000'
+];
+
 app.use(cors({
-    // origin: 'http://localhost:5173',
-    origin: 'https://autonexus-nu.vercel.app',
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(null, true);
+        }
+    },
     credentials: true,
 }));
 
@@ -44,6 +55,40 @@ async function Main() {
 }
 Main().then(()=>{console.log("Database connected...")}).catch((err)=>{console.log(err)});
 
+// Health check & Keep-alive endpoint (pings MongoDB)
+app.get("/", (req, res) => {
+    res.redirect("/health");
+});
+
+app.get("/health", async (req, res) => {
+    try {
+        const dbState = mongoose.connection.readyState;
+        const states = { 0: "disconnected", 1: "connected", 2: "connecting", 3: "disconnecting" };
+        
+        let dbPing = "not_connected";
+        if (dbState === 1 && mongoose.connection.db) {
+            await mongoose.connection.db.admin().ping();
+            dbPing = "ok";
+        }
+
+        res.status(200).json({
+            status: "active",
+            message: "AutoNexus backend is awake",
+            database: {
+                status: states[dbState] || "unknown",
+                ping: dbPing
+            },
+            timestamp: new Date().toISOString()
+        });
+    } catch (err) {
+        console.error("Health check error:", err.message);
+        res.status(500).json({
+            status: "error",
+            error: err.message,
+            timestamp: new Date().toISOString()
+        });
+    }
+});
 
 //Routes
 app.use("/explore" , exploreRoute);
@@ -55,8 +100,22 @@ app.use("/history" , historyRoute);
 app.use("/authenticate" , authenticateRoute);
 app.use("/personalPosts" , personalPostsRoute);
 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}....`);
 
-console.log("port 3000");
-app.listen(3000 , ()=>{
-    console.log("Server running....")
-})
+    // Automatic self-ping on Render (Render automatically sets RENDER_EXTERNAL_URL)
+    const backendUrl = process.env.RENDER_EXTERNAL_URL || process.env.BACKEND_URL;
+    if (backendUrl) {
+        const client = backendUrl.startsWith("https") ? require("https") : require("http");
+        const PING_INTERVAL = 14 * 60 * 1000; // 14 minutes
+        setInterval(() => {
+            client.get(`${backendUrl}/health`, (resp) => {
+                console.log(`[Keep-Alive] Pinged ${backendUrl}/health -> Status: ${resp.statusCode}`);
+            }).on("error", (err) => {
+                console.error(`[Keep-Alive] Ping failed:`, err.message);
+            });
+        }, PING_INTERVAL);
+        console.log(`[Keep-Alive] Self-ping scheduled every 14 minutes for ${backendUrl}`);
+    }
+});

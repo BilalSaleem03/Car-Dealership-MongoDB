@@ -1,0 +1,22 @@
+name: Keep Render Backend & MongoDB Awake
+
+on:
+  schedule:
+    # Runs every 14 minutes (Render sleeps after 15 minutes of inactivity)
+    - cron: '*/14 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions dashboard
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Backend and MongoDB
+        run: |
+          echo "Pinging AutoNexus Backend..."
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "https://autonexus-0uf6.onrender.com/health")
+          echo "Received HTTP Status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" -eq 200 ] || [ "$HTTP_STATUS" -eq 301 ] || [ "$HTTP_STATUS" -eq 302 ]; then
+            echo "Render backend and MongoDB are warm and active!"
+          else
+            echo "Wakeup ping delivered (Status: $HTTP_STATUS)"
+          fi
